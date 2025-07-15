@@ -44,10 +44,7 @@ return {
     -- KeyMaps
     vim.keymap.set('n', '<leader>e', ":NvimTreeToggle<CR>", { silent = true, noremap = true })
 
-    vim.keymap.set("n", "l", edit_or_open,          { desc = "Edit Or Open" })
     vim.keymap.set("n", "L", vsplit_preview,        { desc = "Vsplit Preview" })
-
-    vim.keymap.set("n", "h", api.tree.close,        { desc = "Close" })
     vim.keymap.set("n", "H", api.tree.collapse_all, { desc = "Collapse All" })
   end,
 }

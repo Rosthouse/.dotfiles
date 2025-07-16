@@ -1,4 +1,15 @@
-return {
+return ({
   "mason-org/mason.nvim",
-  opts = {}
-}
+  opts = {
+    ui = {
+      icons = {
+        package_installed = "✓",
+        package_pending = "➜",
+        package_uninstalled = "✗"
+      }
+    }
+  },
+  config = function () 
+    print("Configuring mason")
+  end
+})

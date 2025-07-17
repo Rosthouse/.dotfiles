@@ -1,1 +1,1 @@
-vim.opt.langmap = "ü[,¨],è{,!}"
+vim.opt.langmap = {'ü[','¨]','è{','!}'}

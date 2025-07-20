@@ -67,20 +67,20 @@
     "on-click": "pavucontrol",
     "ignored-sinks": ["Easy Effects Sink"]
   },
-"hyprland/workspaces": {
-  "format": "{icon}",
-  "on-click": "activate",
-  "format-icons": {
-    "1": "",
-    "2": "",
-    "3": "",
-    "4": "",
-    "5": "",
-    "urgent": "",
-    "active": "",
-    "default": ""
-  },
-  "sort-by-number": true
-}
-
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "\\ed29",
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+    "sort-by-number": true
+  }
 }

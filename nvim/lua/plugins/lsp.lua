@@ -14,7 +14,11 @@ return {
 		},
 		config = function()
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
-			require("lspconfig").lua_ls.setup({ capabilities = capabilities })
+			local lspconfig = require("lspconfig")
+
+			lspconfig.lua_ls.setup({ capabilities = capabilities })
+			lspconfig.omnisharp.setup({ capabilities = capabilities })
+			lspconfig.bashls.setup({ capabilities = capabilities })
 		end,
 	},
 	{
@@ -42,7 +46,10 @@ return {
 		dependencies = { "rafamadriz/friendly-snippets" },
 		version = "1.*",
 		opts = {
-			keymap = { preset = "default" },
+			keymap = {
+				preset = "default",
+				["<Tab>"] = { "accept", "fallback" },
+			},
 			appearance = {
 				use_nvim_cmp_as_default = true,
 				nerd_font_variant = "mono",

@@ -8,10 +8,11 @@ return {
 				local wk = require("which-key")
 				wk.show({ global = false })
 				wk.add({
-					{ "<leader>f", group = "file" },
+					{ "<leader>f", group = "Find" },
+					{ "<leader>d", group = "Diagnostics" },
 					{
 						"<leader>b",
-						group = "buffers",
+						group = "Buffers",
 						expand = function()
 							return require("which-key.extras").expand.buf()
 						end,

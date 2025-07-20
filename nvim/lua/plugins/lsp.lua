@@ -1,11 +1,11 @@
 return {
   {
-    "neovim/nvim-lspconfig",
-    config = function () 
-      print("Hello from lsp")
-      local lspconfig = require('lspconfig')
-      lspconfig.lua_ls.setup({})
-    end
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+    },
   },
   {
     "folke/lazydev.nvim",
@@ -17,9 +17,5 @@ return {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
     },
-  },
-  {
-    "mason-org/mason.nvim",
-    opts = {},
   },
 }

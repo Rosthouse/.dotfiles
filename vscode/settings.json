@@ -1,0 +1,21 @@
+{
+    "vim.useSystemClipboard": true,
+    "git.openRepositoryInParentFolders": "never",
+    "vim.camelCaseMotion.enable": true,
+    "glsllint.glslangValidatorPath": "D:/Tools/Khronos/glslValidator/bin/glslangValidator.exe",
+    "plantuml.render": "Local",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "vim.langmap": "üè¨,[{}",
+    "vim.leader": " ",
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "g",
+                "b"
+            ],
+            "commands": [
+                "workbench.action.navigateBack"
+            ]
+        }
+    ]
+}

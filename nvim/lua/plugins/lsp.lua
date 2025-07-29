@@ -12,7 +12,14 @@ return {
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local lspconfig = require("lspconfig")
 
-			lspconfig.lua_ls.setup({ capabilities = capabilities })
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+				Lua = {
+					diagnostics = {
+						globals = { "vim" },
+					},
+				},
+			})
 			lspconfig.omnisharp.setup({ capabilities = capabilities })
 			lspconfig.bashls.setup({ capabilities = capabilities })
 		end,

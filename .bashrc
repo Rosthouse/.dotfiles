@@ -23,10 +23,25 @@ if [ -d ~/.bashrc.d ]; then
     done
 fi
 
-# Launch SSH agent if not running
-if ! ps aux |grep $(whoami) |grep ssh-agent |grep -v grep >/dev/null; then ssh-agent ; fi
+SSH_ENV="$HOME/.ssh/agent-environment"
 
-# Link the latest ssh-agent socket
-ln -sf $(find /tmp -maxdepth 2 -type s -name "agent*" -user $USER -printf '%T@ %p\n' 2>/dev/null |sort -n|tail -1|cut -d' ' -f2) ~/.ssh/ssh_auth_sock
+function start_agent {
+    echo "Initialising new SSH agent..."
+    ssh-agent | sed 's/^echo/#echo/' >"$SSH_ENV"
+    echo succeeded
+    chmod 600 "$SSH_ENV"
+    . "$SSH_ENV" >/dev/null
+    ssh-add ~/.ssh/id_GITHUB
+}
 
-export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
+# Source SSH settings, if applicable
+
+if [ -f "$SSH_ENV" ]; then
+    . "$SSH_ENV" >/dev/null
+    #ps $SSH_AGENT_PID doesn't work under Cygwin
+    ps -ef | grep $SSH_AGENT_PID | grep ssh-agent$ >/dev/null || {
+        start_agent
+    }
+else
+    start_agent
+fi

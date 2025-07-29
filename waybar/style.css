@@ -5,14 +5,14 @@
 }
 
 #waybar {
-  background-color: rgba(10, 10, 10, 0.2);
+  background-color: rgba(10, 10, 10, 0);
   border: none;
   border-radius: 8px;
   box-shadow: none;
 }
 
 #clock,
-#cpu
+#cpu,
 #network,
 #pulseaudio,
 #taskbar,
@@ -21,20 +21,15 @@
 #workspaces
 {
   background-color: rgba(29,31,46, 0.65);
-  padding: 6px; /* 保持内部间距 */
-  margin: 2px;
   border-radius: 8px;
-  border-width: 0px;
+  border-width: 2px;
+  padding: 2px;
+  margin: 4px;
+  box-shadow: 5px 5px 2px rgba(10,10,10, 0.45);
 }
 
-.modules-center,
-.modules-right,
-.modules-left {
-  background-color: rgba(15,27,53,0.9);
-  margin: 2px;
-  padding: 2px;
-  border-radius: 8px;
-  border-width: 0px;
+#tray menu {
+  background-color: rgba(29,31,46, 0.95);
 }
 
 #pulseaudio.muted {

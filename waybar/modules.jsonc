@@ -1,6 +1,7 @@
 {
   "clock": {
-    "format": "{:%a %H:%M}  ",
+    "format": "{:%a :%H%M} ",
+    "format-alt": "{:%A, %B %d, %Y (%R)}  ",
     "calendar": {
        "mode" : "year",
        "mode-mon-col": 3,
@@ -70,17 +71,33 @@
   "hyprland/workspaces": {
     "format": "{icon}",
     "on-click": "activate",
+    "active-only": false,
     "format-icons": {
       "1": "",
       "2": "",
       "3": "",
       "4": "",
-      "5": "",
-      "6": "\\ed29",
+      "5": "󰊗",
       "urgent": "",
       "active": "",
       "default": ""
     },
-    "sort-by-number": true
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+    }
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "tooltip": true,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "active-first": false
   }
 }

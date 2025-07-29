@@ -1,71 +1,82 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    min-height: 0;
+  font-family: "Proto Nerd Font Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
+  font-weight: bold;
+  color: #dcdfe1;
 }
 
-window#waybar {
-    background: rgba(10,10,10, 0.5);
+#waybar {
+  background-color: rgba(10, 10, 10, 0.2);
+  border: none;
+  border-radius: 8px;
+  box-shadow: none;
 }
 
-tooltip {
-  background: rgba(43, 48, 59, 0.5);
-  border: 1px solid rgba(100, 114, 125, 0.5);
+#clock,
+#cpu
+#network,
+#pulseaudio,
+#taskbar,
+#tray,
+#window,
+#workspaces
+{
+  background-color: rgba(29,31,46, 0.65);
+  padding: 6px; /* 保持内部间距 */
+  margin: 2px;
+  border-radius: 8px;
+  border-width: 0px;
 }
 
-tooltip label {
-  color: white;
+.modules-center,
+.modules-right,
+.modules-left {
+  background-color: rgba(15,27,53,0.9);
+  margin: 2px;
+  padding: 2px;
+  border-radius: 8px;
+  border-width: 0px;
 }
 
-#workspaces button {
-    padding: 0 5px;
-    background: transparent;
-    color: white;
+#pulseaudio.muted {
+  color: #FF0000;
+  padding-top: 0;
 }
 
-#workspaces button.focused {
-    background: #64727D;
-    border-bottom: 3px solid white;
+/* 鼠标悬停变亮一点 */
+#bluetooth:hover,
+#network:hover,
+/*#tray:hover,*/
+#backlight:hover,
+#battery:hover,
+#pulseaudio:hover,
+#custom-temperature:hover,
+#memory:hover,
+#cpu:hover,
+#clock:hover,
+#window:hover {
+  background-color: rgba(70, 75, 90, 0.9);
 }
 
-#mode, #clock, #battery {
-    padding: 0 10px;
+.modules-left button:hover{
+  background-color: rgba(97, 175, 239, 0.2);
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 8px;
 }
 
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid white;
+.modules-leftbutton.active {
+  background-color: #61afef; /* 蓝色高亮 */
+  color: #ffffff;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 8px;
 }
 
-#clock {
-    background-color: #64727D;
-}
-
-#battery {
-    background-color: #ffffff;
-    color: black;
-}
-
-#battery.charging {
-    color: white;
-    background-color: #26A65B;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: black;
-    }
-}
-
-#battery.warning:not(.charging) {
-    background: #f53c3c;
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+.modules-left button {
+  background: transparent;
+  border: none;
+  color: #888888;
+  padding: 2px 8px;
+  margin: 0 2px;
+  font-weight: bold;
 }

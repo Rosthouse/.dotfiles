@@ -6,11 +6,22 @@ return {
 		config = function()
 			local conform = require("conform")
 			conform.setup({
+				formatters = {
+					prettier = {
+						options = {
+							ft_parsers = {
+								json = "json",
+								jsonc = "json",
+							},
+						},
+					},
+				},
 				formatters_by_ft = {
 					lua = { "stylua" },
 					c_sharp = { "csharpier" },
 					javascript = { "prettierd", "prettier", stop_after_first = true },
 					json = { "prettierd", "prettier", stop_after_first = true },
+					jsonc = { "prettierd", "prettier", stop_after_first = true },
 				},
 			})
 

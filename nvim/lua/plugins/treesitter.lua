@@ -11,6 +11,7 @@ return {
 				"lua",
 				"json",
 				"jsonc",
+				"org",
 				"vim",
 				"vimdoc",
 			},

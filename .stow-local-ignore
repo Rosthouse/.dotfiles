@@ -27,6 +27,6 @@ _darcs
 /chromium-flags.conf
 
 /docs
-/dot-config/vscode/*
-/dot-config/powershell/*
+/dot-config\/vscode
+/dot-config\/powershell
 

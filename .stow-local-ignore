@@ -18,10 +18,15 @@ _darcs
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
 
-^/README.*
-^/LICENSE.*
-^/COPYING
+/README.*
+/LICENSE/.*
+/COPYING/
 
-\docs
-\dot-config\vscode
-\dot-config\powershell
+/install.sh
+/install_csharp_debugger.sh
+/chromium-flags.conf
+
+/docs
+/dot-config/vscode/*
+/dot-config/powershell/*
+

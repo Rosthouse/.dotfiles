@@ -27,6 +27,7 @@ return {
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope find buffers" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope find buffers" })
 			vim.keymap.set("n", "<leader>ft", builtin.commands, { desc = "Telescope find commands" })
+			vim.keymap.set("n", "<leader>fr", builtin.regex, { desc = "Telescope find commands" })
 		end,
 	},
 }

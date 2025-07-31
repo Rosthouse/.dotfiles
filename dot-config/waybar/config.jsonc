@@ -2,7 +2,7 @@
   "layer": "top",
   "position": "top",
   "modules-left": ["tray", "wlr/taskbar"],
-  "modules-center": ["hyprland/workspaces", "clock"],
+  "modules-center": ["mpd", "hyprland/workspaces", "clock"],
   "modules-right": ["bluetooth", "wireplumber", "cpu"],
   "include": ["~/.config/waybar/modules.jsonc"],
 }

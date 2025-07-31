@@ -6,6 +6,9 @@ return {
 		config = function()
 			local conform = require("conform")
 			conform.setup({
+				default_format_opts = {
+					lsp_format = "prefer",
+				},
 				formatters = {
 					prettier = {
 						options = {
@@ -19,6 +22,7 @@ return {
 				formatters_by_ft = {
 					lua = { "stylua" },
 					c_sharp = { "csharpier" },
+					cs = { "csharpier" },
 					javascript = { "prettierd", "prettier", stop_after_first = true },
 					json = { "prettierd", "prettier", stop_after_first = true },
 					jsonc = { "prettierd", "prettier", stop_after_first = true },

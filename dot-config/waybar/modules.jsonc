@@ -109,13 +109,13 @@
       "3": [],
       "4": [],
       "5": [],
-      "6": [],
     },
   },
   "wireplumber": {
+    "node-type": "Audio/Sink",
     "format": "{icon} {volume}%",
-    "format-muted": "",
-    "on-click": "helvum",
+    "format-muted": "󰝟 {volume}%",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "format-icons": {
       "headphone": "",
       "hands-free": "",

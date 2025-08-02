@@ -18,6 +18,11 @@ return {
 							},
 						},
 					},
+					csharpier = {
+						command = "csharpier",
+						args = { "format" },
+						stdin = true,
+					},
 				},
 				formatters_by_ft = {
 					lua = { "stylua" },
@@ -26,6 +31,7 @@ return {
 					javascript = { "prettierd", "prettier", stop_after_first = true },
 					json = { "prettierd", "prettier", stop_after_first = true },
 					jsonc = { "prettierd", "prettier", stop_after_first = true },
+					python = { "ruff" },
 				},
 			})
 

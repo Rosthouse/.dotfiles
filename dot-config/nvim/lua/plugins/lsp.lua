@@ -13,22 +13,24 @@ return {
           "github:Crashdummyy/mason-registry",
         },
       })
-      require("mason-lspconfig").setup({ automatic_enable = false })
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      local lspconfig = require("lspconfig")
 
-      lspconfig.lua_ls.setup({
+      require("mason-lspconfig").setup()
+
+      vim.lsp.enable("lua_ls")
+      vim.lsp.enable("pyright")
+      vim.lsp.enable("roslyn")
+      vim.lsp.enable("bashls")
+
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      vim.lsp.config("*", {
         capabilities = capabilities,
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
+      })
+
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = { diagnostics = { globals = { "vim" } } },
         },
       })
-      lspconfig.omnisharp.setup({ capabilities = capabilities })
-      lspconfig.bashls.setup({ capabilities = capabilities })
-      lspconfig.roslyn.setup({ capabilities = capabilities })
-      lspconfig.pyright.setup({ capabilities = capabilities })
     end,
   },
 }

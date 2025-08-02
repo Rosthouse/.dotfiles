@@ -27,39 +27,29 @@ return {
 					command = vim.fn.exepath("netcoredbg"),
 					args = { "--interpreter=vscode" },
 				},
+				debugpy = {},
 			})
 
+			vim.fn.sign_define(
+				"DapBreakpoint",
+				{ text = "🛑", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+			)
+			vim.fn.sign_define(
+				"DapStopped",
+				{ text = "▶️", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
+			)
+
 			-- Setup Keymaps
-			vim.fn.sign_define(
-				"DapBreakpoint",
-				{ text = "🛑", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
-			)
-			vim.fn.sign_define(
-				"DapStopped",
-				{ text = "▶️", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
-			)
-
-			--breakpoint icons
-			vim.fn.sign_define(
-				"DapBreakpoint",
-				{ text = "🛑", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
-			)
-			vim.fn.sign_define(
-				"DapStopped",
-				{ text = "▶️", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
-			)
-
-			--toggle breakpoint
 			vim.api.nvim_set_keymap("n", "<F9>", ":DapToggleBreakpoint<CR>", { noremap = true })
-
-			-- start debugging
 			vim.api.nvim_set_keymap("n", "<F5>", ":DapContinue<CR>", { noremap = true })
-
-			--reset layout
+			vim.api.nvim_set_keymap("n", "<F-17>", ":DapTerminate<CR>", { noremap = true })
+			vim.api.nvim_set_keymap("n", "<F10>", ":DapStepOver<CR>", { noremap = true })
+			vim.api.nvim_set_keymap("n", "<F11>", ":DapStepInto<CR>", { noremap = true })
+			vim.api.nvim_set_keymap("n", "<F12>", ":DapStepOut<CR>", { noremap = true })
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>dr",
-				"<cmd>lua require('dapui').open({reset = true})<CR>",
+				"<cmd>lua require('dapui').toggle({reset = true})<CR>", --reset layout
 				{ noremap = true }
 			)
 
@@ -72,12 +62,6 @@ return {
 			end
 			dap.listeners.before.launch.dapui_config = function()
 				dapui.open()
-			end
-			dap.listeners.before.event_terminated.dapui_config = function()
-				dapui.close()
-			end
-			dap.listeners.before.event_exited.dapui_config = function()
-				dapui.close()
 			end
 		end,
 	},

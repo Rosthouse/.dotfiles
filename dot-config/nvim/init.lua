@@ -8,5 +8,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Plugins
 require("config.lazy")
-
 require("config.late")
+
+require("config.godot")

@@ -1,4 +1,4 @@
-vim.opt.nu = true -- Setting line numbers
+vim.opt.nu = true             -- Setting line numbers
 vim.opt.relativenumber = true -- Line numbers are relative
 
 local tabWidth = 2
@@ -20,6 +20,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
+vim.opt.winborder = "rounded"
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"

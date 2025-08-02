@@ -18,8 +18,8 @@ return {
 
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("pyright")
-      vim.lsp.enable("roslyn")
       vim.lsp.enable("bashls")
+      vim.lsp.enable("omnisharp")
 
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       vim.lsp.config("*", {

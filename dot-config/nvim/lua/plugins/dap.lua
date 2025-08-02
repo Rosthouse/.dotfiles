@@ -24,6 +24,7 @@ return {
         },
       })
 
+      --@type da.Adapter
       dap.adapters = {
         coreclr = {
           type = "executable",
@@ -52,16 +53,25 @@ return {
               return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
             end,
           },
+          {
+            type = "coreclr",
+            name = "launch - godot",
+            request = "launch",
+            program = function()
+              return "${env:GODOT}"
+            end,
+            args = { "--path", "${workspaceFolder}" },
+          }
         },
       }
 
       vim.fn.sign_define(
         "DapBreakpoint",
-        { text = "🛑", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+        { text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
       )
       vim.fn.sign_define(
         "DapStopped",
-        { text = "▶️", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
+        { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" }
       )
 
       -- Setup Keymaps
@@ -77,7 +87,15 @@ return {
         "<cmd>lua require('dapui').toggle({reset = true})<CR>", --reset layout
         { noremap = true }
       )
-
+    end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      local dap = require("dap")
       local dapui = require("dapui")
       dapui.setup()
 
@@ -88,6 +106,6 @@ return {
       dap.listeners.before.launch.dapui_config = function()
         dapui.open()
       end
-    end,
-  },
+    end
+  }
 }

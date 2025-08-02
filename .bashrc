@@ -45,3 +45,7 @@ if [ -f "$SSH_ENV" ]; then
 else
     start_agent
 fi
+export GODOT="/home/patrick/.config/godotenv/godot/bin/godot"
+export PATH="/home/patrick/.config/godotenv/godot/bin:$PATH"
+. "$HOME/.config/godotenv/env" # Added by GodotEnv
+

@@ -1,63 +1,105 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python import subprocess import json
+import sys
 import subprocess
+import json
+from typing import Dict, List
 
-# function to parse output of command "wpctl status" and return a dictionary of sinks with their id and name.
-def parse_wpctl_status():
-    # Execute the wpctl status command and store the output in a variable.
-    output = str(subprocess.check_output("wpctl status", shell=True, encoding='utf-8'))
+MEDIA_CLASS_SINK = "Audio/Sink"
+MEDIA_CLASS_SOURCE = "Audio/Source"
 
-    # remove the ascii tree characters and return a list of lines
-    lines = output.replace("├", "").replace("─", "").replace("│", "").replace("└", "").splitlines()
 
-    # get the index of the Sinks line as a starting point
-    sinks_index = None
-    for index, line in enumerate(lines):
-        if "Sinks:" in line:
-            sinks_index = index
-            break
-    if sinks_index == None:
-        subprocess.call("notify-send 'No sinks found'")
-        return []
+def get_property(node: Dict, property: str) -> str | None:
+    return node.get("info", {}).get("props", {}).get(property, None)
 
-    # start by getting the lines after "Sinks:" and before the next blank line and store them in a list
-    sinks = []
-    for line in lines[sinks_index +1:]:
-        if not line.strip():
-            break
-        sinks.append(line.strip())
 
-    # remove the "[vol:" from the end of the sink name
-    for index, sink in enumerate(sinks):
-        sinks[index] = sink.split("[vol:")[0].strip()
-    
-    # strip the * from the default sink and instead append "- Default" to the end. Looks neater in the wofi list this way.
-    for index, sink in enumerate(sinks):
-        if sink.startswith("*"):
-            sinks[index] = sink.strip().replace("*", "").strip() + " - Default"
+def parse_metadata(pipewire_state: Dict):
+    default_sink = None
+    default_source = None
+    for node in pipewire_state:
+        metadata_name = node.get("props", {}).get("metadata.name", None)
+        if metadata_name == "default":
+            for metadata in node["metadata"]:
+                match metadata["key"]:
+                    case "default.audio.sink":
+                        default_sink = metadata["value"]
+                        break
+                    case "default.audio.source":
+                        default_source = metadata["value"]
+                        break
+    return default_sink, default_source
 
-    # make the dictionary in this format {'sink_id': <int>, 'sink_name': <str>}
-    sinks_dict = [{"sink_id": int(sink.split(".")[0]), "sink_name": sink.split(".")[1].strip()} for sink in sinks]
 
-    return sinks_dict
+def parse_nodes(pipewire_state: Dict, media_class: str) -> List:
+    sinks: List = []
+    for node in pipewire_state:
+        mediaClass = get_property(node, "media.class")
+        if mediaClass is not None and mediaClass == media_class:
+            sinks.append(node)
+    return sinks
 
-# get the list of sinks ready to put into wofi - highlight the current default sink
-output = ''
-sinks = parse_wpctl_status()
-for items in sinks:
-    if items['sink_name'].endswith(" - Default"):
-        output += f"<b>-> {items['sink_name']}</b>\n"
-    else:
-        output += f"{items['sink_name']}\n"
 
-# Call wofi and show the list. take the selected sink name and set it as the default sink
-wofi_command = f"echo '{output}' | wofi --show=dmenu --hide-scroll --allow-markup --define=hide_search=true --location=top_right --width=600 --height=200 --xoffset=-60"
-wofi_process = subprocess.run(wofi_command, shell=True, encoding='utf-8', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+def get_pw_dump() -> Dict:
+    pw_dump_output = subprocess.check_output(["pw-dump", "-N"])
+    return json.loads(pw_dump_output)
 
-if wofi_process.returncode != 0:
-    print("User cancelled the operation.")
-    exit(0)
 
-selected_sink_name = wofi_process.stdout.strip()
-sinks = parse_wpctl_status()
-selected_sink = next(sink for sink in sinks if sink['sink_name'] == selected_sink_name)
-subprocess.run(f"wpctl set-default {selected_sink['sink_id']}", shell=True)
+def get_wofi_options(nodes: List, default_name: str) -> str:
+    options = ""
+    for node in nodes:
+        node_description = get_property(node, "node.description")
+        node_name = get_property(node, "node.name")
+        options += f"{'' if node_name == default_name else ''}{node_description}\n"
+    return options
+
+
+def get_selection_from_wofi(wofi_options: str, nodes: List) -> Dict | None:
+    # Call wofi and show the list. take the selected sink name and set it as the default sink
+    wofi_command = f"echo '{wofi_options}' | wofi --show=dmenu --hide-scroll --allow-markup --define=hide_search=true --location=top_right --width=600 --height=200 --xoffset=-60"
+    wofi_process = subprocess.run(
+        wofi_command,
+        shell=True,
+        encoding="utf-8",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+
+    selected_sink_name = wofi_process.stdout.strip()
+    if selected_sink_name == "":
+        return None
+    selected_sink = next(
+        node
+        for node in nodes
+        if get_property(node, "node.description") == selected_sink_name
+    )
+    return selected_sink
+
+
+nodes = []
+default_name = None
+pipewire_state = get_pw_dump()
+
+if len(sys.argv) > 1:
+    (default_sink, default_source) = parse_metadata(pipewire_state)
+
+    match sys.argv[1].lower():
+        case "sink":
+            default_name = default_sink
+            nodes = parse_nodes(pipewire_state, MEDIA_CLASS_SINK)
+        case "source":
+            default_name = default_source
+            nodes = parse_nodes(pipewire_state, MEDIA_CLASS_SOURCE)
+        case _:
+            print("Unknown class")
+            exit(1)
+else:
+    print("Required argument (sink|source) missing")
+    exit(1)
+
+wofi_options = get_wofi_options(nodes, default_name)
+selected_index = get_selection_from_wofi(wofi_options, nodes)
+if selected_index is not None:
+    subprocess.run(f"wpctl set-default {selected_index['id']}", shell=True)
+    subprocess.run(
+        f"notify-send 'Changed audio {sys.argv[1]} to {get_property(selected_index, 'node.description')}'",
+        shell=True,
+    )

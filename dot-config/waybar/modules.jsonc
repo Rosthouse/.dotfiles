@@ -111,11 +111,16 @@
       "5": [],
     },
   },
+  "group/audio": {
+    "orientation": "horizontal",
+    "modules": ["wireplumber", "wireplumber#source"],
+  },
   "wireplumber": {
     "node-type": "Audio/Sink",
     "format": "{icon} {volume}%",
     "format-muted": "󰝟 {volume}%",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "python3 ~/.config/waybar/scripts/audio_changer.py sink",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -128,9 +133,10 @@
   },
   "wireplumber#source": {
     "node-type": "Audio/Source",
-    "format": "{volume}% 󰍬",
-    "format-muted": "󰍭",
-    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "format": " 󰍬 {volume}%",
+    "format-muted": "󰍭 {volume}%",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-click-right": "python3 ~/.config/waybar/scripts/audio_changer.py source",
     "scroll-step": 5,
   },
   "wlr/taskbar": {

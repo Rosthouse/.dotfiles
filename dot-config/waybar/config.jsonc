@@ -3,6 +3,6 @@
   "position": "top",
   "modules-left": ["tray", "wlr/taskbar"],
   "modules-center": ["mpd", "hyprland/workspaces", "clock"],
-  "modules-right": ["bluetooth", "wireplumber", "cpu"],
+  "modules-right": ["bluetooth", "group/audio", "cpu"],
   "include": ["~/.config/waybar/modules.jsonc"],
 }

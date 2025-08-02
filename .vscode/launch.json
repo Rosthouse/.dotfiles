@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "request": "launch",
+      "name": "Launch Java"
+    },
+    {
+      "type": "python",
+      "request": "launch",
+      "name": "Launch Python with args",
+      "program": "${file}",
+      "args": [
+        "${input:cliArgs}"
+      ]
+    },
+    {
+      "type": "cppdbg",
+      "request": "launch",
+      "name": "Launch CPP"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "cliArgs",
+      "type": "promptString",
+      "description": "Insert your cli args here"
+    }
+  ]
+}

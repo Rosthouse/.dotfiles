@@ -21,7 +21,7 @@
 #tray,
 #window,
 #workspaces,
-#group-audio
+#audio
 {
   background-color: rgba(29,31,46, 0.65);
   border-radius: 8px;
@@ -35,19 +35,12 @@
   background-color: rgba(29,31,46, 0.95);
 }
 
-#pulseaudio.muted {
-  color: #FF0000;
-  padding-top: 0;
-}
-
 /* 鼠标悬停变亮一点 */
 #bluetooth:hover,
 #network:hover,
 /*#tray:hover,*/
 #backlight:hover,
 #battery:hover,
-#pulseaudio:hover,
-#custom-temperature:hover,
 #memory:hover,
 #cpu:hover,
 #clock:hover,

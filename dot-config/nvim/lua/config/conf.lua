@@ -32,3 +32,7 @@ vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "ö"
+
+-- Quickfix window
+vim.g.dotnet_errors_only = true
+vim.g.dotnet_show_project_file = false

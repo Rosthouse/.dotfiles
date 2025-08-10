@@ -3,8 +3,7 @@
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 ## This should install all apps needed to make these configs work
-exec dnf install git hyprland waybar wofi tmux nvim dunst kanshi cliphist blueman stow wireplumber pavucontrol
-
+exec dnf install blueman cliphist dunst fuzzel git grim hyprland kanshi nvim pavucontrol stow tmux waybar wf-recorder wireplumber wofi
 ## Make required scripts executable
 exec chmod +x ./dot-config/waybar/scripts/audio_changer.py
 ## This links all files (not excluded by .stow-local-ignore) to your home directory

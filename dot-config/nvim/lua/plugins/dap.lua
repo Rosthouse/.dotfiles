@@ -7,6 +7,7 @@ return {
       "jay-babu/mason-nvim-dap.nvim",
       "theHamsta/nvim-dap-virtual-text",
     },
+
     config = function()
       local dap = require("dap")
       require("nvim-dap-virtual-text").setup({})

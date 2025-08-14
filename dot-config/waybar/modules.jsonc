@@ -37,17 +37,13 @@
   "cpu": {
     "interval": 10,
     "format": "{icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} {icon7}",
-    "format-icons": [
-      "▁",
-      "▂",
-      "▃",
-      "▄",
-      "▅",
-      "▆",
-      "▇",
-      "█"
-    ],
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     "max-length": 10,
+  },
+  "custom/power": {
+    "format": "",
+    "on-click": "shutdown now",
+    "on-right-click": "shutdown -R 0",
   },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
@@ -88,16 +84,11 @@
       "phone-muted": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        ""
-      ],
+      "default": ["", ""],
     },
     "scroll-step": 1,
     "on-click": "pavucontrol",
-    "ignored-sinks": [
-      "Easy Effects Sink"
-    ],
+    "ignored-sinks": ["Easy Effects Sink"],
   },
   "tray": {
     "spacing": 10,
@@ -127,10 +118,7 @@
   },
   "group/audio": {
     "orientation": "horizontal",
-    "modules": [
-      "wireplumber",
-      "wireplumber#source"
-    ],
+    "modules": ["wireplumber", "wireplumber#source"],
   },
   "wireplumber": {
     "node-type": "Audio/Sink",
@@ -145,11 +133,7 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [
-        "",
-        "",
-        ""
-      ],
+      "default": ["", "", ""],
     },
   },
   "wireplumber#source": {

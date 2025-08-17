@@ -1,4 +1,4 @@
-#!/usr/bin/env python import subprocess import json
+#!/usr/bin/env python
 import sys
 import subprocess
 import json
@@ -75,7 +75,7 @@ def get_selection_from_wofi(wofi_options: str, nodes: List) -> Dict | None:
 
 
 nodes = []
-default_name = None
+default_name = ""
 pipewire_state = get_pw_dump()
 
 if len(sys.argv) > 1:

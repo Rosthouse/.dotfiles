@@ -87,7 +87,7 @@ return {
         "n",
         "<leader>dr",
         "<cmd>lua require('dapui').toggle({reset = true})<CR>", --reset layout
-        { noremap = true }
+        { desc = "󰨙 Toggle Debug GUI", noremap = true }
       )
     end
   }

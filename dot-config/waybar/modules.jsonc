@@ -149,7 +149,7 @@
     "tooltip": true,
     "tooltip-format": "{title}",
     "on-click": "activate",
-    "on-click-middle": "close",
+    "on-click-right": "close",
     "active-first": false,
   },
 }

@@ -1,6 +1,5 @@
 -- Start settings
 require("config.conf")
-require("config.keymaps")
 
 -- Disable netrw
 vim.g.loaded_netrw = 1

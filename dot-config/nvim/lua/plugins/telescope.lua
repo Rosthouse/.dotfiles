@@ -25,6 +25,12 @@ return {
     },
     config = function()
       local telescope = require("telescope")
+      telescope.setup({
+        defaults = {
+          path_display = { "smart" },
+          file_ignore_patterns = { "%__virtual.$" },
+        }
+      })
       telescope.load_extension("vstask")
 
       vim.keymap.set("n", "<leader>ta", telescope.extensions.vstask.tasks, { desc = "List Tasks" })

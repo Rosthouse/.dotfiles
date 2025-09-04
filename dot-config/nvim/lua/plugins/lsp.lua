@@ -3,7 +3,19 @@ return {
     "seblyng/roslyn.nvim",
     opts = {
       broad_search = true,
-    }
+    },
+    dependencies = {
+      "tris203/rzls.nvim",
+      config = true,
+    },
+    init = function()
+      vim.filetype.add({
+        extension = {
+          razor = "razor",
+          cshtml = "razor",
+        },
+      })
+    end
   },
   {
     "neovim/nvim-lspconfig",
@@ -24,6 +36,7 @@ return {
         ensure_installed = {
           "bashls",
           "lua_ls",
+          "marksman",
           "pyright", "ruff",
         },
       })
@@ -45,7 +58,21 @@ return {
         },
       })
 
+
+      local mason_registry = require("mason-registry")
+      local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
+      local roslyn_cmd = {
+        "roslyn", "--stdio", "--logLevel=Information",
+        "--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+        "--razorSourceGenerator=" .. vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+        "--razorDesignTimePath=" .. vim.fs.joinpath(rzls_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+        "--extension",
+        vim.fs.joinpath(rzls_path, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
+      }
+
       vim.lsp.config("roslyn", {
+        cmd = roslyn_cmd,
+        handlers = require("rzls.roslyn_handlers"),
         settings = {
           ["csharp|inlay_hints"] = {
             csharp_enable_inlay_hints_for_implicit_object_creation = true,

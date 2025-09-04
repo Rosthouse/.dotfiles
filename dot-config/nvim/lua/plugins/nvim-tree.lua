@@ -7,7 +7,9 @@ return {
   },
 
   config = function()
-    require("nvim-tree").setup({})
+    require("nvim-tree").setup({
+      update_focused_file = { enable = true },
+    })
     -- KeyMaps
     vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>", { desc = " Focus tree", silent = true, noremap = true })
     vim.keymap.set("n", "<leader>E", ":NvimTreeClose<CR>", { desc = "󰅘 Close tree", silent = true, noremap = true })

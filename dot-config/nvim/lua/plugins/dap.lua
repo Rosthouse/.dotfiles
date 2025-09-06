@@ -7,11 +7,11 @@ return {
       "jay-babu/mason-nvim-dap.nvim",
       "theHamsta/nvim-dap-virtual-text",
     },
-
     config = function()
       local dap = require("dap")
       require("nvim-dap-virtual-text").setup({})
       -- Setup Mason integration
+      local pickers = require("telescope.pickers")
 
       require("mason-nvim-dap").setup({
         handlers = {
@@ -35,6 +35,15 @@ return {
           program = function()
             return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
           end,
+          args = function()
+            return coroutine.create(function(coro)
+              local opts = {}
+              pickers.new(opts, {
+                prompt_title = "Select launch profile",
+
+              })
+            end)
+          end
         },
         {
           type = "coreclr",

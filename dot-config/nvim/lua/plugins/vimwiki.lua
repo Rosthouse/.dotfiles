@@ -5,7 +5,8 @@ return {
       {
         path = '~/Documents/notes',
         syntax = 'markdown',
-        ext = '.md'
+        ext = '.md',
+        index = 'Personal',
       },
     }
   end,

@@ -58,8 +58,7 @@ return {
         },
       })
 
-
-      local mason_registry = require("mason-registry")
+      local _ = require("mason-registry")
       local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
       local roslyn_cmd = {
         "roslyn", "--stdio", "--logLevel=Information",
@@ -82,6 +81,9 @@ return {
             dotnet_enable_references_code_lens = true,
           },
         },
+        on_attach = function(client, bufNum)
+          vim.cmd("compiler dotnet")
+        end
       })
     end,
   },

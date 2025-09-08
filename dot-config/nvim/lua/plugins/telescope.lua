@@ -11,9 +11,10 @@ return {
 
       vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Telescope quickfix list" })
       vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "Telescope jump list" })
-      vim.keymap.set("n", "<leader>fli", builtin.lsp_references, { desc = "Telescope LSP References" })
+
+      vim.keymap.set("n", "<leader>flr", builtin.lsp_references, { desc = "Telescope LSP References" })
       vim.keymap.set("n", "<leader>fli", builtin.lsp_incoming_calls, { desc = "Telescope LSP Incoming Calls" })
-      vim.keymap.set("n", "<leader>fli", builtin.lsp_outgoing_calls, { desc = "Telescope LSP Outgoing Calls" })
+      vim.keymap.set("n", "<leader>flo", builtin.lsp_outgoing_calls, { desc = "Telescope LSP Outgoing Calls" })
     end,
   },
   {

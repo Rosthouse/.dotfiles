@@ -8,6 +8,12 @@ return {
         ext = '.md',
         index = 'Personal',
       },
+      {
+        path = '~/Documents/notes',
+        syntax = 'markdown',
+        ext = '.md',
+        index = 'Personal',
+      },
     }
   end,
   config = function()

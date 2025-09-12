@@ -18,6 +18,7 @@ return {
             end,
           },
           { "<leader>l", group = "Language" },
+          { "<leader>G", group = "󰊢 Git" },
         })
       end,
       desc = "Buffer Local Keymaps (which-key)",

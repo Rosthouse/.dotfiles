@@ -19,7 +19,7 @@ return ({
           }),
         },
         custom_attributes = {
-          nunit = { "UnitTest" },
+          nunit = { "UnitTest", "SmokeTest", },
         },
         output = { open_on_run = true },
       })
@@ -29,15 +29,22 @@ return ({
       })
 
       vim.keymap.set('n', '<leader>ltr', neotest.run.run, { desc = 'Test' })
-      vim.keymap.set('n', '<leader>ltR', function() neotest.run.run(vim.fn.expand("%")) end,
+      vim.keymap.set('n', '<leader>ltR', function() require("neotest").run.run(vim.fn.expand("%")) end,
         { desc = 'Test File' })
       vim.keymap.set('n', '<leader>ltx', neotest.run.stop, { desc = ' Stop Running Tests' })
-      vim.keymap.set('n', '<leader>ltd', function() neotest.run.run({ strategy = "dap" }) end,
+      vim.keymap.set('n', '<leader>ltd', function() require("neotest").run.run({ strategy = "dap" }) end,
         { desc = '  Debug Nearest Test' })
-      vim.keymap.set('n', '<leader>ltd', function() neotest.run.run(vim.fn.expand("%"), { strategy = "dap" }) end,
+      vim.keymap.set('n', '<leader>ltd',
+        function() require("neotest").run.run(vim.fn.expand("%"), { strategy = "dap" }) end,
+        { desc = ' Debug Test' })
+      vim.keymap.set('n', '<leader>ltD',
+        function() require("neotest").run.run(vim.fn.expand("%"), { strategy = "dap" }) end,
         { desc = '  Debug Tests in File' })
-      vim.keymap.set('n', '<leader>lto', function() neotest.output() end, { desc = 'Show Result for Test' })
-      vim.keymap.set('n', '<leader>ltO', function() neotest.output() end, { desc = 'Show Result for File' })
+      vim.keymap.set('n', '<leader>lto', function()
+        require("neotest").output.open({ enter = true })
+      end, { desc = 'Show Result for Test' })
+      vim.keymap.set('n', '<leader>ltO', function() require("neotest").output_panel.toggle() end,
+        { desc = 'Show Result for File' })
       vim.keymap.set('n', '<leader>lts', neotest.summary.toggle, { desc = 'Show Test Summary' })
     end
   },

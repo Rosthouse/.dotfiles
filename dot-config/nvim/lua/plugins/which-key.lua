@@ -8,17 +8,18 @@ return {
         local wk = require("which-key")
         wk.show({ global = false })
         wk.add({
-          { "<leader>f", group = "Find" },
-          { "<leader>d", group = "Diagnostics" },
+          { "<leader>f", group = "find", desc = " Find" },
+          { "<leader>d", group = "diagnostics", desc = " Diagnostics" },
           {
             "<leader>b",
-            group = "Buffers",
+            desc = " Buffers",
             expand = function()
               return require("which-key.extras").expand.buf()
             end,
           },
-          { "<leader>l", group = "Language" },
-          { "<leader>G", group = "󰊢 Git" },
+          { "<leader>l", group = "language", desc = " Language" },
+          { "<leader>G", group = "git", desc = "󰊢 Git" },
+          { "<leader>t", group = "task", desc = " Tasks" },
         })
       end,
       desc = "Buffer Local Keymaps (which-key)",

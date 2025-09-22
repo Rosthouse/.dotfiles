@@ -6,17 +6,23 @@ return {
         path = '~/Documents/notes',
         syntax = 'markdown',
         ext = '.md',
-        index = 'Personal',
+        autotag = 1,
       },
       {
-        path = '~/Documents/notes',
+        path = '~/Documents/notes/personal',
         syntax = 'markdown',
         ext = '.md',
-        index = 'Personal',
+      },
+      {
+        path = '~/Documents/notes/work',
+        syntax = 'markdown',
+        ext = '.md',
       },
     }
   end,
   config = function()
+    vim.g.vimwiki_markdown_link_ext = 1
+    vim.g.taskwiki_markup_syntax = "markdown"
     vim.api.nvim_create_autocmd({ "BufNewFile", nil },
       {
         pattern = { "*diary/*.md" },

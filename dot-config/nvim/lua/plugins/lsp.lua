@@ -18,6 +18,21 @@ return {
     end
   },
   {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+    },
+    ft = "python",
+    keys = {
+      { "<leader>lpv", "<cmd>VenvSelect<cr>" },
+    },
+    opts = {
+      search = {}, options = {},
+    },
+    event = 'VeryLazy',
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "mason-org/mason.nvim" },

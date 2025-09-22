@@ -13,9 +13,7 @@ return ({
       neotest.setup({
         adapters = {
           require("neotest-dotnet")({
-            dap_settings = {
-              type = "netcoredbg",
-            }
+            dap = { args = { justMyCode = false } },
           }),
         },
         custom_attributes = {
@@ -35,7 +33,7 @@ return ({
       vim.keymap.set('n', '<leader>ltd', function() require("neotest").run.run({ strategy = "dap" }) end,
         { desc = '  Debug Nearest Test' })
       vim.keymap.set('n', '<leader>ltd',
-        function() require("neotest").run.run(vim.fn.expand("%"), { strategy = "dap" }) end,
+        function() require("neotest").run.run({ strategy = "dap" }) end,
         { desc = ' Debug Test' })
       vim.keymap.set('n', '<leader>ltD',
         function() require("neotest").run.run(vim.fn.expand("%"), { strategy = "dap" }) end,

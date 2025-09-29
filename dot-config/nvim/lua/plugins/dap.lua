@@ -122,14 +122,13 @@ return {
       )
 
       -- Setup Keymaps
-      vim.api.nvim_set_keymap("n", "<F9>", ":DapToggleBreakpoint<CR>", { noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>ldb", ":DapToggleBreakpoint<CR>",
         { desc = " Toggle Breakpoint", noremap = true })
-      vim.api.nvim_set_keymap("n", "<F5>", ":DapContinue<CR>", { noremap = true })
-      vim.api.nvim_set_keymap("n", "<F17>", ":DapTerminate<CR>", { noremap = true })
-      vim.api.nvim_set_keymap("n", "<F10>", ":DapStepOver<CR>", { noremap = true })
-      vim.api.nvim_set_keymap("n", "<F11>", ":DapStepInto<CR>", { noremap = true })
-      vim.api.nvim_set_keymap("n", "<F12>", ":DapStepOut<CR>", { noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>dc", ":DapContinue<CR>", { desc = " Continue", noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>dt", ":DapTerminate<CR>", { desc = " Terminate", noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>do", ":DapStepOver<CR>", { desc = " Step Over", noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>di", ":DapStepInto<CR>", { desc = "󰆹 Step Into", noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>de", ":DapStepOut<CR>", { desc = "󰆸 Step Out", noremap = true })
     end,
   },
   {

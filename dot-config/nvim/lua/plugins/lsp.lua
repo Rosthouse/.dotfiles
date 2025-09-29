@@ -30,6 +30,13 @@ return {
     opts = {
       search = {}, options = {},
     },
+    config = function()
+      require("which-key").add({
+        { "<leader>lp", group = " Python" },
+      })
+      vim.api.nvim_set_keymap("n", "<leader>lpv", "<cmd>VenvSelect<cr>", { desc = "Select venv", noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>lpi", "<cmd>VenvSelect<cr>", { desc = "Install", noremap = true })
+    end,
     event = 'VeryLazy',
   },
   {

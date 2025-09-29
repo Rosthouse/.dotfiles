@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 import datetime
+from typing import List
 
 template = """# {date}
 
@@ -13,7 +14,15 @@ template = """# {date}
 
 ## Notes"""
 
-date = (datetime.date.today() if len(sys.argv) < 2
-        # Expecting filename in YYYY-MM-DD.foo format
-        else sys.argv[1].rsplit(".", 1)[0])
+
+def add_title(document: List[str], title: str, level: int) -> List[str]:
+    return document + [f"{'#' * level} {title}"]
+
+
+date = (
+    datetime.date.today()
+    if len(sys.argv) < 2
+    # Expecting filename in YYYY-MM-DD.foo format
+    else sys.argv[1].rsplit(".", 1)[0]
+)
 print(template.format(date=date))

@@ -3,52 +3,56 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      local telescope = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Telescope find files" })
-      vim.keymap.set("n", "<leader>fh", function()
-        require("telescope.builtin").find_files({ hidden = true })
-      end, { desc = "Telescope find files" })
-      vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope find buffers" })
-      vim.keymap.set("n", "<leader>fg", telescope.live_grep, { desc = "Telescope find buffers" })
-      vim.keymap.set("n", "<leader>ft", telescope.commands, { desc = "Telescope find commands" })
-
-      vim.keymap.set("n", "<leader>fq", telescope.quickfix, { desc = "Telescope quickfix list" })
-      vim.keymap.set("n", "<leader>fj", telescope.jumplist, { desc = "Telescope jump list" })
-
-      vim.keymap.set("n", "<leader>flr", telescope.lsp_references, { desc = "Telescope LSP References" })
-      vim.keymap.set("n", "<leader>fli", telescope.lsp_incoming_calls, { desc = "Telescope LSP Incoming Calls" })
-      vim.keymap.set("n", "<leader>flo", telescope.lsp_outgoing_calls, { desc = "Telescope LSP Outgoing Calls" })
-    end,
-  },
-  {
-    "EthanJWright/vs-tasks.nvim",
-    dependencies = {
-      "nvim-lua/popup.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      { "Joakker/lua-json5", install = "./install.sh" },
-    },
-    config = function()
       local telescope = require("telescope")
-      telescope.load_extension("vstask")
       telescope.setup({
         defaults = {
           path_display = { "smart" },
           file_ignore_patterns = { "%__virtual.$" },
         }
       })
-      require("vstask").setup({
-        json_parser = require("json5").parse
-      })
+      local builtin = require("telescope.builtin")
+      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+      vim.keymap.set("n", "<leader>fh", function()
+        require("telescope.builtin").find_files({ hidden = true })
+      end, { desc = "Telescope find files" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope find buffers" })
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope find buffers" })
+      vim.keymap.set("n", "<leader>ft", builtin.commands, { desc = "Telescope find commands" })
 
-      vim.keymap.set("n", "<leader>tt", telescope.extensions.vstask.tasks, { desc = "Tasks" })
-      vim.keymap.set("n", "<leader>tl", telescope.extensions.vstask.launch, { desc = "Launch" })
-      vim.keymap.set('n', '<leader>ti', telescope.extensions.vstask.inputs, { desc = "Inputs" })
-      vim.keymap.set('n', '<leader>tj', telescope.extensions.vstask.jobs, { desc = "Jobs" })
-      --vim.keymap.set('n', '<leader>ta', telescope.extensions.vstask.clear_inputs()<CR>
-      --vim.keymap.set('n', '<leader>ta', telescope.extensions.vstask.cleanup_completed_jobs()<CR>
-      --vim.keymap.set('n', '<leader>ta', telescope.extensions.vstask.launch()<cr>
-      --vim.keymap.set('n', '<leader>ta', telescope.extensions.vstask.command()<cr>
+      vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Telescope quickfix list" })
+      vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "Telescope jump list" })
+
+      vim.keymap.set("n", "<leader>flr", builtin.lsp_references, { desc = "Telescope LSP References" })
+      vim.keymap.set("n", "<leader>fli", builtin.lsp_incoming_calls, { desc = "Telescope LSP Incoming Calls" })
+      vim.keymap.set("n", "<leader>flo", builtin.lsp_outgoing_calls, { desc = "Telescope LSP Outgoing Calls" })
     end,
   },
+  {
+    'stevearc/overseer.nvim',
+    opts = {},
+    config = function()
+      local overseer = require("overseer")
+      overseer.setup({
+        dap = false
+      })
+
+      local function runLastTask()
+        local tasks = overseer.list_tasks({ recent_first = true })
+        if vim.tbl_isempty(tasks) then
+          vim.notify("No tasks found", vim.log.levels.WARN)
+        else
+          overseer.run_action(tasks[1], "restart")
+        end
+      end
+
+      vim.keymap.set("n", "<leader>tt", "<cmd>OverseerToggle<cr>", { desc = "Task list" })
+      vim.keymap.set("n", "<leader>to", "<cmd>OverseerRun<cr>", { desc = "Run task" })
+      vim.keymap.set("n", "<leader>tl", runLastTask, { desc = "Run Last" })
+      vim.keymap.set("n", "<leader>tq", "<cmd>OverseerQuickAction<cr>", { desc = "Action recent task" })
+      vim.keymap.set("n", "<leader>ti", "<cmd>OverseerInfo<cr>", { desc = "Overseer Info" })
+      vim.keymap.set("n", "<leader>tb", "<cmd>OverseerBuild<cr>", { desc = "Task builder" })
+      vim.keymap.set("n", "<leader>ta", "<cmd>OverseerTaskAction<cr>", { desc = "Task action" })
+      vim.keymap.set("n", "<leader>tc", "<cmd>OverseerClearCache<cr>", { desc = "Clear cache" })
+    end
+  }
 }

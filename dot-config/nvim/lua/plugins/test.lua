@@ -29,6 +29,9 @@ return ({
       vim.keymap.set('n', '<leader>ltr', neotest.run.run, { desc = 'Test' })
       vim.keymap.set('n', '<leader>ltR', function() require("neotest").run.run(vim.fn.expand("%")) end,
         { desc = 'Test File' })
+      vim.keymap.set('n', '<leader>ltA', function()
+        require("neotest").run.run(vim.uv.cwd())
+      end, { desc = 'Run all Tests' })
       vim.keymap.set('n', '<leader>ltx', neotest.run.stop, { desc = ' Stop Running Tests' })
       vim.keymap.set('n', '<leader>ltd', function() require("neotest").run.run({ strategy = "dap" }) end,
         { desc = '  Debug Nearest Test' })
@@ -44,6 +47,11 @@ return ({
       vim.keymap.set('n', '<leader>ltO', function() require("neotest").output_panel.toggle() end,
         { desc = 'Show Result for File' })
       vim.keymap.set('n', '<leader>lts', neotest.summary.toggle, { desc = 'Show Test Summary' })
+    end,
+    opts = function(_, opts)
+      opts = opts or {}
+      opts.consumers = opts.consumers or {}
+      opts.consumers.overseer = require("neotest.consumers.overseer")
     end
   },
 })

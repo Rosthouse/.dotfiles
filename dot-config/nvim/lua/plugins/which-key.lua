@@ -8,11 +8,11 @@ return {
         local wk = require("which-key")
         wk.show({ global = false })
         wk.add({
-          { "<leader>f", group = "find", desc = " Find" },
-          { "<leader>d", group = "diagnostics", desc = " Diagnostics" },
+          { "<leader>f", group = "find", icon = "" },
+          { "<leader>d", group = "diagnostics", icon = " " },
           {
             "<leader>b",
-            desc = " Buffers",
+            icon = "",
             expand = function()
               return require("which-key.extras").expand.buf()
             end,

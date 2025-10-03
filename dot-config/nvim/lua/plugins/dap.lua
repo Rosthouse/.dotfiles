@@ -76,7 +76,6 @@ return {
                 local opts = {}
                 pickers.new(opts, {
                   prompt_title = "Select launch profile",
-
                 })
               end)
             end
@@ -112,6 +111,8 @@ return {
         }
       }
 
+      require("overseer").enable_dap()
+
       vim.fn.sign_define(
         "DapBreakpoint",
         { text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
@@ -122,7 +123,7 @@ return {
       )
 
       -- Setup Keymaps
-      vim.api.nvim_set_keymap("n", "<leader>ldb", ":DapToggleBreakpoint<CR>",
+      vim.api.nvim_set_keymap("n", "<leader>db", ":DapToggleBreakpoint<CR>",
         { desc = " Toggle Breakpoint", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>dc", ":DapContinue<CR>", { desc = " Continue", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>dt", ":DapTerminate<CR>", { desc = " Terminate", noremap = true })

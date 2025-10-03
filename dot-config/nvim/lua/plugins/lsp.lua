@@ -21,9 +21,8 @@ return {
     "linux-cultist/venv-selector.nvim",
     dependencies = {
       "neovim/nvim-lspconfig",
-      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+      { "nvim-telescope/telescope.nvim" },
     },
-    ft = "python",
     keys = {
       { "<leader>lpv", "<cmd>VenvSelect<cr>" },
     },
@@ -37,7 +36,6 @@ return {
       vim.api.nvim_set_keymap("n", "<leader>lpv", "<cmd>VenvSelect<cr>", { desc = "Select venv", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>lpi", "<cmd>VenvSelect<cr>", { desc = "Install", noremap = true })
     end,
-    event = 'VeryLazy',
   },
   {
     "neovim/nvim-lspconfig",

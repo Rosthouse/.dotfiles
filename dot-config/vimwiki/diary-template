@@ -2,6 +2,7 @@
 import sys
 import datetime
 from typing import List
+from mdcomposer import MdComposer
 
 template = """# {date}
 

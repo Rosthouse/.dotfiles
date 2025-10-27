@@ -15,6 +15,7 @@ return {
               ft_parsers = {
                 json = "json",
                 jsonc = "json",
+                markdown = "markdown",
               },
             },
           },
@@ -31,6 +32,7 @@ return {
           javascript = { "prettierd", "prettier", stop_after_first = true },
           json = { "prettierd", "prettier", stop_after_first = true },
           jsonc = { "prettierd", "prettier", stop_after_first = true },
+          markdown = { "prettier", stop_after_first = true },
           python = { "ruff" },
         },
       })

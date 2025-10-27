@@ -1,5 +1,12 @@
 return {
   {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = { path = "${3rd}/luv/library", words = { "vim%.uv" } }
+    },
+  },
+  {
     "seblyng/roslyn.nvim",
     opts = {
       broad_search = true,
@@ -15,27 +22,10 @@ return {
           cshtml = "razor",
         },
       })
+      vim.g.dotnet_errors_only = false
+      vim.g.dotnet_show_project_file = false
+      vim.g.compiler = "dotnet"
     end
-  },
-  {
-    "linux-cultist/venv-selector.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      { "nvim-telescope/telescope.nvim" },
-    },
-    keys = {
-      { "<leader>lpv", "<cmd>VenvSelect<cr>" },
-    },
-    opts = {
-      search = {}, options = {},
-    },
-    config = function()
-      require("which-key").add({
-        { "<leader>lp", group = " Python" },
-      })
-      vim.api.nvim_set_keymap("n", "<leader>lpv", "<cmd>VenvSelect<cr>", { desc = "Select venv", noremap = true })
-      vim.api.nvim_set_keymap("n", "<leader>lpi", "<cmd>VenvSelect<cr>", { desc = "Install", noremap = true })
-    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -67,15 +57,36 @@ return {
       vim.lsp.enable("roslyn")
 
       local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(ev)
+          local builtin = require("telescope.builtin")
+          vim.keymap.set("n", "<leader>flr", builtin.lsp_references, { desc = "References" })
+          vim.keymap.set("n", "<leader>fli", builtin.lsp_incoming_calls, { desc = "Incoming Calls" })
+          vim.keymap.set("n", "<leader>flo", builtin.lsp_outgoing_calls, { desc = "LSP Outgoing Calls" })
+          vim.keymap.set("n", "<leader>fld", function()
+            require("telescope.builtin").diagnostics({ bufnr = 0 })
+          end, { desc = "Document Diagnostics" })
+          vim.keymap.set("n", "<leader>flD", builtin.diagnostics, { desc = "Workspace Diagnostics" })
+        end
+      })
+
       vim.lsp.config("*", {
         capabilities = capabilities,
-        root_markers = { ".git" }
+        root_markers = { ".git" },
       })
 
       vim.lsp.config("lua_ls", {
         settings = {
           Lua = { diagnostics = { globals = { "vim" } } },
         },
+      })
+
+      vim.lsp.config("pyright", {
+        settings = {
+          venvPath = ".venv",
+          venv = "venv",
+        }
       })
 
       local _ = require("mason-registry")

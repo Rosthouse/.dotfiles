@@ -6,6 +6,9 @@ return ({
     "nvim-telescope/telescope.nvim",
   },
   {
+    "sindrets/diffview.nvim",
+  },
+  {
     "lewis6991/gitsigns.nvim",
     config = function()
       local ng = require("neogit")

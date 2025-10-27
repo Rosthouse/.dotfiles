@@ -15,15 +15,15 @@ return ({
     signature = { enabled = true },
     fuzzy = { implementation = "prefer_rust_with_warning" },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
       per_filetype = {
         sql = { "snippets", "dadbod", "buffer" },
       },
       providers = {
-        dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" }
+        dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100, },
       }
     }
   },
   opts_extend = { "sources.default" },
-
 })

@@ -13,18 +13,14 @@ return {
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
       vim.keymap.set("n", "<leader>fh", function()
-        require("telescope.builtin").find_files({ hidden = true })
-      end, { desc = "Telescope find files" })
-      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope find buffers" })
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope find buffers" })
-      vim.keymap.set("n", "<leader>ft", builtin.commands, { desc = "Telescope find commands" })
+        require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
+      end, { desc = "Telescope find hidden files" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "find buffers" })
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "find buffers" })
+      vim.keymap.set("n", "<leader>ft", builtin.commands, { desc = "find commands" })
 
-      vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "Telescope quickfix list" })
-      vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "Telescope jump list" })
-
-      vim.keymap.set("n", "<leader>flr", builtin.lsp_references, { desc = "Telescope LSP References" })
-      vim.keymap.set("n", "<leader>fli", builtin.lsp_incoming_calls, { desc = "Telescope LSP Incoming Calls" })
-      vim.keymap.set("n", "<leader>flo", builtin.lsp_outgoing_calls, { desc = "Telescope LSP Outgoing Calls" })
+      vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "quickfix list" })
+      vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "jump list" })
     end,
   },
   {
@@ -46,7 +42,7 @@ return {
       end
 
       vim.keymap.set("n", "<leader>tt", "<cmd>OverseerToggle<cr>", { desc = "Task list" })
-      vim.keymap.set("n", "<leader>to", "<cmd>OverseerRun<cr>", { desc = "Run task" })
+      vim.keymap.set("n", "<leader>tr", "<cmd>OverseerRun<cr>", { desc = "Run task" })
       vim.keymap.set("n", "<leader>tl", runLastTask, { desc = "Run Last" })
       vim.keymap.set("n", "<leader>tq", "<cmd>OverseerQuickAction<cr>", { desc = "Action recent task" })
       vim.keymap.set("n", "<leader>ti", "<cmd>OverseerInfo<cr>", { desc = "Overseer Info" })

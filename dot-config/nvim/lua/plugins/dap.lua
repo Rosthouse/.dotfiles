@@ -1,3 +1,17 @@
+function getPythonPath()
+  -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+  -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+  -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+  local cwd = vim.fn.getcwd()
+  if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+    return cwd .. "/venv/bin/python"
+  elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+    return cwd .. "/.venv/bin/python"
+  else
+    return "/usr/bin/python"
+  end
+end
+
 return {
   {
     "mfussenegger/nvim-dap",
@@ -11,9 +25,10 @@ return {
       local dap = require("dap")
       require("nvim-dap-virtual-text").setup({})
       -- Setup Mason integration
-      local pickers = require("telescope.pickers")
 
       require("mason-nvim-dap").setup({
+        automatic_installation = false,
+        ensure_installed = {},
         handlers = {
           function(config)
             require("mason-nvim-dap").default_setup(config)
@@ -23,11 +38,15 @@ return {
 
       dap.adapters =
       {
+        lldb = {
+          type = "executable",
+          command = "lldb-dap",
+        },
         coreclr = {
           type = "executable",
           command = "/usr/local/netcoredbg",
           args = { "--interpreter=vscode" },
-          justMyCode = false,
+          justMyCode = true,
         },
         netcoredbg = {
           type = "executable",
@@ -68,17 +87,8 @@ return {
             name = "launch - netcoredbg",
             request = "launch",
             program = function()
-              print(vim.g.roslyn_nvim_selected_solution)
               return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
             end,
-            args = function()
-              return coroutine.create(function(coro)
-                local opts = {}
-                pickers.new(opts, {
-                  prompt_title = "Select launch profile",
-                })
-              end)
-            end
           },
           {
             type = "coreclr",
@@ -86,6 +96,25 @@ return {
             request = "launch",
             program = "godot",
             args = { "--path", "${workspaceFolder}" },
+          },
+          {
+            type = "lldb",
+            name = "LLDB",
+            request = "launch",
+            program = function() -- 👈 focus this function
+              return coroutine.create(function(dap_run_co)
+                local picker = require("scripts.picker")
+                picker.get_file(
+                  { title = "python <file>: select input file:" },
+                  function(select_item)
+                    coroutine.resume(dap_run_co, select_item)
+                  end
+                )
+              end)
+            end,
+            sourceMap = {
+              { "/", "${workspaceFolder}" },
+            },
           }
         },
         python = {
@@ -93,21 +122,21 @@ return {
             type = "python",
             request = "launch",
             name = "Launch File",
-            program = "${file}", -- This configuration will launch the current file if used.
-            pythonPath = function()
-              -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-              -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-              -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-              local cwd = vim.fn.getcwd()
-              if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-                return cwd .. "/venv/bin/python"
-              elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-                return cwd .. "/.venv/bin/python"
-              else
-                return "/usr/bin/python"
-              end
+            program = function()
+              return "${file}" .. " " .. vim.fn.input({ prompt = "Args: " })
             end,
-          }
+            pythonPath = getPythonPath,
+          },
+          {
+            type = "python",
+            request = "launch",
+            name = "Launch Module",
+            program = "-m ${file}", -- This configuration will launch the current file if used.
+            pythonPath = getPythonPath,
+            args = function()
+              return vim.fn.input({ prompt = "Args: " })
+            end
+          },
         }
       }
 
@@ -126,7 +155,7 @@ return {
       vim.api.nvim_set_keymap("n", "<leader>db", ":DapToggleBreakpoint<CR>",
         { desc = " Toggle Breakpoint", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>dc", ":DapContinue<CR>", { desc = " Continue", noremap = true })
-      vim.api.nvim_set_keymap("n", "<leader>dt", ":DapTerminate<CR>", { desc = " Terminate", noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>ds", ":DapTerminate<CR>", { desc = " Terminate", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>do", ":DapStepOver<CR>", { desc = " Step Over", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>di", ":DapStepInto<CR>", { desc = "󰆹 Step Into", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>de", ":DapStepOut<CR>", { desc = "󰆸 Step Out", noremap = true })
@@ -152,12 +181,9 @@ return {
         dapui.open()
       end
 
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>dr",
-        "<cmd>lua require('dapui').toggle({reset = true})<CR>", --reset layout
-        { desc = "󰨙 Toggle Debug GUI", noremap = true }
-      )
+      vim.keymap.set("n", "<leader>dt", function()
+        require('dapui').toggle({ reset = true })
+      end, { desc = "󰨙 Toggle Debug GUI", })
     end
   }
 }

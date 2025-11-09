@@ -53,27 +53,27 @@ return {
           command = "/usr/local/netcoredbg",
           args = { "--interpreter=vscode" },
         },
-        python = function(cb, config)
+        debugpy = function(cb, config)
           if config.request == 'attach' then
             ---@diagnostic disable-next-line: undefined-field
             local port = (config.connect or config).port
             ---@diagnostic disable-next-line: undefined-field
             local host = (config.connect or config).host or '127.0.0.1'
             cb({
-              type = 'server',
-              port = assert(port, '`connect.port` is required for a python `attach` configuration'),
+              type = "server",
+              port = assert(port, "`connect.port` is required for a python `attach` configuration"),
               host = host,
               options = {
-                source_filetype = 'python',
+                source_filetype = "python",
               },
             })
           else
             cb({
-              type = 'executable',
-              command = 'python',
-              args = { '-m', 'debugpy.adapter' },
+              type = "executable",
+              command = "python",
+              args = { "-m", "debugpy.adapter" },
               options = {
-                source_filetype = 'python',
+                source_filetype = "python",
               },
             })
           end
@@ -119,16 +119,29 @@ return {
         },
         python = {
           {
-            type = "python",
+            type = "debugpy",
             request = "launch",
             name = "Launch File",
-            program = function()
-              return "${file}" .. " " .. vim.fn.input({ prompt = "Args: " })
-            end,
+            program = "${file}",
             pythonPath = getPythonPath,
           },
           {
-            type = "python",
+            type = "debugpy",
+            request = "launch",
+            name = "Launch File With Args",
+            args = function()
+              local input = vim.fn.input({ prompt = "Args: " })
+              local t = {}
+              for str in string.gmatch(input, "([^" .. " " .. "]+)") do
+                table.insert(t, str)
+              end
+              return t
+            end,
+            program = "${file}",
+            pythonPath = getPythonPath,
+          },
+          {
+            type = "debugpy",
             request = "launch",
             name = "Launch Module",
             program = "-m ${file}", -- This configuration will launch the current file if used.
@@ -154,6 +167,7 @@ return {
       -- Setup Keymaps
       vim.api.nvim_set_keymap("n", "<leader>db", ":DapToggleBreakpoint<CR>",
         { desc = " Toggle Breakpoint", noremap = true })
+      vim.api.nvim_set_keymap("n", "<leader>dc", ":DapContinue<CR>", { desc = " Continue", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>dc", ":DapContinue<CR>", { desc = " Continue", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>ds", ":DapTerminate<CR>", { desc = " Terminate", noremap = true })
       vim.api.nvim_set_keymap("n", "<leader>do", ":DapStepOver<CR>", { desc = " Step Over", noremap = true })

@@ -125,7 +125,7 @@
     "format": "{icon} {volume}%",
     "format-muted": "󰝟 {volume}%",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-click-right": "python3 ~/.config/waybar/scripts/audio_changer.py sink",
+    "on-click-right": "python3 ~/.config/userscripts/audio_changer.py sink",
     "format-icons": {
       "headphone": "",
       "hands-free": "",
@@ -141,7 +141,7 @@
     "format": " 󰍬 {volume}%",
     "format-muted": "󰍭 {volume}%",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    "on-click-right": "python3 ~/.config/waybar/scripts/audio_changer.py source",
+    "on-click-right": "python3 ~/.config/userscripts/audio_changer.py source",
     "scroll-step": 5,
   },
   "wlr/taskbar": {

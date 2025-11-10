@@ -18,6 +18,7 @@ return {
       vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "find buffers" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "find buffers" })
       vim.keymap.set("n", "<leader>ft", builtin.commands, { desc = "find commands" })
+      vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "find diagnostics" })
 
       vim.keymap.set("n", "<leader>fq", builtin.quickfix, { desc = "quickfix list" })
       vim.keymap.set("n", "<leader>fj", builtin.jumplist, { desc = "jump list" })

@@ -43,7 +43,7 @@ def get_pw_dump() -> Dict:
     return json.loads(pw_dump_output)
 
 
-def get_wofi_options(nodes: List, default_name: str) -> str:
+def get_dmenu_options(nodes: List, default_name: str) -> str:
     options = ""
     for node in nodes:
         node_description = get_property(node, "node.description")
@@ -52,18 +52,18 @@ def get_wofi_options(nodes: List, default_name: str) -> str:
     return options
 
 
-def get_selection_from_wofi(wofi_options: str, nodes: List) -> Dict | None:
-    # Call wofi and show the list. take the selected sink name and set it as the default sink
-    wofi_command = f"echo '{wofi_options}' | wofi --show=dmenu --hide-scroll --allow-markup --define=hide_search=true --location=top_right --width=600 --height=200 --xoffset=-60"
-    wofi_process = subprocess.run(
-        wofi_command,
+def get_selection_from_dmenu(dmenu: str, nodes: List) -> Dict | None:
+    # Call dmenu and show the list. take the selected sink name and set it as the default sink
+    dmenu_command = f"echo '{dmenu}' | fuzzel --show=dmenu --hide-scroll --allow-markup --define=hide_search=true --location=top_right --width=600 --height=200 --xoffset=-60"
+    dmenu_process = subprocess.run(
+        dmenu_command,
         shell=True,
         encoding="utf-8",
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
 
-    selected_sink_name = wofi_process.stdout.strip()
+    selected_sink_name = dmenu_process.stdout.strip()
     if selected_sink_name == "":
         return None
     selected_sink = next(
@@ -95,8 +95,8 @@ else:
     print("Required argument (sink|source) missing")
     exit(1)
 
-wofi_options = get_wofi_options(nodes, default_name)
-selected_index = get_selection_from_wofi(wofi_options, nodes)
+dmenu_options = get_dmenu_options(nodes, default_name)
+selected_index = get_selection_from_dmenu(dmenu_options, nodes)
 if selected_index is not None:
     subprocess.run(f"wpctl set-default {selected_index['id']}", shell=True)
     subprocess.run(

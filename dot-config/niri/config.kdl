@@ -40,6 +40,7 @@ input {
         // accel-profile "flat"
         // scroll-method "two-finger"
         // disabled-on-external-mouse
+        tap-button-map "left-middle-right"
     }
 
     mouse {
@@ -103,6 +104,38 @@ input {
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
     position x=1280 y=0
+}
+
+output "eDP-1" {
+  position x=0 y=0
+}
+
+output "Dell Inc. DELL U2722D 79DW193" {
+  position x=4480 y=0
+  //  layout {
+  //   default-column-width { proportion 0.25; }
+  //   preset-column-widths {
+  //     proportion 0.2;
+  //     proportion 0.25;
+  //     proportion 0.5;
+  //     proportion 0.75;
+  //     proportion 0.8;
+  //   }
+  // }  
+}
+
+output "Dell Inc. DELL U2722D 7YFPDH3" {
+  position x=1920 y=0
+  //  layout {
+  //   default-column-width { proportion 0.25; }
+  //   preset-column-widths {
+  //     proportion 0.2;
+  //     proportion 0.25;
+  //     proportion 0.5;
+  //     proportion 0.75;
+  //     proportion 0.8;
+  //   }
+  // }  
 }
 
 output "Samsung Electric Company LC49G95T H4ZNA03304" {
@@ -392,9 +425,9 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Mod+Space hotkey-overlay-title="Run an Application: wofi" { spawn-sh "wofi --show drun"; }
-    Mod+E hotkey-overlay-title="Run an Application: wofi-emoji" { spawn-sh "wofi-emoji"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+    Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn-sh "fuzzel --show drun"; }
+    Mod+E hotkey-overlay-title="Run Emoji Picker: wofi-emoji" { spawn-sh "wofi-emoji"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: wlogout" { spawn "wlogout"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -624,6 +657,7 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
+    Mod+S { screenshot; }
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }

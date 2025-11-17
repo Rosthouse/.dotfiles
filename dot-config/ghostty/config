@@ -1,0 +1,17 @@
+# themes
+# dark: Andromeda, catppuccin-mocha | light: catppuccin-latte
+# theme = dark:Andromeda,light:catppuccin-latte
+
+# font
+font-family = "0xProto Nerd Font Mono"
+font-thicken = false
+
+# window
+window-padding-y = 6
+window-padding-x = 6
+window-padding-balance = true
+window-width = 95
+window-height = 28
+window-save-state = always
+
+bell-features = no-audio, no-title, no-system

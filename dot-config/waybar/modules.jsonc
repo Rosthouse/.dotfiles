@@ -1,9 +1,18 @@
 {
+  "battery": {
+    "format": "Test",
+    "states": {
+        "warning": 30,
+        "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": ["", "", "", "", ""],
+    "max-length": 25
+  },
   "bluetooth": {
     "format": " {status}",
     "format-connected": " {device_alias}",
     "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-    // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
@@ -11,7 +20,7 @@
     "on-click": "~/.config/waybar/scripts/rofi-bluetooth &",
   },
   "clock": {
-    "format": "{:%a :%H%M} 󱑂",
+    "format": "{:%a %H%M} 󱑂",
     "format-alt": "{:%A, %d %B, %Y} 󰃭",
     "calendar": {
       "mode": "year",
@@ -36,9 +45,10 @@
   },
   "cpu": {
     "interval": 10,
-    "format": "{icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} {icon7}",
-    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    "format": "{}% {icon}",
+    "format-icons": ["⢀", "⣀", "⣠", "⣤", "⣴", "⣶", "⣾", "⣿"],
     "max-length": 10,
+    "tooltip": true,
   },
   "custom/power": {
     "format": "",
@@ -70,6 +80,33 @@
     "tooltip-format": "MPD (connected)",
     "tooltip-format-disconnected": "MPD (disconnected)",
   },
+  "privacy": {
+	  "transition-duration": 250,
+	  "modules": [
+	  	{
+	  		"type": "screenshare",
+	  		"tooltip": true,
+	  		"tooltip-icon-size": 24
+	  	},
+	  	{
+	  		"type": "audio-out",
+	  		"tooltip": true,
+	  		"tooltip-icon-size": 24
+	  	},
+	  	{
+	  		"type": "audio-in",
+	  		"tooltip": true,
+	  		"tooltip-icon-size": 24
+	  	}
+	  ],
+	  "ignore-monitor": true,
+	  "ignore": [
+	  	{
+	  		"type": "audio-in",
+	  		"name": "cava"
+	  	},
+	  ]
+  },
   "pulseaudio": {
     "format": "{volume}% {icon}",
     "format-bluetooth": "{volume}% {icon}",
@@ -90,32 +127,6 @@
     "on-click": "pavucontrol",
     "ignored-sinks": ["Easy Effects Sink"],
   },
-  "tray": {
-    "spacing": 10,
-  },
-  "hyprland/workspaces": {
-    "format": "{icon}",
-    "on-click": "activate",
-    "active-only": false,
-    "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "",
-      "5": "󰊗",
-      "urgent": "",
-      "active": "",
-      "default": "",
-    },
-    "sort-by-number": true,
-    "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": [],
-    },
-  },
   "group/audio": {
     "orientation": "horizontal",
     "modules": ["wireplumber", "wireplumber#source"],
@@ -125,7 +136,8 @@
     "format": "{icon} {volume}%",
     "format-muted": "󰝟 {volume}%",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-click-right": "python3 ~/.config/userscripts/audio_changer.py sink",
+    "on-right-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    // "on-click-right": "python3 ~/.config/userscripts/audio_changer.py sink",
     "format-icons": {
       "headphone": "",
       "hands-free": "",

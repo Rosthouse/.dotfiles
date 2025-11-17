@@ -2,7 +2,6 @@
 - [x] Configure stow
 - [x] Clipboard manager
 - [ ] Grub Theme
-- [ ] Wofi Theme
 - [ ] Manage bluetooth through waybar
 - [ ] Manage sound devices through waybar
 - [ ] Fix minimize to tray

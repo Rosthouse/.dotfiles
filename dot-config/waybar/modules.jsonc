@@ -2,12 +2,12 @@
   "battery": {
     "format": "Test",
     "states": {
-        "warning": 30,
-        "critical": 15
+      "warning": 30,
+      "critical": 15,
     },
     "format": "{capacity}% {icon}",
     "format-icons": ["", "", "", "", ""],
-    "max-length": 25
+    "max-length": 25,
   },
   "bluetooth": {
     "format": " {status}",
@@ -81,31 +81,31 @@
     "tooltip-format-disconnected": "MPD (disconnected)",
   },
   "privacy": {
-	  "transition-duration": 250,
-	  "modules": [
-	  	{
-	  		"type": "screenshare",
-	  		"tooltip": true,
-	  		"tooltip-icon-size": 24
-	  	},
-	  	{
-	  		"type": "audio-out",
-	  		"tooltip": true,
-	  		"tooltip-icon-size": 24
-	  	},
-	  	{
-	  		"type": "audio-in",
-	  		"tooltip": true,
-	  		"tooltip-icon-size": 24
-	  	}
-	  ],
-	  "ignore-monitor": true,
-	  "ignore": [
-	  	{
-	  		"type": "audio-in",
-	  		"name": "cava"
-	  	},
-	  ]
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+    ],
+    "ignore-monitor": true,
+    "ignore": [
+      {
+        "type": "audio-in",
+        "name": "cava",
+      },
+    ],
   },
   "pulseaudio": {
     "format": "{volume}% {icon}",
@@ -129,15 +129,14 @@
   },
   "group/audio": {
     "orientation": "horizontal",
-    "modules": ["wireplumber", "wireplumber#source"],
+    "modules": ["wireplumber#sink", "wireplumber#source"],
   },
-  "wireplumber": {
+  "wireplumber#sink": {
     "node-type": "Audio/Sink",
     "format": "{icon} {volume}%",
     "format-muted": "󰝟 {volume}%",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-right-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    // "on-click-right": "python3 ~/.config/userscripts/audio_changer.py sink",
+    "on-click-right": "python3 ~/.config/userscripts/audio_changer.py sink",
     "format-icons": {
       "headphone": "",
       "hands-free": "",

@@ -7,12 +7,14 @@ from typing import Dict, List
 MEDIA_CLASS_SINK = "Audio/Sink"
 MEDIA_CLASS_SOURCE = "Audio/Source"
 
+print("Trying to set audio")
+
 
 def get_property(node: Dict, property: str) -> str | None:
     return node.get("info", {}).get("props", {}).get(property, None)
 
 
-def parse_metadata(pipewire_state: Dict):
+def parse_metadata(pipewire_state: Dict) -> tuple[str | None, str | None]:
     default_sink = None
     default_source = None
     for node in pipewire_state:
@@ -21,10 +23,10 @@ def parse_metadata(pipewire_state: Dict):
             for metadata in node["metadata"]:
                 match metadata["key"]:
                     case "default.audio.sink":
-                        default_sink = metadata["value"]
+                        default_sink = metadata["value"]["name"]
                         break
                     case "default.audio.source":
-                        default_source = metadata["value"]
+                        default_source = metadata["value"]["name"]
                         break
     return default_sink, default_source
 
@@ -43,7 +45,7 @@ def get_pw_dump() -> Dict:
     return json.loads(pw_dump_output)
 
 
-def get_dmenu_options(nodes: List, default_name: str) -> str:
+def get_dmenu_options(nodes: List, default_name: str | None) -> str:
     options = ""
     for node in nodes:
         node_description = get_property(node, "node.description")
@@ -54,7 +56,7 @@ def get_dmenu_options(nodes: List, default_name: str) -> str:
 
 def get_selection_from_dmenu(dmenu: str, nodes: List) -> Dict | None:
     # Call dmenu and show the list. take the selected sink name and set it as the default sink
-    dmenu_command = f"echo '{dmenu}' | fuzzel --show=dmenu --hide-scroll --allow-markup --define=hide_search=true --location=top_right --width=600 --height=200 --xoffset=-60"
+    dmenu_command = f"echo '{dmenu}' | fuzzel -a top-right -d"
     dmenu_process = subprocess.run(
         dmenu_command,
         shell=True,
@@ -75,17 +77,24 @@ def get_selection_from_dmenu(dmenu: str, nodes: List) -> Dict | None:
 
 
 nodes = []
-default_name = ""
+default_name: str | None = None
 pipewire_state = get_pw_dump()
+
+print("Got PW dump")
 
 if len(sys.argv) > 1:
     (default_sink, default_source) = parse_metadata(pipewire_state)
 
     match sys.argv[1].lower():
         case "sink":
+            if default_sink is None:
+                print("Default sink not found")
             default_name = default_sink
+
             nodes = parse_nodes(pipewire_state, MEDIA_CLASS_SINK)
         case "source":
+            if default_source is None:
+                print("Default source not found")
             default_name = default_source
             nodes = parse_nodes(pipewire_state, MEDIA_CLASS_SOURCE)
         case _:
@@ -95,8 +104,16 @@ else:
     print("Required argument (sink|source) missing")
     exit(1)
 
-dmenu_options = get_dmenu_options(nodes, default_name)
+print(f"Found default device {default_name}")
+
+dmenu_options = get_dmenu_options(nodes=nodes, default_name=default_name)
+
+print(f"Got dmenu options {dmenu_options}")
+
 selected_index = get_selection_from_dmenu(dmenu_options, nodes)
+
+print(f"Got selection from dmenu {selected_index}")
+
 if selected_index is not None:
     subprocess.run(f"wpctl set-default {selected_index['id']}", shell=True)
     subprocess.run(

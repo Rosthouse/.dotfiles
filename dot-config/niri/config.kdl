@@ -487,7 +487,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn-sh "fuzzel --show drun"; }
-    Mod+E hotkey-overlay-title="Run Emoji Picker: wofi-emoji" { spawn-sh "wofi-emoji"; }
+    Mod+E hotkey-overlay-title="Run Emoji Picker: bemoji" { spawn-sh "emoji-picker"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: wlogout" { spawn "wlogout"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.

@@ -44,9 +44,7 @@ return {
         },
         coreclr = {
           type = "executable",
-          command = "/usr/local/netcoredbg",
-          args = { "--interpreter=vscode" },
-          justMyCode = true,
+          command = "lldb-dap",
         },
         netcoredbg = {
           type = "executable",

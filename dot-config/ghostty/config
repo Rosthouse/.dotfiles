@@ -9,7 +9,7 @@ font-family = "0xProto Nerd Font Mono"
 font-thicken = false
 
 # Looks
-background-opacity = 0.85
+background-opacity = 0.75
 background-blur = true
 
 # window
@@ -22,3 +22,5 @@ window-save-state = always
 
 bell-features = no-audio, no-title, no-system
 
+# startup
+command = ~/.config/userscripts/tmux_management.sh

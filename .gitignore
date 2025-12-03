@@ -2,7 +2,9 @@ nvim/~/*
 ~/*
 dot-config/tmux/plugins/
 
-
+dot-config/   
 ## Ignoring Python stuff
 # Byte-compiled / optimized / DLL files
 __pycache__/
+
+.vscode

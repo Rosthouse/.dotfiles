@@ -25,7 +25,6 @@ return {
       local dap = require("dap")
       require("nvim-dap-virtual-text").setup({})
       -- Setup Mason integration
-
       require("mason-nvim-dap").setup({
         automatic_installation = false,
         ensure_installed = {},
@@ -40,11 +39,8 @@ return {
       {
         lldb = {
           type = "executable",
-          command = "lldb-dap",
-        },
-        coreclr = {
-          type = "executable",
-          command = "lldb-dap",
+          command = "codelldb",
+          name = "lldb"
         },
         netcoredbg = {
           type = "executable",
@@ -80,21 +76,21 @@ return {
 
       dap.configurations = {
         cs = {
-          {
-            type = "coreclr",
-            name = "launch - netcoredbg",
-            request = "launch",
-            program = function()
-              return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
-            end,
-          },
-          {
-            type = "coreclr",
-            name = "launch - godot",
-            request = "launch",
-            program = "godot",
-            args = { "--path", "${workspaceFolder}" },
-          },
+          -- {
+          --   type = "coreclr",
+          --   name = "launch - netcoredbg",
+          --   request = "launch",
+          --   program = function()
+          --     return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+          --   end,
+          -- },
+          -- {
+          --   type = "coreclr",
+          --   name = "launch - godot",
+          --   request = "launch",
+          --   program = "godot",
+          --   args = { "--path", "${workspaceFolder}" },
+          -- },
           {
             type = "lldb",
             name = "LLDB",
@@ -197,5 +193,5 @@ return {
         require('dapui').toggle({ reset = true })
       end, { desc = "󰨙 Toggle Debug GUI", })
     end
-  }
+  },
 }

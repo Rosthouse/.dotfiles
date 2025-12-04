@@ -1,5 +1,6 @@
-alias pcve='python -m venv .venv && source .venv/bin/activate'
-alias psve='source .venv/bin/activate'
+alias resource='source ~/.bashrc'
+alias pvec='python -m venv .venv && source .venv/bin/activate'
+alias pves='source .venv/bin/activate'
 alias fzp="fzf --preview 'cat {}'"
 alias fkill="ps aux | fzf --preview='echo COMMAND: {11}' | awk '{print \$2}' | xargs kill -9"
 

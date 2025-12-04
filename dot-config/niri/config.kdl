@@ -196,8 +196,36 @@ output "Dell Inc. DELL U2722D GDBX6H3" {
   // }  
 }
 
+// WP right of Ilja
+output "Dell Inc. DELL U2722D JXLX6H3" {
+  position x=1920 y=0
+  //  layout {
+  //   default-column-width { proportion 0.25; }
+  //   preset-column-widths {
+  //     proportion 0.2;
+  //     proportion 0.25;
+  //     proportion 0.5;
+  //     proportion 0.75;
+  //     proportion 0.8;
+  //   }
+  // }  
+}
 
+output "Dell Inc. DELL U2722D 8R728H3" {
+  position x=4480 y=0
+  //  layout {
+  //   default-column-width { proportion 0.25; }
+  //   preset-column-widths {
+  //     proportion 0.2;
+  //     proportion 0.25;
+  //     proportion 0.5;
+  //     proportion 0.75;
+  //     proportion 0.8;
+  //   }
+  // }  
+}
 
+// Home Office
 output "Samsung Electric Company LC49G95T H4ZNA03304" {
   position x=-5120 y=0
   //  layout {

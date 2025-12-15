@@ -1,1 +1,3 @@
-cat ~/.config/emoji/emojis.txt | fuzzel -p "Emoji" -d -i | cut -d ' ' -f 1 | tr -d '\n' | wl-copy
+# Remove lines with '#' | Remove empty lines | 
+cat ~/.config/emoji/emoji-test.txt | sed '/^#/d' | sed '/^$/d' | awk '{print $5}' | xargs echo 
+

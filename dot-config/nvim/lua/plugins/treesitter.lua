@@ -1,42 +1,61 @@
+---@module "lazy"
+---@type LazySpec
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
-    lazy = "false",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-context',
+    },
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
     config = function()
-      local configs = require("nvim-treesitter.configs")
+      local ts = require("nvim-treesitter")
 
-      configs.setup({
-        ensure_installed = {
-          "c",
-          "c_sharp",
-          "ini",
-          "lua",
-          "json",
-          "jsonc",
-          "vim",
-          "vimdoc",
-        },
-        sync_install = false,
-        auto_install = true,
-        highlight = { enable = true },
-        indent = { enable = true },
-        autotag = { enable = true },
+      ts.install({
+        "bash",
+        "c",
+        "c_sharp",
+        "html",
+        "ini",
+        "json",
+        "jsonc",
+        "latex",
+        "lua",
+        "markdown",
+        "python",
+        "vim",
+        "vimdoc",
+        "xml",
       })
 
-      vim.treesitter.language.register('ini', 'service')
-    end,
-  },
-  {
-    'Thiago4532/mdmath.nvim',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-    },
+      local group = vim.api.nvim_create_augroup('TreesitterSetup', { clear = true })
+      local ignore_filetypes = {
+        "checkhealth",
+        "lazy",
+        "mason",
+      }
 
-    -- The build is already done by default in lazy.nvim, so you don't need
-    -- the next line, but you can use the command `:MdMath build` to rebuild
-    -- if the build fails for some reason.
-    -- build = ':MdMath build'
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = group,
+        desc = "Enable treesitter highlighting and indentation",
+        callback = function(event)
+          if vim.tbl_contains(ignore_filetypes, event.match) then
+            return
+          end
+
+
+          local lang = vim.treesitter.language.get_lang(event.match) or event.match
+          local buf = event.buf
+
+          pcall(vim.treesitter.start, buf, lang)
+
+          vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+          ts.install({ lang })
+        end
+      })
+    end,
   },
 }

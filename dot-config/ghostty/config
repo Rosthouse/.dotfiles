@@ -24,4 +24,4 @@ window-save-state = always
 bell-features = no-audio, no-title, no-system
 
 # startup
-# command = ~/.config/userscripts/tmux_management.sh
+command = ~/.config/userscripts/tmux_management.sh

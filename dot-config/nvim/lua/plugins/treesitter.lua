@@ -3,9 +3,6 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-context',
-    },
     branch = "main",
     lazy = false,
     build = ":TSUpdate",
@@ -36,7 +33,6 @@ return {
         "mason",
       }
 
-
       vim.api.nvim_create_autocmd("FileType", {
         group = group,
         desc = "Enable treesitter highlighting and indentation",
@@ -44,7 +40,6 @@ return {
           if vim.tbl_contains(ignore_filetypes, event.match) then
             return
           end
-
 
           local lang = vim.treesitter.language.get_lang(event.match) or event.match
           local buf = event.buf

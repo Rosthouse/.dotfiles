@@ -1,4 +1,4 @@
-function getPythonPath()
+local function getPythonPath()
   -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
   -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
   -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.

@@ -42,6 +42,11 @@ return {
           command = "codelldb",
           name = "lldb"
         },
+        coreclr = {
+          type = "executable",
+          command = "codelldb",
+          name = "lldb"
+        },
         netcoredbg = {
           type = "executable",
           command = "/usr/local/netcoredbg",

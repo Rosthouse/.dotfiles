@@ -1,8 +1,9 @@
-alias resource='source ~/.bashrc'
-alias pvec='python -m venv .venv && source .venv/bin/activate'
+alias rs='source ~/.bashrc'
+alias pvec='python -m venv .venv && pves'
 alias pves='source .venv/bin/activate'
 alias fzp="fzf --preview 'cat {}'"
 alias fkill="ps aux | fzf --preview='echo COMMAND: {11}' | awk '{print \$2}' | xargs kill -9"
+alias prtl=pritunl-client
 
 fenv() {
   local var
@@ -18,3 +19,6 @@ fdnf() {
   dnf list -C | awk '{print $1}' | fzf --multi --preview 'dnf info {1} -C ' | awk '{print $1}'
 }
 
+zd() {
+  zoxide "$@"
+}

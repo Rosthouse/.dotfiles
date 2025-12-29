@@ -246,6 +246,7 @@ binds {
   // Mod+Shift+Space { switch-layout "prev"; }
   
   Mod+S { screenshot; }
+  Mod+Shift+S { spawn-sh "niri msg action screenshot | wl-paste | tesseract -c debug_file=/dev/null - - | wl-copy"; }
   Print { screenshot; }
   Ctrl+Print { screenshot-screen; }
   Alt+Print { screenshot-window; }

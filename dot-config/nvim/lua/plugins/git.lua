@@ -6,7 +6,10 @@ return ({
     "nvim-telescope/telescope.nvim",
   },
   {
-    "sindrets/diffview.nvim",
+    'axkirillov/unified.nvim',
+    config = function()
+      vim.keymap.set('n', '<leader>Gd', require('unified').toggle, { desc = 'Toggle unified diff' })
+    end
   },
   {
     "lewis6991/gitsigns.nvim",

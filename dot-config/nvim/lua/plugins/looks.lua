@@ -16,16 +16,8 @@ return ({
           lualine_b = {},
           lualine_c = {},
           lualine_x = {},
-          lualine_y = {
-            {
-              function(_)
-                return "LSP ~ " .. vim.lsp.client.name:sub(5, -2)
-              end,
-              icons_enabled = true,
-              icon = " ",
-            }
-          },
-          lualine_z = {}
+          lualine_y = { 'lsp_status' },
+          lualine_z = { 'filename' }
         },
         theme = "pywal16-nvim",
       }

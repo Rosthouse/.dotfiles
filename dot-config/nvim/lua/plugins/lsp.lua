@@ -78,6 +78,22 @@ return {
             vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
             vim.keymap.set("i", "<CR>", [[pumvisible() ? "\<C-y>" : "\<CR>"]], { noremap = true, expr = true })
           end
+
+          if client:supports_method('textDocument/formatting') then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              callback = function(args)
+                local mode = vim.api.nvim_get_mode().mode
+                local filetype = vim.bo.filetype
+                if vim.bo.modified == true and mode == 'n' and filetype ~= "oil" then
+                  -- vim.cmd('lua vim.lsp.buf.format()')
+                  vim.lsp.buf.format()
+                else
+                end
+              end
+            })
+          end
+
+
           local builtin = require("telescope.builtin")
           vim.keymap.set("n", "<leader>flr", builtin.lsp_references, { desc = "References" })
           vim.keymap.set("n", "<leader>fli", builtin.lsp_incoming_calls, { desc = "Incoming Calls" })
@@ -85,6 +101,7 @@ return {
           vim.keymap.set("n", "<leader>fld", function()
             require("telescope.builtin").diagnostics({ bufnr = 0 })
           end, { desc = "Document Diagnostics" })
+
           vim.keymap.set("n", "<leader>flD", builtin.diagnostics, { desc = "Workspace Diagnostics" })
         end
       })

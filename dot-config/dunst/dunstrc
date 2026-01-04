@@ -5,14 +5,17 @@
   highlight = "#89b4fa"
 
 [urgency_low]
+  timeout = 10
   background = "#1e1e2e"
   foreground = "#cdd6f4"
 
 [urgency_normal]
+  timeout = 15
   background = "#1e1e2e"
   foreground = "#cdd6f4"
 
 [urgency_critical]
+  timeout = 60
   background = "#1e1e2e"
   foreground = "#cdd6f4"
   frame_color = "#fab387"

@@ -36,4 +36,4 @@ vim.g.dotnet_errors_only = true
 vim.g.dotnet_show_project_file = false
 
 -- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
-vim.opt.completeopt = { "menuone", "noselect", "popup", "fuzzy" }
+vim.opt.completeopt = { "menuone", "menu", "noselect", "fuzzy" }

@@ -54,7 +54,7 @@ return {
             csharp_enable_inlay_hints_for_implicit_variable_types = true,
           },
           ["csharp|code_lens"] = {
-            dotnet_enable_references_code_lens = true,
+            dotnet_enable_references_code_lens = false,
           },
         },
         on_attach = function()

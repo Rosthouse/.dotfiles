@@ -59,6 +59,8 @@ return {
         },
         on_attach = function()
           vim.cmd("compiler dotnet")
+          local roslyn = require("roslyn")
+          local overseer = require("overseer")
         end
       })
 

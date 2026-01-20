@@ -21,8 +21,8 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "sql",
       callback = function()
-        vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { desc = "trigger autocompletion" })
         vim.bo.completefunc = "vim_dadbod_completion#omni"
+        vim.keymap.set("i", "<C-space>", vim.bo.complete, { desc = "trigger autocompletion" })
       end,
     })
   end,

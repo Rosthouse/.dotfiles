@@ -54,7 +54,7 @@ return {
             csharp_enable_inlay_hints_for_implicit_variable_types = true,
           },
           ["csharp|code_lens"] = {
-            dotnet_enable_references_code_lens = false,
+            dotnet_enable_references_code_lens = true,
           },
         },
         on_attach = function()
@@ -72,28 +72,29 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(ev)
           local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+          client.server_capabilities.semanticTokensProvider = nil
 
-          if client:supports_method('textDocument/completion') then
-            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-            vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { desc = "trigger autocompletion" })
-            vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { noremap = true, expr = true })
-            vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
-            vim.keymap.set("i", "<CR>", [[pumvisible() ? "\<C-y>" : "\<CR>"]], { noremap = true, expr = true })
-          end
+          -- if client:supports_method('textDocument/completion') then
+          --   vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+          --   vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { desc = "trigger autocompletion" })
+          --   vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { noremap = true, expr = true })
+          --   vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { noremap = true, expr = true })
+          --   vim.keymap.set("i", "<CR>", [[pumvisible() ? "\<C-y>" : "\<CR>"]], { noremap = true, expr = true })
+          -- end
 
-          if client:supports_method('textDocument/formatting') then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              callback = function(args)
-                local mode = vim.api.nvim_get_mode().mode
-                local filetype = vim.bo.filetype
-                if vim.bo.modified == true and mode == 'n' and filetype ~= "oil" then
-                  -- vim.cmd('lua vim.lsp.buf.format()')
-                  vim.lsp.buf.format()
-                else
-                end
-              end
-            })
-          end
+          -- if client:supports_method('textDocument/formatting') then
+          --   vim.api.nvim_create_autocmd("BufWritePre", {
+          --     callback = function(args)
+          --       local mode = vim.api.nvim_get_mode().mode
+          --       local filetype = vim.bo.filetype
+          --       if vim.bo.modified == true and mode == 'n' and filetype ~= "oil" then
+          --         -- vim.cmd('lua vim.lsp.buf.format()')
+          --         vim.lsp.buf.format()
+          --       else
+          --       end
+          --     end
+          --   })
+          -- end
 
 
           local builtin = require("telescope.builtin")

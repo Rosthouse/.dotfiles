@@ -1,0 +1,50 @@
+#!/bin/bash
+create=false
+source=false
+system_site_packages=false
+name=.venv
+while getopts 'csn:sh' opt; do
+  case $opt in
+    c)
+      create=true
+      ;;
+    s)
+      source=true
+      ;;
+    n)
+      name="$OPTARG"
+      ;;
+    g)
+      system_site_packages=true
+      ;;
+    ?|h)
+      echo "Usage: $(basename $0) [-c Create a python virtual environment] [-s source the virtual environment] [-n Name of the venv (.venv by default)] [-s Toggle to install (s)ervices]" 
+      exit 1
+      ;;
+  esac
+done
+shift "$(($OPTIND -1))"
+
+if [ "$create" = true ]; then
+  echo "Creating VENV $name"
+  if [ -d "./$name" ]; then
+    echo "Virtual environment $name already exists"
+    exit 1
+  fi
+
+  if [ $system_site_packages = true ]; then
+    python -m venv $name --system-site-packages
+  else
+    python -m venv $name 
+  fi
+fi
+
+if [ "$source" = true ]; then
+  echo "Sourcing VENV $name"
+  if [ ! -d "./$name" ]; then
+    echo "Virtual environment $name does not exists"
+    exit 1
+  fi
+
+  source "$name/bin/activate"
+fi

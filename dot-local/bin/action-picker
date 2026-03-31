@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+EMOJI="$(sed '1,/^### DATA ###$/d' $0 | fuzzel --dmenu --prompt="Action: " | cut -d ' ' -f 1 | tr -d '\n')"
+wtype "$EMOJI"; wl-copy "$EMOJI"
+exit
+### DATA ###
+"󰖩 Network Manager" networkmanager_dmenu 

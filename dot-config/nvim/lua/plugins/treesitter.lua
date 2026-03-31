@@ -20,11 +20,19 @@ return {
         callback = function()
           -- syntax highlighting, provided by Neovim
           vim.treesitter.start()
-          -- folds, provided by Neovim
-          vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-          vim.wo.foldmethod = 'expr'
-          -- indentation, provided by nvim-treesitter
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+          if require("nvim-treesitter.parsers").has_parser() then
+              -- use treesitter folding
+              vim.opt.foldmethod = "expr"
+              vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+              -- indentation, provided by nvim-treesitter
+              vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          else
+              -- use alternative foldmethod
+              vim.opt.foldmethod = "syntax"
+          end
+          -- disable folding on startup
+          vim.opt.foldenable = false
         end,
       })
     end

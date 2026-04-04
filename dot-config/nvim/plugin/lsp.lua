@@ -45,9 +45,10 @@ vim.lsp.config("pyright", {
   }
 })
 
+vim.lsp.enable("bashls")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("pyright")
-vim.lsp.enable("bashls")
+vim.lsp.enable("roslyn")
 
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --   callback = function(ev)
@@ -76,28 +77,6 @@ vim.lsp.enable("bashls")
 --     },
 --   },
 --   {
---     "seblyng/roslyn.nvim",
---     ---@module 'roslyn.config'
---     ---@type RoslynNvimConfig
---     opts = {
---         -- your configuration comes here; leave empty for default settings
---     },
---   },
---   {
---     "neovim/nvim-lspconfig",
---     dependencies = {
---       {
---         "mason-org/mason.nvim",
---       },
---     },
---     config = function()
---       require("mason").setup({
---         registries = {
---           "github:mason-org/mason-registry",
---           "github:Crashdummyy/mason-registry",
---         },
---       })
--- 
 --       vim.lsp.config("roslyn", {
 --           on_attach = function()
 --               print("This will run when the server attaches!")

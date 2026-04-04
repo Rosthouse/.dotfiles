@@ -29,7 +29,6 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = "ö"
 
 -- Quickfix window
 vim.g.dotnet_errors_only = true

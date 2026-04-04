@@ -4,7 +4,7 @@ vim.pack.add({
   'https://github.com/nvim-lua/plenary.nvim',
 })
 
-telescope = require("telescope.builtin")
+local telescope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>fh", function()
   telescope.find_files({ hidden = true, no_ignore = true })

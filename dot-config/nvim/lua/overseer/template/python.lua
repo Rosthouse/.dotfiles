@@ -1,16 +1,16 @@
----@type overseer.TemplateFileProvider
-return {
-  {
-    name = "Install",
-    desc = "Runs `pip install` in the current working directory",
-    condition = {
-      filetype = { "python" },
-    },
-    builder = function ()
-      return {
-        cmd = { "pip" , "install", vim.uv.cwd()}
-      }
-    end
-  }
-
-}
+-- ---@type overseer.TemplateFileProvider
+-- return {
+--   {
+--     name = "Install",
+--     desc = "Runs `pip install` in the current working directory",
+--     condition = {
+--       filetype = { "python" },
+--     },
+--     builder = function ()
+--       return {
+--         cmd = { "pip" , "install", vim.uv.cwd()}
+--       }
+--     end
+--   }
+-- 
+-- }

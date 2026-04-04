@@ -10,15 +10,12 @@ require("mason").setup({
     "github:Crashdummyy/mason-registry",
   },
 })
+
 require("mason-lspconfig").setup({
-    -- A list of servers to ensure are installed.
-    -- These will be installed automatically by mason-lspconfig.
-    -- Alternatively, you can leave this empty and install manually
-    -- or use the ensure_installed function.
-    ensure_installed = { 
+    ensure_installed = {
       'bashls',
-      "lua_ls", 
-      "pyright", 
+      "lua_ls",
+      "pyright",
     },
     -- You can also pass settings to mason.nvim's setup function here
     -- if you want to customize mason from mason-lspconfig
@@ -43,6 +40,18 @@ vim.lsp.config("pyright", {
     venvPath = ".venv",
     venv = "venv",
   }
+})
+
+vim.lsp.config("roslyn", {
+  settings = {
+    ["csharp|inlay_hints"] = {
+      csharp_enable_inlay_hints_for_implicit_object_creation = true,
+      csharp_enable_inlay_hints_for_implicit_variable_types = true,
+    },
+    ["csharp|code_lens"] = {
+      dotnet_enable_references_code_lens = true,
+    },
+  },
 })
 
 vim.lsp.enable("bashls")
@@ -77,20 +86,6 @@ vim.lsp.enable("roslyn")
 --     },
 --   },
 --   {
---       vim.lsp.config("roslyn", {
---           on_attach = function()
---               print("This will run when the server attaches!")
---           end,
---           settings = {
---               ["csharp|inlay_hints"] = {
---                   csharp_enable_inlay_hints_for_implicit_object_creation = true,
---                   csharp_enable_inlay_hints_for_implicit_variable_types = true,
---               },
---               ["csharp|code_lens"] = {
---                   dotnet_enable_references_code_lens = true,
---               },
---           },
---       })
 -- 
 --   },
 -- }

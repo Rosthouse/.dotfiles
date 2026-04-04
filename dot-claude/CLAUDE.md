@@ -2,14 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Team Structure
-
-I am a member of Team Octopussy.
-
-## Repository Purpose
-
-This is a personal notes and documentation repository. It contains architectural diagrams, technical vision documents, and planning notes — primarily related to logistics/ERP domain work at Digitec Galaxus.
-
 ## Honesty
 
 - I wish you to be honest with me. If you don't know something, I want you to tell me so.
@@ -39,19 +31,30 @@ The glossary contains often used terms and abbreviations. This is rendered as a 
 | Product Manager/Owner      | PM/PO        | The Product Manager or Product Owner is responsible for managing timelines, resource allocation and the organisation of timelines in a team and for their respective products.                                                             |
 | Lot                        |              | Lot represents a grouping of articles of the same product. Once registered and applied, it is immutable. It carries data that may change between the instances of the same product, e.g. an expiration date or the supplied power adapter. |
 
-## Domain Context
-
-Notes here relate to internal ERP systems and logistics products:
-
-- **IMP (InterMandatorPurchase)**: Cross-mandator purchasing flow. Key entities: `ItemProductStatic`, `ItemProduct`, `ProviderOrder`, `InterMandatorSalesOrder`, `InterMandatorProviderOrder`. The state `WholeSalePrereserved = 78` is used to identify items in wholesale pre-reservation.
-- **LPD (LogisticsProductData)**: The logistics product data module, split between `LogisticsProduct` and `OutboundLogisticsProduct`, with some parts still in the monolith (`devinite` codebase). Uses the `logistics` database.
-- **LogisticsProblem**: An architectural proposal for a plugin-style error case handling system using `ErrorCase` + `ErrorCaseComponent` objects, inspired by LSP/DAP/MCP patterns and the Saga pattern.
-
 ## File Conventions
 
-- `.md` files: Architectural notes and planning documents (mix of German and English)
+- `.md` files: Architectural notes, documentation and planning documents (mix of German and English)
 - `.excalidraw` / `.excalidraw.svg` / `.svg`: Architecture diagrams
 - `skills/`: Claude Code custom skill definitions
+
+## Formatting
+
+### General
+
+- Always prefer spaces over tabs when indenting.
+- Unless otherwise specified, use 2 spaces to indent
+
+### Markdown
+
+These are the specific rules for formatting my markdown files:
+
+- Never split headings with a horizontal rule (`---`).
+- Tables should be formated, so that each pipe (|) is in the same column
+- Indented list should use 4 spaces
+
+## Python
+
+- Use 4 spaces to indent
 
 ## Language
 

@@ -4,7 +4,12 @@ vim.pack.add({
   'https://github.com/mason-org/mason-lspconfig.nvim',
 })
 
-require("mason").setup()
+require("mason").setup({
+  registries = {
+    "github:mason-org/mason-registry",
+    "github:Crashdummyy/mason-registry",
+  },
+})
 require("mason-lspconfig").setup({
     -- A list of servers to ensure are installed.
     -- These will be installed automatically by mason-lspconfig.

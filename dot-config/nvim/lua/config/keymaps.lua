@@ -8,6 +8,8 @@ vim.keymap.set("", "<leader>Y", '"+Y', { desc = "Yank to clipboard" })
 vim.keymap.set("n", "<leader>p", '"+p', { desc = "Paste after cursor from clipboard" })
 vim.keymap.set("n", "<leader>P", '"+P', { desc = "Paste before cursor from clipboard" })
 
+-- Undotree
+vim.keymap.set("n", "<leader>u", function() require('undotree').open() end, { desc = "Toggles the undotree" })
 -- Mini files functions
 vim.keymap.set('n', '<leader>e', function() require('mini.files').open() end, { desc = 'Opens mini.files', })
 

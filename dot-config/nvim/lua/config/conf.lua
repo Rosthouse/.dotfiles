@@ -1,6 +1,4 @@
-vim.opt.nu = true             -- Setting line numbers
-vim.opt.relativenumber = true -- Line numbers are relative
-
+-- configure tab settings
 local tabWidth = 2
 
 vim.opt.tabstop = tabWidth
@@ -10,7 +8,6 @@ vim.opt.expandtab = true
 
 vim.opt.smartindent = true
 
-vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -19,6 +16,7 @@ vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+-- looks
 vim.opt.termguicolors = true
 vim.opt.winborder = "rounded"
 
@@ -28,11 +26,13 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
-vim.g.mapleader = " "
+vim.opt.pumborder = 'rounded'
+vim.opt.pummaxwidth = 40
+vim.opt.completeopt = { "menuone", "menu", "noselect", "fuzzy" }
+vim.o.autocomplete = true
+
 
 -- Quickfix window
 vim.g.dotnet_errors_only = true
 vim.g.dotnet_show_project_file = false
 
--- prevent the built-in vim.lsp.completion autotrigger from selecting the first item
-vim.opt.completeopt = { "menuone", "menu", "noselect", "fuzzy" }

@@ -1,8 +1,11 @@
 vim.pack.add({
-  'https://github.com/nvim-treesitter/nvim-treesitter',
+  {
+    src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+    version = 'main',
+  }
 })
 
-require('nvim-treesitter').install { 'bash', 'c_sharp', 'lua', 'python' }
+require('nvim-treesitter').install( { 'bash', 'c_sharp', 'lua', 'python' } )
 
 -- {
 --   "nvim-treesitter/nvim-treesitter",

@@ -15,9 +15,9 @@ local function start_debugging()
   dap.continue()
 end
 
-vim.api.nvim_set_keymap('n', '<leader>db', function() require('dap').toggle_breakpoint() end, { desc = ' Toggle Breakpoint', noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>ds', start_debugging, { desc = ' Continue', noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>dt', function() dap.terminate() end, { desc = ' Terminate', noremap = true })
+vim.keymap.set('n', '<leader>db', function() require('dap').toggle_breakpoint() end, { desc = ' Toggle Breakpoint', noremap = true })
+vim.keymap.set('n', '<leader>ds', start_debugging, { desc = ' Continue', noremap = true })
+vim.keymap.set('n', '<leader>dt', function() dap.terminate() end, { desc = ' Terminate', noremap = true })
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)

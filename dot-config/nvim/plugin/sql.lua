@@ -1,4 +1,7 @@
-vim.pack.add({ 'https://github.com/tpope/vim-dadbod', 'https://github.com/kristijanhusak/vim-dadbod-ui', 'https://github.com/kristijanhusak/vim-dadbod-completion',
+vim.pack.add({ 
+  'https://github.com/tpope/vim-dadbod',
+  'https://github.com/kristijanhusak/vim-dadbod-ui',
+  'https://github.com/kristijanhusak/vim-dadbod-completion',
 })
 
 
@@ -15,7 +18,7 @@ vim.api.nvim_set_keymap("n", "<leader>d", "<cmd>DBUIToggle<cr>", { desc = "Toggl
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "sql",
   callback = function()
-    vim.bo.completefunc = "vim_dadbod_completion#omni"
+    vim.bo[vim.api.nvim_get_current_buf()].complete = "vim_dadbod_completion#omni"
     vim.keymap.set("i", "<C-space>", vim.bo.complete, { desc = "trigger autocompletion" })
   end,
 })

@@ -15,37 +15,26 @@ binds {
   
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-  Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn-sh "fuzzel --show drun"; }
-  Mod+E hotkey-overlay-title="Run Emoji Picker: fuzzel-emoji" { spawn-sh "fuzzel-emoji"; }
-  Mod+A hotkey-overlay-title="Run Action Picker" {spawn-sh "action-picker"; }
-  Super+Alt+L hotkey-overlay-title="Lock the Screen: wlogout" { spawn "wlogout"; }
-  Super+Shift+V hotkey-overlay-title="Clipboard manager: cliphist" { spawn-sh "cliphist list | fuzzel -d | cliphist decode | wl-copy"; }
+
+  Mod+Space { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+  Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+  // Mod+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
+  Mod+E hotkey-overlay-title="Run Emoji Picker: fuzzel-emoji" { spawn-sh "qs -c noctalia-shell ipc call launcher emoji"; }
+  Mod+A hotkey-overlay-title="Run Action Picker" {spawn-sh "qs -c noctalia-shell ipc call launcher command"; }
+  Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+  Super+Shift+V hotkey-overlay-title="Clipboard manager: cliphist" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
   
-  // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
-  // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
-  // For example, this is a standard bind to toggle the screen reader (orca).
-  Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
-  
-  // Example volume keys mappings for PipeWire & WirePlumber.
-  // The allow-when-locked=true property makes them work even when the session is locked.
-  // Using spawn-sh allows to pass multiple arguments together with the command.
-  XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-  XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-  XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-  XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-  
-  // Example brightness key mappings for brightnessctl.
-  // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
-  // but you need to manually put each argument in separate "" quotes.
-  XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+  XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
+  XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+  XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+  XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+  XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
   
   // Open/close the Overview: a zoomed-out view of workspaces and windows.
   // You can also move the mouse into the top-left hot corner,
   // or do a four-finger swipe up on a touchpad.
   Mod+O repeat=false  { toggle-overview; }
   Mod+Q repeat=false  { close-window; }
-  Mod+Shift+W         { spawn-sh "killall waybar || waybar"; }  // see: https://github.com/hyprwm/Hyprland/discussions/6972#discussioncomment-10390529
   
   Mod+Alt+W { set-dynamic-cast-window; }
   Mod+Alt+M { set-dynamic-cast-monitor; }
@@ -238,15 +227,8 @@ binds {
   // rather than stacked on top of each other.
   Mod+W { toggle-column-tabbed-display; }
   
-  // Actions to switch layouts.
-  // Note: if you uncomment these, make sure you do NOT have
-  // a matching layout switch hotkey configured in xkb options above.
-  // Having both at once on the same hotkey will break the switching,
-  // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-  // Mod+Space       { switch-layout "next"; }
-  // Mod+Shift+Space { switch-layout "prev"; }
   
-  Mod+S { screenshot; }
+  // Mod+S { screenshot; }
   Mod+Shift+S { spawn-sh "niri msg action screenshot | wl-paste | tesseract -c debug_file=/dev/null - - | wl-copy"; }
   Print { screenshot; }
   Ctrl+Print { screenshot-screen; }

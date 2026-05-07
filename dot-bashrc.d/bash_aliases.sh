@@ -5,6 +5,10 @@ alias fzp="fzf --preview 'cat {}'"
 alias fkill="ps aux | fzf --preview='echo COMMAND: {11}' | awk '{print \$2}' | xargs kill -9"
 alias prtl=pritunl-client
 
+nsl() {
+  qs -c noctalia-shell ipc call $@
+}
+
 fenv() {
   local var
   var=$(env | fzf) $$ echo "$var"

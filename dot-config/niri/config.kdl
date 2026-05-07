@@ -273,15 +273,16 @@ layout {
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
+spawn-at-startup "qs" "-c" "noctalia-shell"
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
-spawn-sh-at-startup "swaybg -o DP-1 -i  $HOME/Pictures/Wallpapers/aishot-997.jpg"
-spawn-sh-at-startup "swaybg -o eDP-1 -i $HOME/Pictures/Wallpapers/botw_day.jpg"
+// spawn-sh-at-startup "swaybg -o DP-1 -i  $HOME/Pictures/Wallpapers/aishot-997.jpg"
+// spawn-sh-at-startup "swaybg -o eDP-1 -i $HOME/Pictures/Wallpapers/botw_day.jpg"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -326,6 +327,8 @@ window-rule {
     // You can get away with just app-id="wezterm" if you want.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
+    geometry-corner-radius 20
+    clip-to-geometry true
 }
 
 // Open the Firefox picture-in-picture player as floating by default.

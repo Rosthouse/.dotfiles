@@ -4,10 +4,11 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 ## Enabling additional copr repos
 dnf --assumeyes copr enable scottames/ghostty
+dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 
 ## This should install all apps needed to make these configs work
 echo "Installing dependencies"
-dnf --assumeyes install dunst fuzzel ghostty kanshi niri nvim python python-pip python3-venv pipx stow swaybg tmux waybar wl-clipboard wtype
+dnf --assumeyes install ghostty noctalia-shell niri nvim python python-pip python3-venv pipx stow tmux wl-clipboard wtype
 
 
 ## Install python tools

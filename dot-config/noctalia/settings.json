@@ -102,6 +102,16 @@
                     "unfocusedIconsOpacity": 1
                 },
                 {
+                    "defaultSettings": {
+                        "catColor": "default",
+                        "catOffsetY": 0,
+                        "catSize": 1,
+                        "idleTimeout": 150,
+                        "raveMode": false,
+                        "tappyMode": false,
+                        "useMprisFilter": false,
+                        "waitingTimeout": 30000
+                    },
                     "id": "plugin:slowbongo"
                 }
             ],
@@ -177,6 +187,22 @@
             ],
             "right": [
                 {
+                    "defaultSettings": {
+                        "colorHistory": [
+                        ],
+                        "detectedCompositor": "",
+                        "detectedRecorder": "",
+                        "filenameFormat": "",
+                        "installedLangs": [
+                            "eng"
+                        ],
+                        "paletteColors": [
+                        ],
+                        "screenshotPath": "",
+                        "selectedOcrLang": "eng",
+                        "transAvailable": false,
+                        "videoPath": ""
+                    },
                     "id": "plugin:screen-toolkit"
                 },
                 {
@@ -527,7 +553,7 @@
         "firstDayOfWeek": -1,
         "hideWeatherCityName": true,
         "hideWeatherTimezone": false,
-        "name": "Gutenswil",
+        "name": "Dietikon",
         "showCalendarEvents": true,
         "showCalendarWeather": true,
         "showWeekNumberInCalendar": false,

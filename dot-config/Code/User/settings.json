@@ -1,21 +1,134 @@
 {
-    "vim.useSystemClipboard": true,
-    "git.openRepositoryInParentFolders": "never",
-    "vim.camelCaseMotion.enable": true,
-    "glsllint.glslangValidatorPath": "D:/Tools/Khronos/glslValidator/bin/glslangValidator.exe",
-    "plantuml.render": "Local",
-    "diffEditor.ignoreTrimWhitespace": false,
-    "vim.langmap": "üè¨,[{}",
-    "vim.leader": " ",
-    "vim.normalModeKeyBindings": [
+    "excalidraw.theme": "light",
+    "claudeCode.preferredLocation": "panel",
+    "debug.onTaskErrors": "abort",
+    "workbench.startupEditor": "none",
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "~/.config/Code/User/.vimrc",
+    "datadog.connection.notification.suppressSignInNotification": true,
+    "git.blame.editorDecoration.enabled": true,
+    "editor.detectIndentation": false,
+    "mssql.connectionGroups": [
         {
-            "before": [
-                "g",
-                "b"
-            ],
-            "commands": [
-                "workbench.action.navigateBack"
-            ]
+            "name": "ROOT",
+            "id": "ROOT"
+        },
+        {
+            "name": "DEV",
+            "color": "#6EFF00",
+            "id": "44e132cc-34a5-456c-9371-0e2729f903cb",
+            "parentId": "ROOT"
+        },
+        {
+            "name": "Local",
+            "color": "#EAA300",
+            "id": "94066d72-317a-4a80-875c-b002bff8225f",
+            "parentId": "ROOT"
+        },
+        {
+            "name": "PROD",
+            "color": "#7160E8",
+            "id": "f40b2870-bce1-4289-a561-8b9e8d098754",
+            "parentId": "ROOT"
         }
-    ]
+    ],
+    "mssql.connections": [
+        {
+            "server": "SQLD-AZ-VM01.intranet.digitec,1433",
+            "port": 1433,
+            "database": "dev-logistics",
+            "user": "Patrick Joos - Patrick.Joos@digitecgalaxus.ch",
+            "authenticationType": "AzureMFA",
+            "azureAccountToken": "",
+            "encrypt": "Mandatory",
+            "trustServerCertificate": true,
+            "connectTimeout": 30,
+            "commandTimeout": 30,
+            "connectRetryCount": 1,
+            "connectRetryInterval": 10,
+            "applicationName": "vscode-mssql",
+            "email": "Patrick.Joos@digitecgalaxus.ch",
+            "accountId": "05a9e22e-16cb-43ed-af45-73faa339e273.35aa8c5b-ac0a-4b15-9788-ff6dfa22901f",
+            "tenantId": "35aa8c5b-ac0a-4b15-9788-ff6dfa22901f",
+            "expiresOn": 1778226822,
+            "profileName": "Logistics",
+            "groupId": "44e132cc-34a5-456c-9371-0e2729f903cb",
+            "id": "cd159c18-b8e1-4bf4-92d9-e8ed281414c3"
+        },
+        {
+            "server": "SQLD-AZ-VM01.intranet.digitec,1433",
+            "port": 1433,
+            "database": "dev-BookIn",
+            "authenticationType": "AzureMFA",
+            "azureAccountToken": "",
+            "encrypt": "Mandatory",
+            "trustServerCertificate": true,
+            "connectTimeout": 30,
+            "commandTimeout": 30,
+            "connectRetryCount": 1,
+            "connectRetryInterval": 10,
+            "applicationName": "vscode-mssql",
+            "email": "Patrick.Joos@digitecgalaxus.ch",
+            "accountId": "05a9e22e-16cb-43ed-af45-73faa339e273.35aa8c5b-ac0a-4b15-9788-ff6dfa22901f",
+            "tenantId": "35aa8c5b-ac0a-4b15-9788-ff6dfa22901f",
+            "expiresOn": 1778227824,
+            "groupId": "44e132cc-34a5-456c-9371-0e2729f903cb",
+            "id": "866d3972-c817-443b-ad94-e9c40bd9f2af",
+            "profileSource": 0,
+            "profileName": "BookIn"
+        },
+        {
+            "server": "localhost.",
+            "database": "local-logistics",
+            "user": "sa",
+            "password": "",
+            "authenticationType": "SqlLogin",
+            "encrypt": "False",
+            "trustServerCertificate": true,
+            "connectTimeout": 30,
+            "commandTimeout": 30,
+            "connectRetryCount": 1,
+            "connectRetryInterval": 10,
+            "applicationName": "vscode-mssql",
+            "savePassword": true,
+            "profileName": "Logistics",
+            "groupId": "94066d72-317a-4a80-875c-b002bff8225f",
+            "id": "d99ce11e-ff89-4c44-8966-c4b11ce2d547",
+            "containerName": "mssql-local"
+        },
+        {
+            "server": "SQLP-C10-LOGI.intranet.digitec,14328",
+            "port": 14328,
+            "database": "logistics",
+            "authenticationType": "AzureMFA",
+            "azureAccountToken": "",
+            "encrypt": "true",
+            "trustServerCertificate": true,
+            "connectTimeout": 30,
+            "commandTimeout": 30,
+            "connectRetryCount": 1,
+            "connectRetryInterval": 10,
+            "applicationName": "vscode-mssql",
+            "multiSubnetFailover": true,
+            "email": "Patrick.Joos@digitecgalaxus.ch",
+            "accountId": "05a9e22e-16cb-43ed-af45-73faa339e273.35aa8c5b-ac0a-4b15-9788-ff6dfa22901f",
+            "tenantId": "35aa8c5b-ac0a-4b15-9788-ff6dfa22901f",
+            "expiresOn": 1778580182,
+            "groupId": "f40b2870-bce1-4289-a561-8b9e8d098754",
+            "id": "97f59e80-e7dd-49ef-8e63-2efb56782bbe",
+            "profileSource": 0,
+            "profileName": "Logistics"
+        }
+    ],
+    "vim.highlightedyank.enable": true,
+    "vim.smartRelativeLine": true,
+    "kafka.clusters": [
+        {
+            "id": "Local-bG9jYWxob3N0OjkwMDA",
+            "name": "Local",
+            "bootstrap": "localhost:9092",
+            "ssl": false
+        }
+    ],
+    "explorer.confirmDelete": false
 }

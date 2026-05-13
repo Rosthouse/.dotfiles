@@ -6,9 +6,9 @@ nnoremap N Nzzzv
 xnoremap <leader>p "_dP
 
 " Yank to system clipboard
-noremap <leader>y "+y
-noremap <leader>Y "+Y
+noremap gy "+y
+noremap gY "+Y
 
 " Paste from system clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
+nnoremap gp "+p
+nnoremap gP "+P

@@ -21,7 +21,7 @@ binds {
   // Mod+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
   Mod+E hotkey-overlay-title="Run Emoji Picker: fuzzel-emoji" { spawn-sh "qs -c noctalia-shell ipc call launcher emoji"; }
   Mod+A hotkey-overlay-title="Run Action Picker" {spawn-sh "qs -c noctalia-shell ipc call launcher command"; }
-  Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+  Super+Alt+L hotkey-overlay-title="Lock the Screen" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
   Super+Shift+V hotkey-overlay-title="Clipboard manager: cliphist" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
   
   XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }

@@ -4,6 +4,7 @@ alias pves='source .venv/bin/activate'
 alias fzp="fzf --preview 'cat {}'"
 alias fkill="ps aux | fzf --preview='echo COMMAND: {11}' | awk '{print \$2}' | xargs kill -9"
 alias prtl=pritunl-client
+alias dni='~/.bashrc.d/dotnet-install.sh'
 
 nsl() {
   qs -c noctalia-shell ipc call $@

@@ -13,18 +13,19 @@ sudo -s <<'END_OF_SUDO'
 
 	echo "Installing dependencies"
 	dnf --assumeyes install \
-    evtest \
 		ghostty \
 		niri \
 		noctalia-shell \
 		nvim \
 		python \
 		stow \
-    tldr \
 		tmux \
-		wl-clipboard \
-		wtype \
+    btop \
+    evtest \
     fzf \
+    rclone \
+    tldr \
+    ufw \
     zoxide
 	
 	echo "Installing python libs"

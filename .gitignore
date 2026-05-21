@@ -7,3 +7,6 @@ dot-config/tmux/plugins/
 __pycache__/
 
 .vscode
+
+**/*Cache*/*
+**/logs/*

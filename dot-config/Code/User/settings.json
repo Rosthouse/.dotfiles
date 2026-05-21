@@ -30,6 +30,12 @@
             "color": "#7160E8",
             "id": "f40b2870-bce1-4289-a561-8b9e8d098754",
             "parentId": "ROOT"
+        },
+        {
+            "name": "Backup",
+            "color": "#77009E",
+            "id": "27e42b0f-b430-4e95-a783-a105d7bf998b",
+            "parentId": "ROOT"
         }
     ],
     "mssql.connections": [
@@ -118,6 +124,28 @@
             "id": "97f59e80-e7dd-49ef-8e63-2efb56782bbe",
             "profileSource": 0,
             "profileName": "Logistics"
+        },
+        {
+            "server": "SQLT-CLU10-BK01.intranet.digitec,1433",
+            "port": 1433,
+            "database": "backup-devinite",
+            "user": "Patrick Joos - Patrick.Joos@digitecgalaxus.ch",
+            "authenticationType": "AzureMFA",
+            "azureAccountToken": "",
+            "encrypt": "true",
+            "trustServerCertificate": true,
+            "connectTimeout": 30,
+            "commandTimeout": 30,
+            "connectRetryCount": 1,
+            "connectRetryInterval": 10,
+            "applicationName": "vscode-mssql",
+            "multiSubnetFailover": true,
+            "email": "Patrick.Joos@digitecgalaxus.ch",
+            "accountId": "05a9e22e-16cb-43ed-af45-73faa339e273.35aa8c5b-ac0a-4b15-9788-ff6dfa22901f",
+            "tenantId": "35aa8c5b-ac0a-4b15-9788-ff6dfa22901f",
+            "expiresOn": 1779285009,
+            "groupId": "27e42b0f-b430-4e95-a783-a105d7bf998b",
+            "id": "8e9df225-beb6-4aec-9bc4-43b91275c8d3"
         }
     ],
     "vim.highlightedyank.enable": true,

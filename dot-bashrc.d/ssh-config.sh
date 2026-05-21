@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-echo "Loading SSH"
-
 SSH_ENV="$HOME/.ssh/agent-environment"
 
 function start_agent {

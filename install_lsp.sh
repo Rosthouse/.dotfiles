@@ -21,9 +21,10 @@ sudo -s <<'END_OF_SUDO'
 
 END_OF_SUDO
 
-## Treesitter
-## git clone https://github.com/tree-sitter/csharp-tree-sitter.git --recursive
-
+curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
+chmod +x ./dotnet-install.sh
+. dotnet-install.sh
+rm dotnet-install.sh
 
 ## CSharp
 dotnet tool install --global csharpier
@@ -35,4 +36,4 @@ dotnet tool install --global roslyn-language-server --prerelease
 pip install pyright ruff
 
 ## Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -y

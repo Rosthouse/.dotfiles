@@ -12,6 +12,3 @@ vim.keymap.set("n", "<leader>P", '"+P', { desc = "Paste before cursor from clipb
 vim.keymap.set("n", "<leader>u", function() require('undotree').open() end, { desc = "Toggles the undotree" })
 -- Mini files functions
 vim.keymap.set('n', '<leader>e', function() require('mini.files').open() end, { desc = 'Opens mini.files', })
-
--- LSP keymaps
-vim.keymap.set('n', '<C-a>', function() vim.lsp.buf.code_action() end, { desc = 'Show avaiable code actions' })

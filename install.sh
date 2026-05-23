@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-
-## Enabling additional copr repos
 
 sudo -s <<'END_OF_SUDO'
 	echo "Enabling external repos"
@@ -22,11 +19,12 @@ sudo -s <<'END_OF_SUDO'
 		tmux \
     btop \
     evtest \
+    fd-find \
     fzf \
     rclone \
     tldr \
     ufw \
-    zoxide
+    zoxide \
 	
 	echo "Installing python libs"
 	dnf --assumeyes install \
@@ -38,30 +36,27 @@ sudo -s <<'END_OF_SUDO'
   sudo usermod -a -G input patrick
 END_OF_SUDO
 
-
-## This should install all apps needed to make these configs work
-
-
 ## Install python tools
 pipx ensurepath
 pipx install --global pywal16
 
-## Make required scripts executable
-chmod +x $SCRIPT_DIR/dot-config/userscripts/*
+## Make sure required scripts are executable
+chmod +x "$SCRIPT_DIR"/dot-config/userscripts/*
 
 ## Setting up tools
 
 ### Setting up TMUX plugins
-if [ ! -d $HOME/.tmux/plugins/tpm/ ]; then
+if [ ! -d "$HOME"/.tmux/plugins/tpm/ ]; then
   echo "Installing TMUX plugins"
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
+## Enabling niri
 systemctl --user add-wants niri.service dms
 
 ## This links all files (not excluded by .stow-local-ignore) to your home directory
 ## Note that the directory 'dot-config' will map to $HOME/.config/
 echo "Stowing dotfiles"
-cd $SCRIPT_DIR
+cd "$SCRIPT_DIR" || exit
 stow -R --dotfiles -v -t ~ .
-cd -
+cd - || exit

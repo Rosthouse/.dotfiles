@@ -1,19 +1,18 @@
+#!/usr/bin/bash
 alias rs='source ~/.bashrc'
 alias pvec='python -m venv .venv && pves'
 alias pves='source .venv/bin/activate'
 alias fzp="fzf --preview 'cat {}'"
-alias fkill="ps aux | fzf --preview='echo COMMAND: {11}' | awk '{print \$2}' | xargs kill -9"
 alias prtl=pritunl-client
 alias dni='dotnet-install.sh'
 alias dn='dotnet'
 
 nsl() {
-  qs -c noctalia-shell ipc call $@
+  qs -c noctalia-shell ipc call "$@"
 }
 
-fenv() {
-  local var
-  var=$(env | fzf) $$ echo "$var"
+fkill() {
+  ps aux | fzf --preview='echo COMMAND: {11}' | awk '{print \$2}' | xargs kill -9 
 }
 
 fsvc() {

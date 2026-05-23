@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 SSH_ENV="$HOME/.ssh/agent-environment"
 
 function start_agent {
@@ -14,7 +14,7 @@ function start_agent {
 if [ -f "$SSH_ENV" ]; then
   . "$SSH_ENV" >/dev/null
   #ps $SSH_AGENT_PID doesn't work under Cygwin
-  ps -ef | grep $SSH_AGENT_PID | grep ssh-agent$ >/dev/null || {
+  ps -ef | grep "$SSH_AGENT_PID" | grep ssh-agent$ >/dev/null || {
     start_agent
   }
 else

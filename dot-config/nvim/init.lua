@@ -4,4 +4,3 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Start settings
 require("config")
-

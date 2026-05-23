@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-
 sudo -s <<'END_OF_SUDO'
   # Installing runtimes
   dnf install --assumeyes \
@@ -8,13 +6,24 @@ sudo -s <<'END_OF_SUDO'
     nodejs \
     npm \
   
-  # Installing my lsps
-  
-  ## Bash
+  # Installing dnf lsps
   dnf install --assumeyes \
-      shellcheck \
+      lua-language-server \
       nodejs-bash-language-server \
+      shellcheck \
+
+
+
+  ## Prettier
+  npm install -g \
+    prettier \
+    tree-sitter-cli \
+
 END_OF_SUDO
+
+## Treesitter
+## git clone https://github.com/tree-sitter/csharp-tree-sitter.git --recursive
+
 
 ## CSharp
 dotnet tool install --global csharpier
@@ -25,5 +34,5 @@ dotnet tool install --global roslyn-language-server --prerelease
 ## Python
 pip install pyright ruff
 
-## Prettier
-npm install -g prettier
+## Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

@@ -18,3 +18,10 @@ vim.keymap.set("n", "<leader>fd", telescope.diagnostics, { desc = "find diagnost
 vim.keymap.set("n", "<leader>fq", telescope.quickfix, { desc = "quickfix list" })
 vim.keymap.set("n", "<leader>fj", telescope.jumplist, { desc = "jump list" })
 
+-- Disable autocomplete in telescope buffers
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = vim.api.nvim_create_augroup("autocompletion-sanitizer", { clear = true }),
+    callback = function(ev)
+        if vim.bo[ev.buf].buftype ~= "" then vim.bo[ev.buf].autocomplete = false end
+    end,
+})

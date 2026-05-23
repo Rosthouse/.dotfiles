@@ -84,25 +84,6 @@
             "profileName": "BookIn"
         },
         {
-            "server": "localhost.",
-            "database": "local-logistics",
-            "user": "sa",
-            "password": "",
-            "authenticationType": "SqlLogin",
-            "encrypt": "False",
-            "trustServerCertificate": true,
-            "connectTimeout": 30,
-            "commandTimeout": 30,
-            "connectRetryCount": 1,
-            "connectRetryInterval": 10,
-            "applicationName": "vscode-mssql",
-            "savePassword": true,
-            "profileName": "Logistics",
-            "groupId": "94066d72-317a-4a80-875c-b002bff8225f",
-            "id": "d99ce11e-ff89-4c44-8966-c4b11ce2d547",
-            "containerName": "mssql-local"
-        },
-        {
             "server": "SQLP-C10-LOGI.intranet.digitec,14328",
             "port": 14328,
             "database": "logistics",
@@ -146,6 +127,26 @@
             "expiresOn": 1779285009,
             "groupId": "27e42b0f-b430-4e95-a783-a105d7bf998b",
             "id": "8e9df225-beb6-4aec-9bc4-43b91275c8d3"
+        },
+        {
+            "server": "localhost.,1433",
+            "port": 1433,
+            "user": "sa",
+            "password": "",
+            "authenticationType": "SqlLogin",
+            "encrypt": "False",
+            "trustServerCertificate": true,
+            "connectTimeout": 30,
+            "commandTimeout": 30,
+            "connectRetryCount": 1,
+            "connectRetryInterval": 10,
+            "applicationName": "vscode-mssql",
+            "profileName": "Logistics",
+            "savePassword": true,
+            "id": "d99ce11e-ff89-4c44-8966-c4b11ce2d547",
+            "groupId": "94066d72-317a-4a80-875c-b002bff8225f",
+            "database": "",
+            "containerName": "mssql-local"
         }
     ],
     "vim.highlightedyank.enable": true,
@@ -158,5 +159,8 @@
             "ssl": false
         }
     ],
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "task.problemMatchers.neverPrompt": {
+        "shell": true
+    }
 }

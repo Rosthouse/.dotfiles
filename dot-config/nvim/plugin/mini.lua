@@ -1,5 +1,5 @@
 vim.pack.add({
-	'https://github.com/nvim-mini/mini.nvim',
+  { src= 'https://github.com/nvim-mini/mini.nvim', version = 'stable' },
 })
 
 require('mini.basics').setup({
@@ -10,6 +10,9 @@ require('mini.completion').setup({
     signature = { border = 'rounded'},
   },
 })
+
+-- status
+require('mini.statusline').setup()
 
 -- Files
 local files = require('mini.files')

@@ -12,12 +12,11 @@ sudo -s <<'END_OF_SUDO'
       nodejs-bash-language-server \
       shellcheck \
 
-
-
-  ## Prettier
+  ## Install npm language servers
   npm install -g \
     prettier \
     tree-sitter-cli \
+    yaml-language-server \
 
 END_OF_SUDO
 
@@ -37,3 +36,5 @@ pip install pyright ruff
 
 ## Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -y
+
+cargo install taplo-cli --locked

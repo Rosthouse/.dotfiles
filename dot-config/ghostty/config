@@ -1,27 +1,28 @@
 # themes
 # dark: Andromeda, catppuccin-mocha | light: catppuccin-latte
 # theme = dark:Andromeda,light:catppuccin-latte
-theme = Catppuccin Frappe 
+theme = Catppuccin Frappe
 window-decoration = false
 mouse-hide-while-typing = true
 
 # font
-font-family = "0xProto Nerd Font Mono"
-font-thicken = false
+font-family         = "0xProto Nerd Font Mono"
+font-family-bold    = "0xProto Nerd Font Mono Bold"
+font-family-italic  = "0xProto Nerd Font Mono Italic"
 
 # Looks
-background-opacity = 0.75
-background-blur = true
+# background-opacity = 0.75
+# background-blur = true
 
 # window
-window-padding-y = 6
-window-padding-x = 6
-window-padding-balance = true
-window-width = 95
-window-height = 28
-window-save-state = always
+# window-padding-y = 6
+# window-padding-x = 6
+# window-padding-balance = true
+# window-width = 95
+# window-height = 28
+# window-save-state = always
 
 bell-features = no-audio, no-title, no-system
 
 # startup
-command = ~/.config/userscripts/tmux_management.sh
+# command = ~/.config/userscripts/tmux_management.sh

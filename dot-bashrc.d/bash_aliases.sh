@@ -27,3 +27,7 @@ fdnf() {
 zd() {
   zoxide "$@"
 }
+
+sc() {
+  sesh connect "$(sesh list | fzf)"
+}

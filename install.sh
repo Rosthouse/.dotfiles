@@ -5,7 +5,7 @@ sudo -s <<'END_OF_SUDO'
 	echo "Enabling external repos"
 	dnf --assumeyes copr enable scottames/ghostty
 	dnf --assumeyes copr enable avengemedia/dms
-  dnf --assumeyes copr enable buckaroogeek/Tmux_sesh 
+	dnf --assumeyes copr enable buckaroogeek/Tmux_sesh
 
 	dnf install --assumeyes --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release ## For Noctalia Shell
 
@@ -31,7 +31,6 @@ sudo -s <<'END_OF_SUDO'
 
 
   # Tmux package manager
-                     https://github.com/tmuxpack/tpack/releases/download/v1.0.0/tpack_1.0.0_linux_arm64.rpm
   curl --remote-name https://github.com/tmuxpack/tpack/releases/download/v1.0.0/tpack_1.0.0_linux_amd64.rpm
   rpm -i tpack_*.rpm
   rm tpack_*.rpm
@@ -48,7 +47,6 @@ END_OF_SUDO
 
 ## Install python tools
 pipx ensurepath
-pipx install --global pywal16
 
 ## Make sure required scripts are executable
 chmod +x "$SCRIPT_DIR"/dot-config/userscripts/*

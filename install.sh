@@ -5,6 +5,7 @@ sudo -s <<'END_OF_SUDO'
 	echo "Enabling external repos"
 	dnf --assumeyes copr enable scottames/ghostty
 	dnf --assumeyes copr enable avengemedia/dms
+  dnf --assumeyes copr enable buckaroogeek/Tmux_sesh 
 
 	dnf install --assumeyes --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release ## For Noctalia Shell
 
@@ -21,10 +22,19 @@ sudo -s <<'END_OF_SUDO'
     evtest \
     fd-find \
     fzf \
+    lazygit \
     rclone \
+    sesh \
     tldr \
     ufw \
     zoxide \
+
+
+  # Tmux package manager
+                     https://github.com/tmuxpack/tpack/releases/download/v1.0.0/tpack_1.0.0_linux_arm64.rpm
+  curl --remote-name https://github.com/tmuxpack/tpack/releases/download/v1.0.0/tpack_1.0.0_linux_amd64.rpm
+  rpm -i tpack_*.rpm
+  rm tpack_*.rpm
 	
 	echo "Installing python libs"
 	dnf --assumeyes install \
@@ -45,18 +55,12 @@ chmod +x "$SCRIPT_DIR"/dot-config/userscripts/*
 
 ## Setting up tools
 
-### Setting up TMUX plugins
-if [ ! -d "$HOME"/.tmux/plugins/tpm/ ]; then
-  echo "Installing TMUX plugins"
-  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-fi
-
 ## Enabling niri
 systemctl --user add-wants niri.service dms
 
 ## This links all files (not excluded by .stow-local-ignore) to your home directory
 ## Note that the directory 'dot-config' will map to $HOME/.config/
-echo "Stowing dotfiles"
-cd "$SCRIPT_DIR" || exit
-stow -R --dotfiles -v -t ~ .
-cd - || exit
+# echo "Stowing dotfiles"
+# cd "$SCRIPT_DIR" || exit
+# stow -R --dotfiles -v -t ~ .
+# cd - || exit

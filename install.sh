@@ -5,6 +5,7 @@ sudo -s <<'END_OF_SUDO'
 	echo "Enabling external repos"
 	dnf --assumeyes copr enable scottames/ghostty
 	dnf --assumeyes copr enable avengemedia/dms
+	dnf --assumeyes copr enable buckaroogeek/Tmux_sesh
 
 	dnf install --assumeyes --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release ## For Noctalia Shell
 
@@ -22,6 +23,7 @@ sudo -s <<'END_OF_SUDO'
     fd-find \
     fzf \
     rclone \
+    sesh \
     tldr \
     ufw \
     zoxide \

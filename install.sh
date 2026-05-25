@@ -22,6 +22,7 @@ sudo -s <<'END_OF_SUDO'
     evtest \
     fd-find \
     fzf \
+    lazygit \
     rclone \
     sesh \
     tldr \
@@ -40,7 +41,6 @@ END_OF_SUDO
 
 ## Install python tools
 pipx ensurepath
-pipx install --global pywal16
 
 ## Make sure required scripts are executable
 chmod +x "$SCRIPT_DIR"/dot-config/userscripts/*

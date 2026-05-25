@@ -30,10 +30,16 @@ vim.lsp.enable("pyright")
 -- Roslyn
 vim.lsp.config('roslyn_ls', {
   filetypes = { 'cs', 'razor' },
-
+  root_markers = { '.git' },
 })
 
 vim.lsp.enable('roslyn_ls')
+
+-- Taplo
+vim.lsp.enable('taplo')
+
+-- yaml
+vim.lsp.enable('yamlls')
 
 
 -- Autocommands

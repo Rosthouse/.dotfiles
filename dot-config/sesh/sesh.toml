@@ -1,0 +1,37 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+sort_order = [
+  "🌍 Devinite",   # show first
+  "📔 BookIn",
+  "🚚 Logistics",
+  "👨‍💻 dotfiles",
+]
+
+[[session]]
+name = "🌍 Devinite"
+path = "~/Projects/devinite/master"
+startup_command = "nvim"
+preview_command = "bat --color=always ~/c/Projects/devinite/master/README.md"
+
+[[session]]
+name = "📔 BookIn"
+path = "~/Projects/Dg.BookIn/master"
+startup_command = "nvim"
+preview_command = "bat --color=always ~/Projects/Dg.BookIn/master/README.md"
+
+
+[[session]]
+name = "🚚 Logistics"
+path = "~/Projects/Dg.Logistics/master"
+startup_command = "nvim"
+preview_command = "bat --color=always ~/Projects/Dg.Logistics/master/README.md"
+
+[[session]]
+name = "👨‍💻 dotfiles"
+path = "~/Projects/.dotfiles/"
+startup_command = "nvim"
+preview_command = "bat --color=always ~/Projects/dotfiles/README.md"
+
+[[wildcard]]
+pattern = "~/Projects/*"
+startup_command = "nvim"

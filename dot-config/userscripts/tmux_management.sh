@@ -1,21 +1,72 @@
 #!/bin/bash
 
 # Echo usage if something isn't right.
-usage() { 
-    echo "Usage: $0 [-p <80|443>] [-h <string>] [-f]" 1>&2; exit 1; 
+usage() {
+  cat <<EOF
+Usage: $0 [-w] [-h]
+
+A tmux helper for switching between git worktrees and checking out remote
+branches as new worktrees.
+
+Options:
+  -w    Open an fzf picker listing the current repo's existing worktrees
+        and remote branches.
+
+        Selecting an existing worktree switches the current tmux session
+        to a window for it, creating the window if it does not exist yet.
+
+        Selecting a remote branch first creates a new worktree as a
+        sibling of the current repo, named after the last slash-separated
+        segment of the branch (e.g. origin/feature/team/JIRA-5669_Foo
+        becomes ../JIRA-5669_Foo), then opens a tmux window in it.
+
+  -h    Show this help message and exit.
+
+Examples:
+  $0 -w     Pick a worktree or branch to work on.
+EOF
 }
 
 switchworktree() {
   session=$(tmux display-message -p '#S')
-  selected=$(git worktree list|  fzf-tmux -p 80%,70%)
-  window_name="$(echo $selected | awk '{print $3}')"
+  selected=$({ git worktree list| sed 's/^/ /'; git branch --remote | sed 's/^//'; } | fzf-tmux -p 80%,70%)
 
-  if tmux has-session -t "$session:$window_name";  then
+  if [ -z "$selected" ]; then
+    return
+  fi
+
+  repo_root="$(git rev-parse --show-toplevel)"
+  identifier=$(echo "$selected" | awk '{print $2}')
+
+  case "$selected" in
+    ""*) 
+      worktree_dir="$identifier"
+      ;;
+    ""*) 
+      worktree_dir="${repo_root}/../${identifier##*/}"
+      if [ ! -d "$worktree_dir" ]; then
+        git worktree add "$worktree_dir" "${identifier#*/}"
+      fi
+      ;;
+    *)
+      echo "unexpected selection: $selected" >&2
+      return 1
+      ;;
+  esac
+
+  window_name="${identifier##*/}"
+
+  if tmux has-session -t "$session:$window_name" 2>/dev/null; then
     tmux select-window -t "$session:$window_name"
   else
-    tmux new-window -n "$window_name" -c "$(echo $selected | awk '{print $1}')"
+    tmux new-window -n "$window_name" -c "$worktree_dir"
   fi
 }
+
+if [ $# -eq 0 ]; then
+  usage
+  exit 0
+fi
 
 while getopts ":wh" o; do
     case "${o}" in
@@ -24,14 +75,17 @@ while getopts ":wh" o; do
             ;;
         h)
             usage
+            exit 0
             ;;
-        :)  
-            echo "ERROR: Option -$OPTARG requires an argument"
-            usage
+        :)
+            echo "ERROR: Option -$OPTARG requires an argument" >&2
+            usage >&2
+            exit 2
             ;;
         \?)
-            echo "ERROR: Invalid option -$OPTARG"
-            usage
+            echo "ERROR: Invalid option -$OPTARG" >&2
+            usage >&2
+            exit 2
             ;;
     esac
 done

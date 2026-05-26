@@ -19,12 +19,17 @@ path = "~/Projects/Dg.BookIn/master"
 startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.BookIn/master/README.md"
 
-
 [[session]]
 name = "🚚 Logistics"
 path = "~/Projects/Dg.Logistics/master"
 startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.Logistics/master/README.md"
+
+[[session]]
+name = "🏪 Warehousing"
+path = "~/Projects/Dg.Warehousing/master"
+startup_command = "nvim"
+preview_command = "bat --color=always ~/Projects/Dg.Warehousing/master/README.md"
 
 [[session]]
 name = "👨‍💻 dotfiles"

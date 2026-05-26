@@ -31,6 +31,7 @@ vim.lsp.enable("pyright")
 vim.lsp.config('roslyn_ls', {
   filetypes = { 'cs', 'razor' },
   root_markers = { '.git' },
+  cmd = { 'roslyn-language-server', '--sourceGeneratorExecutionPreference', 'Balanced', '--stdio' },
 })
 
 vim.lsp.enable('roslyn_ls')

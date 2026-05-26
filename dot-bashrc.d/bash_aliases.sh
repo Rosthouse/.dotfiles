@@ -6,6 +6,7 @@ alias fzp="fzf --preview 'cat {}'"
 alias prtl=pritunl-client
 alias dni='dotnet-install.sh'
 alias dn='dotnet'
+alias cd=z
 
 nsl() {
   qs -c noctalia-shell ipc call "$@"

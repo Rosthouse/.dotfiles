@@ -3,10 +3,10 @@
 # Echo usage if something isn't right.
 usage() {
   cat <<EOF
-Usage: $0 [-w] [-h]
+Usage: $0 [-w] [-c] [-h]
 
-A tmux helper for switching between git worktrees and checking out remote
-branches as new worktrees.
+A tmux helper for switching between git worktrees, checking out remote
+branches as new worktrees, and creating brand-new branches as worktrees.
 
 Options:
   -w    Open an fzf picker listing the current repo's existing worktrees
@@ -20,15 +20,72 @@ Options:
         segment of the branch (e.g. origin/feature/team/JIRA-5669_Foo
         becomes ../JIRA-5669_Foo), then opens a tmux window in it.
 
+  -c    Open a tmux popup that asks for a new branch name, then create a
+        new branch (from the current HEAD) and check it out into a fresh
+        worktree as a sibling of the current repo.
+
+        The directory is named after the last slash-separated segment of
+        the branch (e.g. feature/team/JIRA-5669_Foo becomes
+        ../JIRA-5669_Foo), and a tmux window for it is opened in the
+        current session.
+
   -h    Show this help message and exit.
 
 Examples:
   $0 -w     Pick a worktree or branch to work on.
+  $0 -c     Create a new branch and open a worktree for it.
 EOF
 }
 
-switchworktree() {
+open_worktree_window() {
+  worktree_dir="$1"
+  window_name="$2"
   session=$(tmux display-message -p '#S')
+
+  if tmux has-session -t "$session:$window_name" 2>/dev/null; then
+    tmux select-window -t "$session:$window_name"
+  else
+    tmux new-window -n "$window_name" -c "$worktree_dir"
+  fi
+}
+
+selectworktree() {
+  selected=$({ git worktree list| sed 's/^/ /'; git branch --remote | sed 's/^//'; } | fzf-tmux -p 80%,70%)
+}
+
+switchworktree() {
+  selected=$({ git worktree list| sed 's/^/ /'; git branch --remote | sed 's/^//'; } | fzf-tmux -p 80%,70% \
+    --preview-window 'right:55%' \
+    --preview 'git log --graph --abbrev-commit --decorate  --first-parent {}'
+)
+
+  if [ -z "$selected" ]; then
+    return
+  fi
+
+  repo_root="$(git rev-parse --show-toplevel)"
+  identifier=$(echo "$selected" | awk '{print $2}')
+
+  case "$selected" in
+    ""*) 
+      worktree_dir="$identifier"
+      ;;
+    ""*) 
+      worktree_dir="${repo_root}/../${identifier##*/}"
+      if [ ! -d "$worktree_dir" ]; then
+        git worktree add "$worktree_dir" "${identifier#*/}"
+      fi
+      ;;
+    *)
+      echo "unexpected selection: $selected" >&2
+      return 1
+      ;;
+  esac
+
+  open_worktree_window "$worktree_dir" "${identifier##*/}"
+}
+
+deleteworktree() {
   selected=$({ git worktree list| sed 's/^/ /'; git branch --remote | sed 's/^//'; } | fzf-tmux -p 80%,70%)
 
   if [ -z "$selected" ]; then
@@ -54,13 +111,36 @@ switchworktree() {
       ;;
   esac
 
-  window_name="${identifier##*/}"
+  open_worktree_window "$worktree_dir" "${identifier##*/}"
+}
 
-  if tmux has-session -t "$session:$window_name" 2>/dev/null; then
-    tmux select-window -t "$session:$window_name"
-  else
-    tmux new-window -n "$window_name" -c "$worktree_dir"
+createworktree() {
+  repo_root=$(git rev-parse --show-toplevel)
+  tmpfile=$(mktemp)
+
+  tmux display-popup -E -w 60 -h 5 \
+    "read -e -p 'Branch name: ' name && printf '%s' \"\$name\" > '$tmpfile'"
+
+  branch=$(< "$tmpfile")
+  rm -f "$tmpfile"
+
+  if [ -z "$branch" ]; then
+    return
   fi
+
+  window_name="${branch##*/}"
+  worktree_dir="${repo_root}/../${window_name}"
+
+  if [ -d "$worktree_dir" ]; then
+    echo "worktree dir already exists: $worktree_dir" >&2
+    return 1
+  fi
+
+  if ! git worktree add -b "$branch" "$worktree_dir"; then
+    return 1
+  fi
+
+  open_worktree_window "$worktree_dir" "$window_name"
 }
 
 if [ $# -eq 0 ]; then
@@ -68,10 +148,13 @@ if [ $# -eq 0 ]; then
   exit 0
 fi
 
-while getopts ":wh" o; do
+while getopts ":wch" o; do
     case "${o}" in
         w)
             switchworktree
+            ;;
+        c)
+            createworktree
             ;;
         h)
             usage

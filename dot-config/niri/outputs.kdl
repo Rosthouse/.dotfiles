@@ -116,7 +116,9 @@ output "Dell Inc. DELL U2722D 8R728H3" {
 
 // Home Office
 output "Samsung Electric Company LC49G95T H4ZNA03304" {
-  position x=-5120 y=0
+  position x=-5120 y=-500
+  mode "5120x1440@59.977"
+  scale 1.25
   //  layout {
   //   default-column-width { proportion 0.25; }
   //   preset-column-widths {

@@ -1,11 +1,17 @@
 #:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
 
 sort_order = [
+  "🏠 Home",
   "🌍 Devinite",   # show first
   "📔 BookIn",
   "🚚 Logistics",
   "👨‍💻 dotfiles",
 ]
+
+[[session]]
+name = "🏠 Home"
+path = "~"
+preview_command = "ls ~"
 
 [[session]]
 name = "🌍 Devinite"
@@ -32,10 +38,32 @@ startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.Warehousing/master/README.md"
 
 [[session]]
+name = "🔄 Automatic Counting"
+path = "~/Projects/Dg.BookIn.AutomaticCounting/master"
+startup_command = "nvim"
+preview_command = "bat --color=always {}/README.md"
+windows = ["ImageCaptureServer", "CameraUnitCoordinator"]
+
+[[window]]
+name = "ImageCaptureServer"
+path = "{}/ImageCaptureServer/"
+startup_script = "nvim"
+
+[[window]]
+name = "CameraUnitCoordinator"
+path = "{}/CameraUnitCoordinator/"
+startup_script = "nvim"
+
+[[session]]
 name = "👨‍💻 dotfiles"
 path = "~/Projects/.dotfiles/"
 startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/dotfiles/README.md"
+
+[[session]]
+name = "󰣀 Raspi Home"
+path = "~/"
+startup_command = "ssh patrick@raspberrypi.local"
 
 [[wildcard]]
 pattern = "~/Projects/*"

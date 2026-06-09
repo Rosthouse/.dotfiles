@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-export DOTNET_ROOT="$HOME/.dotnet/"
+export DOTNET_ROOT="$HOME/.dotnet"
 export DOTNET_INSTALL_DIR="$DOTNET_ROOT"
 export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools"
 export DOTNET_USE_POLLING_FILE_WATCHER=1

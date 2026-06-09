@@ -7,6 +7,8 @@ alias prtl=pritunl-client
 alias dni='dotnet-install.sh'
 alias dn='dotnet'
 alias cd=z
+alias docker=podman
+alias docker-compose=podman-compose
 
 nsl() {
   qs -c noctalia-shell ipc call "$@"

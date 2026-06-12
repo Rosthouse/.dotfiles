@@ -65,6 +65,11 @@ name = "󰣀 Raspi Home"
 path = "~/"
 startup_command = "ssh patrick@raspberrypi.local"
 
+[[session]]
+name = "󰣀 Counter Camera"
+path = "~/"
+startup_command = "ssh counter@cc-g1-d1"
+
 [[wildcard]]
 pattern = "~/Projects/*"
 startup_command = "nvim"

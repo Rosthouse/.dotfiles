@@ -1,14 +1,10 @@
 #!/usr/bin/bash
 alias rs='source ~/.bashrc'
-alias pvec='python -m venv .venv && pves'
-alias pves='source .venv/bin/activate'
 alias fzp="fzf --preview 'cat {}'"
 alias prtl=pritunl-client
 alias dni='dotnet-install.sh'
 alias dn='dotnet'
 alias cd=z
-alias docker=podman
-alias docker-compose=podman-compose
 
 nsl() {
   qs -c noctalia-shell ipc call "$@"

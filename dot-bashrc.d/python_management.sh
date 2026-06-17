@@ -1,49 +1,54 @@
 #!/bin/bash
+# python_management.sh — defines the `pve` command.
+#
+# This lives in ~/.bashrc.d/, so .bashrc sources it on every shell startup.
+# It must be sourced (not executed), because activating a virtual environment
+# changes the current shell. Running it as a normal script would activate the
+# venv in a subshell that disappears immediately — which is why `pve` is a
+# function rather than a standalone script.
+#
+# pve: activate the project's Python virtual environment, creating it first
+#      if it does not exist yet.
+#
+#   pve            # use ".venv" (the default)
+#   pve -n .test   # use ".test" instead
+#   pve -s         # give the new venv access to system site-packages
 
-create=false
-install=false
-activate=false
-name=".venv"
+pve() {
+    # `local OPTIND` keeps getopts' parsing position from leaking into the
+    # shell. Without it, a second `pve` call would resume parsing at the wrong
+    # spot because OPTIND is a global variable.
+    local OPTIND
+    local name=".venv"
+    # Extra arguments passed to `python -m venv`. Collected as an array so we
+    # can pass zero or more flags cleanly without word-splitting surprises.
+    local create_args=()
 
-while getopts "can:" opt; do
-    case "${opt}" in
-        c) 
-          create=true 
-          ;;
-        i)
-          install=true 
-          ;;
-        a)
-          activate=true 
-          ;;
-        n)
-          name="$OPTARG"
-          ;;
-    esac
-done
-shift "$(($OPTIND -1))"
+    while getopts "n:s" opt; do
+        case "${opt}" in
+            n)
+                name="$OPTARG"
+                ;;
+            s)
+                create_args+=("--system-site-packages")
+                ;;
+            *)
+                echo "usage: pve [-n venv_name] [-s]"
+                return 1
+                ;;
+        esac
+    done
 
+    if [ -f "$name/bin/activate" ]; then
+        echo "Activating existing virtual environment '$name'"
+    else
+        echo "Creating virtual environment '$name'"
+        python -m venv "${create_args[@]}" "$name"
+        if [ $? -ne 0 ]; then
+            echo "Failed to create virtual environment '$name'"
+            return 1
+        fi
+    fi
 
-if $install ; then
-  if [ -d $name ] ; then 
-    echo "venv $name already exists, aborting"
-    exit 1
-  fi
-
-  python -m venv $name && source $name/bin/activate
-
-fi
-
-function create_venv() {
-  # Setting up systemd
-  echo "Installing picamera2 libraries"
-  kernel_name=$(uname -r)
-  if [[ $kernel_name == *"rpi"* ]]; then
-    apt install -y python3-picamera2 --no-install-recommends
-  else
-    echo "We are not on a raspberry pi, so we be skipping this."
-  fi
+    source "$name/bin/activate"
 }
-
-alias pcve='python -m venv .venv && source .venv/bin/activate'
-alias psve='source .venv/bin/activate'

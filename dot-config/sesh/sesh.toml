@@ -57,8 +57,18 @@ startup_script = "nvim"
 [[session]]
 name = "👨‍💻 dotfiles"
 path = "~/Projects/.dotfiles/"
-startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/dotfiles/README.md"
+windows = ["👨‍💻 dotfiles", "🤖 AiAgents"]
+
+[[window]]
+name = "👨‍💻 dotfiles"
+path = "~/Projects/.dotfiles/"
+startup_script = "nvim"
+
+[[window]]
+name = "🤖 AiAgents"
+path = "~/Projects/AiAgents/"
+startup_script = "nvim"
 
 [[session]]
 name = "󰣀 Raspi Home"

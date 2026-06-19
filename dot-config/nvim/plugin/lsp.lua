@@ -43,16 +43,13 @@ vim.lsp.enable('taplo')
 vim.lsp.enable('yamlls')
 
 
+local lsp_group = 'my.lsp'
 -- Autocommands
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('my.lsp', {}),
+  group = vim.api.nvim_create_augroup(lsp_group, {}),
   callback = function(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-    if client:supports_method('textDocument/implementation') then
-      -- Create a keymap for vim.lsp.buf.implementation ...
-    end
 
-    -- Enable codelens if avaiable
     if client:supports_method('textDocument/codeLens') then
       vim.lsp.codelens.enable(true)
       vim.keymap.set("n", "grc", vim.lsp.codelens.run, { desc = "Run codelens" })
@@ -75,7 +72,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
     if not client:supports_method('textDocument/willSaveWaitUntil') and client:supports_method('textDocument/formatting') then
       vim.api.nvim_create_autocmd('BufWritePre', {
-        group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+        group = vim.api.nvim_create_augroup(lsp_group, { clear = false }),
         buffer = ev.buf,
         callback = function()
           vim.lsp.buf.format({ bufnr = ev.buf, id = client.id, timeout_ms = 1000 })

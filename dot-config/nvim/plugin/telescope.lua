@@ -20,7 +20,6 @@ require("telescope").setup({
 
 local ts_builtin = require("telescope.builtin")
 
-
 vim.keymap.set("n", "<leader>ff", ts_builtin.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>fh", function()
   ts_builtin.find_files({ hidden = true, no_ignore = true })
@@ -30,9 +29,14 @@ vim.keymap.set("n", "<leader>fb", ts_builtin.buffers, { desc = "find buffers" })
 vim.keymap.set("n", "<leader>fg", ts_builtin.live_grep, { desc = "find buffers" })
 vim.keymap.set("n", "<leader>ft", ts_builtin.commands, { desc = "find commands" })
 vim.keymap.set("n", "<leader>fd", ts_builtin.diagnostics, { desc = "find diagnostics" })
-
 vim.keymap.set("n", "<leader>fq", ts_builtin.quickfix, { desc = "quickfix list" })
 vim.keymap.set("n", "<leader>fj", ts_builtin.jumplist, { desc = "jump list" })
+
+-- LSP
+vim.keymap.set("n", "<leader>fl", ts_builtin.lsp_references, { desc = "find LSP references" })
+vim.keymap.set("n", "<leader>fld", ts_builtin.lsp_document_symbols, { desc = "find LSP references in document" })
+vim.keymap.set("n", "<leader>flw", ts_builtin.lsp_workspace_symbols, { desc = "find LSP references in workspace" })
+
 
 -- Disable autocomplete in telescope buffers
 vim.api.nvim_create_autocmd("BufEnter", {

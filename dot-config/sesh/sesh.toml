@@ -32,6 +32,12 @@ startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.Logistics/master/README.md"
 
 [[session]]
+name = "📮 Receiving"
+path = "~/Projects/Dg.Receiving/master"
+startup_command = "nvim"
+preview_command = "bat --color=always ~/Projects/Dg.Receiving/master/README.md"
+
+[[session]]
 name = "🏪 Warehousing"
 path = "~/Projects/Dg.Warehousing/master"
 startup_command = "nvim"

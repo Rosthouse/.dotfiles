@@ -52,6 +52,8 @@ pipx ensurepath
 chmod +x "$SCRIPT_DIR"/dot-config/userscripts/*
 
 ## Setting up tools
+## Installing tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
 
 ## Enabling niri
 systemctl --user add-wants niri.service dms

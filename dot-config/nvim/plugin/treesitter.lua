@@ -1,15 +1,14 @@
--- vim.pack.add({
---   {
---     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
---     version = 'main',
---   }
--- })
--- 
--- require('nvim-treesitter').install({
---   'bash',
---   'c_sharp',
---   'html',
---   'lua',
---   'python',
---   'razor',
--- })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'avsc', 'csharp', 'json', },
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
+
+
+vim.treesitter.language.add('json',
+  { path = '/opt/treesitter/tree-sitter-json/libtree-sitter-json.so' }
+)
+
+vim.treesitter.language.register('csharp', { 'cs' })
+vim.treesitter.language.register('json', { 'avcl' })

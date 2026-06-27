@@ -1,0 +1,11 @@
+default_agent = "plan"
+
+enable_auto_update = true
+enable_notifications = true
+
+[[mcp-servers]]
+name = "godot"
+transport = "stdio"
+command = "npx"
+args = ["@coding-solo/godot-mcp"]
+env = { "GODOT_PATH" = "/path/to/godot", "DEBUG" = "true" }

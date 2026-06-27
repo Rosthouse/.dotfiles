@@ -20,9 +20,14 @@ sudo -s <<'END_OF_SUDO'
 
 END_OF_SUDO
 
-curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
-chmod +x ./dotnet-install.sh
-. dotnet-install.sh
+## Install TMUX tpm
+if [ -d ~/.tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+curl -L https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
+chmod +x /tmp/dotnet-install.sh
+. /tmp/dotnet-install.sh
 rm dotnet-install.sh
 
 ## CSharp

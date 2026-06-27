@@ -1,3 +1,8 @@
+-- map leader to <Space>
+vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 

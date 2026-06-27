@@ -11,8 +11,8 @@ font-family-bold    = "0xProto Nerd Font Mono Bold"
 font-family-italic  = "0xProto Nerd Font Mono Italic"
 
 # Looks
-# background-opacity = 0.75
-# background-blur = true
+background-opacity = 0.75
+background-blur = true
 
 # window
 # window-padding-y = 6
@@ -22,7 +22,4 @@ font-family-italic  = "0xProto Nerd Font Mono Italic"
 # window-height = 28
 # window-save-state = always
 
-bell-features = no-audio, no-title, no-system
-
-# startup
-# command = ~/.config/userscripts/tmux_management.sh
+# bell-features = no-audio, no-title, no-system

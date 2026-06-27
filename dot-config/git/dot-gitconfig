@@ -6,3 +6,12 @@
   br=branch
   ci=commit
   st=status
+
+[difftool]
+  prompt=true
+
+[diff]
+  tool = nvimdiff
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$REMOTE\" "\$LOCAL\""

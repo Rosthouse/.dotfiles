@@ -56,8 +56,7 @@ selectworktree() {
 switchworktree() {
   selected=$({ git worktree list| sed 's/^/ /'; git branch --remote | sed 's/^//'; } | fzf-tmux -p 80%,70% \
     --preview-window 'right:55%' \
-    --preview 'git log --graph --abbrev-commit --decorate  --first-parent {}'
-)
+    --preview 'git log --graph --abbrev-commit --decorate  --first-parent {}')
 
   if [ -z "$selected" ]; then
     return

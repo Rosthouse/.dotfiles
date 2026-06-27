@@ -32,6 +32,12 @@ startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.Logistics/master/README.md"
 
 [[session]]
+name = "📮 Receiving"
+path = "~/Projects/Dg.Receiving/master"
+startup_command = "nvim"
+preview_command = "bat --color=always ~/Projects/Dg.Receiving/master/README.md"
+
+[[session]]
 name = "🏪 Warehousing"
 path = "~/Projects/Dg.Warehousing/master"
 startup_command = "nvim"
@@ -57,8 +63,18 @@ startup_script = "nvim"
 [[session]]
 name = "👨‍💻 dotfiles"
 path = "~/Projects/.dotfiles/"
-startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/dotfiles/README.md"
+windows = ["👨‍💻 dotfiles", "🤖 AiAgents"]
+
+[[window]]
+name = "👨‍💻 dotfiles"
+path = "~/Projects/.dotfiles/"
+startup_script = "nvim"
+
+[[window]]
+name = "🤖 AiAgents"
+path = "~/Projects/AiAgents/"
+startup_script = "nvim"
 
 [[session]]
 name = "󰣀 Raspi Home"

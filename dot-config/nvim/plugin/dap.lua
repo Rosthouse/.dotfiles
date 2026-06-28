@@ -8,14 +8,37 @@ local dap = require('dap')
 local dap_vtext = require('nvim-dap-virtual-text')
 local dap_view = require('dap-view')
 
+dap_view.setup({
+  winbar = {
+    sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
+  }
+})
+
 dap_vtext.setup({})
+
+-- Adapter for .NET (CoreCLR) debugging via netcoredbg.
+-- nvim-dap launches this binary and speaks the Debug Adapter Protocol to it
+-- over stdio (that is what `--interpreter=vscode` selects).
+-- `coreclr` is the `type` used by .NET launch configs (matches .vscode/launch.json).
+dap.adapters.coreclr = {
+  type = 'executable',
+  command = 'netcoredbg', -- must be on $PATH (installed at ~/.local/bin/netcoredbg)
+  args = { '--interpreter=vscode' },
+}
+
+-- No configurations are defined here on purpose: nvim-dap reads a project's
+-- `.vscode/launch.json` automatically when you call `dap.continue()` (the
+-- built-in "dap.launch.json" config provider). `${workspaceFolder}` resolves
+-- to nvim's cwd, and `${input:...}` pickString prompts are supported, so the
+-- existing DEV launch configs work as-is when nvim is opened at the solution root.
 
 local function start_debugging()
   dap_view.open()
   dap.continue()
 end
 
-vim.keymap.set('n', '<leader>db', function() require('dap').toggle_breakpoint() end, { desc = ' Toggle Breakpoint', noremap = true })
+vim.keymap.set('n', '<leader>db', function() require('dap').toggle_breakpoint() end,
+  { desc = ' Toggle Breakpoint', noremap = true })
 vim.keymap.set('n', '<leader>ds', start_debugging, { desc = ' Continue', noremap = true })
 vim.keymap.set('n', '<leader>dt', function() dap.terminate() end, { desc = ' Terminate', noremap = true })
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)

@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "gitsigns.nvim": {
+      "rev": "2038c666bd9d8a0b7349a0b6ee00dc83104b9ecf",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
     "markdown-plus.nvim": {
       "rev": "003f5a83de9dad0c6a5a86c375745cb359e60d3a",
       "src": "https://github.com/yousefhadder/markdown-plus.nvim"

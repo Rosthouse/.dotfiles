@@ -12,6 +12,9 @@ vim.lsp.enable("bashls")
 -- LUA
 vim.lsp.enable('lua_ls')
 
+-- JSON
+vim.lsp.enable('jsonls')
+
 -- Prettier
 vim.lsp.config('prettier', {
   filetypes = { 'md', 'js', 'ts' },

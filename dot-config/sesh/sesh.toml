@@ -8,6 +8,14 @@ sort_order = [
   "👨‍💻 dotfiles",
 ]
 
+[[window]]
+name = " Editor"
+startup_script = "nvim"
+
+[[window]]
+name = "󰚩 Claudio"
+startup_script = "claude"
+
 [[session]]
 name = "🏠 Home"
 path = "~"
@@ -16,49 +24,38 @@ preview_command = "ls ~"
 [[session]]
 name = "🌍 Devinite"
 path = "~/Projects/devinite/master"
-startup_command = "nvim"
 preview_command = "bat --color=always ~/c/Projects/devinite/master/README.md"
+windows = [" Editor", "󰚩 Claudio"]
 
 [[session]]
 name = "📔 BookIn"
 path = "~/Projects/Dg.BookIn/master"
-startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.BookIn/master/README.md"
+windows = [" Editor", "󰚩 Claudio"]
 
 [[session]]
 name = "🚚 Logistics"
 path = "~/Projects/Dg.Logistics/master"
-startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.Logistics/master/README.md"
+windows = [" Editor", "󰚩 Claudio"]
 
 [[session]]
 name = "📮 Receiving"
 path = "~/Projects/Dg.Receiving/master"
-startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.Receiving/master/README.md"
+windows = [" Editor", "󰚩 Claudio"]
 
 [[session]]
 name = "🏪 Warehousing"
 path = "~/Projects/Dg.Warehousing/master"
-startup_command = "nvim"
 preview_command = "bat --color=always ~/Projects/Dg.Warehousing/master/README.md"
+windows = [" Editor", "󰚩 Claudio"]
 
 [[session]]
 name = "🔄 Automatic Counting"
 path = "~/Projects/Dg.BookIn.AutomaticCounting/master"
-startup_command = "nvim"
 preview_command = "bat --color=always {}/README.md"
-windows = ["ImageCaptureServer", "CameraUnitCoordinator"]
-
-[[window]]
-name = "ImageCaptureServer"
-path = "{}/ImageCaptureServer/"
-startup_script = "nvim"
-
-[[window]]
-name = "CameraUnitCoordinator"
-path = "{}/CameraUnitCoordinator/"
-startup_script = "nvim"
+windows = [" Editor", "󰚩 Claudio"]
 
 [[session]]
 name = "👨‍💻 dotfiles"
@@ -88,4 +85,6 @@ startup_command = "ssh counter@cc-g1-d1"
 
 [[wildcard]]
 pattern = "~/Projects/*"
-startup_command = "nvim"
+preview_command = "ls {}"
+disable_startup_command = false
+windows = [" Editor", "󰚩 Claudio"]

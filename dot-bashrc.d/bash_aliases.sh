@@ -7,6 +7,7 @@ alias dn='dotnet'
 alias cd=z
 alias ls='ls -l'
 alias cat=bat
+alias ts=tree-sitter
 
 nsl() {
   qs -c noctalia-shell ipc call "$@"

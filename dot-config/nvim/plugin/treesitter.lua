@@ -10,5 +10,5 @@ vim.treesitter.language.add('json',
   { path = '/opt/treesitter/tree-sitter-json.wasm' }
 )
 
-vim.treesitter.language.register('csharp', { 'cs' })
+vim.treesitter.language.register('csharp', { 'cs', 'razor' })
 vim.treesitter.language.register('json', { 'avcl' })

@@ -29,4 +29,5 @@ _darcs
 /docs
 /dot-config\/vscode
 /dot-config\/powershell
-
+/dot-claude
+/dot-vibe

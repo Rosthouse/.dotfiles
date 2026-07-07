@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 
 vim.treesitter.language.add('json',
-  { path = '/opt/treesitter/tree-sitter-json/libtree-sitter-json.so' }
+  { path = '/opt/treesitter/tree-sitter-json.wasm' }
 )
 
 vim.treesitter.language.register('csharp', { 'cs', 'razor' })

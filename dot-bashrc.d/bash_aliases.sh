@@ -1,12 +1,12 @@
 #!/usr/bin/bash
-alias rs='source ~/.bashrc'
-alias fzp="fzf --preview 'cat {}'"
-alias prtl=pritunl-client
-alias dni='dotnet-install.sh'
-alias dn='dotnet'
-alias cd=z
-alias ls='ls -l'
 alias cat=bat
+alias cd=z
+alias dn='dotnet'
+alias fzp="fzf --preview 'cat {}'"
+alias ls='ls -l'
+alias oc=opencode
+alias prtl=pritunl-client
+alias rs='source ~/.bashrc'
 alias sld='stow -R --dotfiles -v -t ~ .'
 
 nsl() {

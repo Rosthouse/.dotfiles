@@ -5,7 +5,7 @@
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "markdown-plus.nvim": {
-      "rev": "003f5a83de9dad0c6a5a86c375745cb359e60d3a",
+      "rev": "59075587b4540abd5fac68232c39d5a46db6d44c",
       "src": "https://github.com/yousefhadder/markdown-plus.nvim"
     },
     "mini.nvim": {
@@ -14,7 +14,7 @@
       "version": "'stable'"
     },
     "neotest": {
-      "rev": "ff5437f7d9af801917bed119082934b0eb6ee0e9",
+      "rev": "fb84d87285698f7055f618083c351984449119b8",
       "src": "https://www.github.com/nvim-neotest/neotest",
       "version": "'master'"
     },
@@ -24,7 +24,7 @@
       "version": "'main'"
     },
     "nvim": {
-      "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
+      "rev": "05e8787020dcfdb937bf2ff23855ea2415b4e072",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-dap": {
@@ -40,7 +40,7 @@
       "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
     },
     "nvim-lspconfig": {
-      "rev": "292f44408498103c47996ff5c18fd366293840d8",
+      "rev": "d224a1920728ba129880efc700d4a0180ac4ecbb",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {

@@ -7,7 +7,6 @@ alias ls='ls -l'
 alias oc=opencode
 alias prtl=pritunl-client
 alias rs='source ~/.bashrc'
-||||||| d709dfa
 alias ts=tree-sitter
 alias sld='stow -R --dotfiles -v -t ~ .'
 

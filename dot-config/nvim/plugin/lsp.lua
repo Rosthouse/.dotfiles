@@ -33,7 +33,7 @@ vim.lsp.enable("pyright")
 -- Roslyn
 vim.lsp.config('roslyn_ls', {
   filetypes = { 'cs', 'razor' },
-  root_markers = { '.git' },
+  root_markers = { '.git', '.slnx' },
   cmd = { 'roslyn-language-server', '--autoLoadProjects', '--sourceGeneratorExecutionPreference', 'Balanced', '--stdio' },
 })
 
@@ -50,6 +50,7 @@ local lsp_group = 'my.lsp'
 -- Autocommands
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup(lsp_group, {}),
+  ---@param ev {data: vim.event.lspattach.data}
   callback = function(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 

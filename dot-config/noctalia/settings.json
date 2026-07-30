@@ -19,7 +19,8 @@
         "overviewLayer": false,
         "pinnedApps": [
             "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default",
-            "app.zen_browser.zen"
+            "app.zen_browser.zen",
+            "com.mitchellh.ghostty"
         ],
         "position": "center",
         "screenshotAnnotationTool": "",

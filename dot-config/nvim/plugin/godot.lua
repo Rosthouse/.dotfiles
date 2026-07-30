@@ -23,24 +23,3 @@ end
 local filter_hide = function(fs_entry)
   return not vim.endswith(fs_entry.name, "uid")
 end
-
-require("oil").setup({
-    view_options = {
-        show_hidden = true,
-        is_always_hidden = function(name, bufnr)
-            -- for godot projects ignore *.uid files
-            if is_godot_project then
-                -- ignore *.uid files introduced in godot 4.4
-                if vim.endswith(name, '.uid') then
-                    return true
-                end
-                -- ignore server.pipe file
-                if name == 'server.pipe' then
-                    return true
-                end
-            else
-                return false
-            end
-        end,
-    },
-})

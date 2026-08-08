@@ -23,3 +23,4 @@ background-blur = true
 # window-save-state = always
 
 # bell-features = no-audio, no-title, no-system
+keybind = ctrl+enter=unbind 

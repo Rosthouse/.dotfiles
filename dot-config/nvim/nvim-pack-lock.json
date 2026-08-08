@@ -1,11 +1,11 @@
 {
   "plugins": {
     "gitsigns.nvim": {
-      "rev": "2038c666bd9d8a0b7349a0b6ee00dc83104b9ecf",
+      "rev": "eb60cc7b94c46005237fd34170d76f3a089a90aa",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "markdown-plus.nvim": {
-      "rev": "003f5a83de9dad0c6a5a86c375745cb359e60d3a",
+      "rev": "59075587b4540abd5fac68232c39d5a46db6d44c",
       "src": "https://github.com/yousefhadder/markdown-plus.nvim"
     },
     "mini.nvim": {
@@ -14,7 +14,7 @@
       "version": "'stable'"
     },
     "neotest": {
-      "rev": "ad991822b7076b1d940b33a9d6d0d30416d5df81",
+      "rev": "fb84d87285698f7055f618083c351984449119b8",
       "src": "https://www.github.com/nvim-neotest/neotest",
       "version": "'master'"
     },
@@ -24,7 +24,7 @@
       "version": "'main'"
     },
     "nvim": {
-      "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
+      "rev": "05e8787020dcfdb937bf2ff23855ea2415b4e072",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-dap": {
@@ -32,7 +32,7 @@
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-dap-view": {
-      "rev": "440ec66c2b26470ec97cd4d6667cdd4b51cbc7cb",
+      "rev": "b8c8aa91f42055d7f69012587cde4f1d99f2a701",
       "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-dap-virtual-text": {
@@ -40,7 +40,7 @@
       "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
     },
     "nvim-lspconfig": {
-      "rev": "3371bf298c1f56efc26771ee961f461176958fb5",
+      "rev": "d224a1920728ba129880efc700d4a0180ac4ecbb",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-nio": {
@@ -51,6 +51,10 @@
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "octo.nvim": {
+      "rev": "b9a73e167f851a98d8f29d62658d3640bb8a7314",
+      "src": "https://github.com/pwntester/octo.nvim"
     },
     "overseer.nvim": {
       "rev": "a93d9f6d6defdac4bcd6d2c8ba988650e42e0a0e",

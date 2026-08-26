@@ -76,7 +76,7 @@ startup_script = "nvim"
 [[session]]
 name = "󰣀 Raspi Home"
 path = "~/"
-startup_command = "ssh patrick@raspberrypi.local"
+startup_command = "ssh patrick@rosthouse.ch"
 
 [[session]]
 name = "󰣀 Counter Camera"

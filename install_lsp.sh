@@ -2,6 +2,7 @@
 sudo -s <<'END_OF_SUDO'
   # Installing runtimes
   dnf install --assumeyes \
+    golang \
     lldb \
     nodejs \
     npm \

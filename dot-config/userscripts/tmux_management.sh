@@ -37,6 +37,23 @@ Examples:
 EOF
 }
 
+select_session(){
+  sesh connect "$(
+    sesh list --icons | fzf-tmux -p 80%,70% \
+      --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+      --header '  ^a all ^t tmux ^g configs ^d zoxide ^x tmux kill ^f find' \
+      --bind 'ctrl-j:down,ctrl-k:up' \
+      --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+      --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+      --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+      --bind 'ctrl-d:change-prompt(📁  )+reload(sesh list -z --icons)' \
+      --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+      --bind 'ctrl-x:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+      --preview-window 'right:55%' \
+      --preview 'sesh preview {}'
+    )"
+}
+
 open_worktree_window() {
   worktree_dir="$1"
   window_name="$2"
@@ -147,13 +164,16 @@ if [ $# -eq 0 ]; then
   exit 0
 fi
 
-while getopts ":wch" o; do
+while getopts ":wcsh" o; do
     case "${o}" in
         w)
             switchworktree
             ;;
         c)
             createworktree
+            ;;
+        s)
+            select_session
             ;;
         h)
             usage

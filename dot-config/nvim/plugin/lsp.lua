@@ -34,7 +34,42 @@ vim.lsp.enable("pyright")
 vim.lsp.config('roslyn_ls', {
   filetypes = { 'cs', 'razor' },
   root_markers = { '.git', '.slnx' },
-  cmd = { 'roslyn-language-server', '--autoLoadProjects', '--sourceGeneratorExecutionPreference', 'Balanced', '--stdio' },
+  cmd = { 'roslyn-language-server', '--autoLoadProjects', '--daemon-mode', '--daemonKeepAlive', '300', '--sourceGeneratorExecutionPreference', 'Balanced', '--stdio' },
+  root_dir = function(_, cb)
+    cb(vim.fn.getcwd())
+  end,
+  on_init = {
+    function(client)
+      local root_dir = client.config.root_dir
+      local solutions = vim.fs.find(function(name)
+        return name:match('%.slnx?$') ~= nil
+      end, { limit = math.huge, type = 'file', path = root_dir })
+
+      local function open_sln(sln)
+        client:notify('solution/open', { solution = vim.uri_from_fname(sln) })
+        vim.cmd('compiler! dotnet')
+      end
+
+      if #solutions > 1 then
+        vim.ui.select(solutions, { prompt = 'Select solution' }, function(sln)
+          if sln then open_sln(sln) end
+        end)
+      elseif #solutions == 1 then
+        open_sln(solutions[1])
+      else
+        -- no solution found, open projects
+        local projects = {}
+        for entry, type in vim.fs.dir(root_dir) do
+          if type == 'file' and vim.endswith(entry, '.csproj') then
+            table.insert(projects, vim.uri_from_fname(vim.fs.joinpath(root_dir, entry)))
+          end
+        end
+        if #projects > 0 then
+          client:notify('project/open', { projects = projects })
+        end
+      end
+    end,
+  },
 })
 
 vim.lsp.enable('roslyn_ls')

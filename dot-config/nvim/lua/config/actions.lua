@@ -1,4 +1,20 @@
 local actions = {
+  {
+    name = "Make",
+    fn = function()
+      local overseer = require("overseer")
+      local cmd = vim.fn.expandcmd(vim.o.makeprg)
+      local existing = overseer.list_tasks({ name = cmd })[1]
+      if existing then
+        overseer.run_action(existing, "restart")
+        return
+      end
+      overseer.new_task({
+        cmd = cmd,
+        components = { { "on_output_quickfix", open = true }, "default" },
+      }):start()
+    end,
+  },
   { name = "Update plugins",     fn = function() vim.pack.update() end },
   { name = "Show plugin status", fn = function() print(vim.inspect(vim.pack.get())) end },
   {
@@ -12,7 +28,9 @@ local actions = {
   {
     name = "Restart LSP",
     fn = function()
-      vim.lsp.stop_client(vim.lsp.get_clients())
+      for _, client in vim.lsp.get_clients() do
+        client.stop()
+      end
       vim.cmd.edit()
     end,
   },

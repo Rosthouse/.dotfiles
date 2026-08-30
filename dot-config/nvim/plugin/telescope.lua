@@ -1,11 +1,17 @@
 vim.pack.add({
   'https://github.com/nvim-telescope/telescope.nvim',
   'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/nvim-telescope/telescope-ui-select.nvim',
 })
 
 require("telescope").setup({
   defaults = {
     path_display = { "truncate" },
+  },
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown(),
+    },
   },
   pickers = {
     buffers = {
@@ -17,6 +23,8 @@ require("telescope").setup({
     },
   },
 })
+
+require("telescope").load_extension("ui-select")
 
 local ts_builtin = require("telescope.builtin")
 

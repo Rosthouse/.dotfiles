@@ -1,7 +1,7 @@
 # themes
 # dark: Andromeda, catppuccin-mocha | light: catppuccin-latte
 # theme = dark:Andromeda,light:catppuccin-latte
-theme = Catppuccin Frappe
+theme = catppuccin-frappe.conf
 window-decoration = false
 mouse-hide-while-typing = true
 

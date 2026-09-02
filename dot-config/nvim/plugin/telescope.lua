@@ -1,11 +1,17 @@
 vim.pack.add({
   'https://github.com/nvim-telescope/telescope.nvim',
   'https://github.com/nvim-lua/plenary.nvim',
+  'https://github.com/nvim-telescope/telescope-ui-select.nvim',
 })
 
 require("telescope").setup({
   defaults = {
     path_display = { "truncate" },
+  },
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown(),
+    },
   },
   pickers = {
     buffers = {
@@ -17,6 +23,8 @@ require("telescope").setup({
     },
   },
 })
+
+require("telescope").load_extension("ui-select")
 
 local ts_builtin = require("telescope.builtin")
 
@@ -35,7 +43,10 @@ vim.keymap.set("n", "<leader>fj", ts_builtin.jumplist, { desc = "jump list" })
 -- LSP
 vim.keymap.set("n", "<leader>fl", ts_builtin.lsp_references, { desc = "find LSP references" })
 vim.keymap.set("n", "<leader>fld", ts_builtin.lsp_document_symbols, { desc = "find LSP references in document" })
-vim.keymap.set("n", "<leader>flw", ts_builtin.lsp_workspace_symbols, { desc = "find LSP references in workspace" })
+vim.keymap.set("n", "<leader>fls", ts_builtin.lsp_document_symbols, { desc = "find LSP references in workspace" })
+vim.keymap.set("n", "<leader>flS", ts_builtin.lsp_workspace_symbols, { desc = "find LSP references in workspace" })
+vim.keymap.set("n", "<leader>flW", ts_builtin.lsp_dynamic_workspace_symbols,
+  { desc = "find LSP references in workspace" })
 
 
 -- Disable autocomplete in telescope buffers

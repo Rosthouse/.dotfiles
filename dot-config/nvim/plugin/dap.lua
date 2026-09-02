@@ -32,14 +32,32 @@ dap.adapters.coreclr = {
 -- to nvim's cwd, and `${input:...}` pickString prompts are supported, so the
 -- existing DEV launch configs work as-is when nvim is opened at the solution root.
 
-local function start_debugging()
-  dap_view.open()
-  dap.continue()
-end
+-- launch.json configs are matched by filetype, and nvim-dap assumes the
+-- config `type` is the filetype. Map `coreclr` configs to `cs` buffers,
+-- otherwise dap.continue() never offers them.
+require('dap.ext.vscode').type_to_filetypes.coreclr = { 'cs' }
+
+-- Fallback for projects without .vscode/launch.json: prompt for the dll.
+dap.configurations.cs = {
+  {
+    type = 'coreclr',
+    name = 'Launch dll',
+    request = 'launch',
+    program = function()
+      return vim.fn.input('Path to dll: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+    end,
+  },
+}
+
+-- Open/close dap-view with the session, regardless of how it was started.
+dap.listeners.before.attach['dap-view'] = function() dap_view.open() end
+dap.listeners.before.launch['dap-view'] = function() dap_view.open() end
+dap.listeners.before.event_terminated['dap-view'] = function() dap_view.close() end
+dap.listeners.before.event_exited['dap-view'] = function() dap_view.close() end
 
 vim.keymap.set('n', '<leader>db', function() require('dap').toggle_breakpoint() end,
   { desc = ' Toggle Breakpoint', noremap = true })
-vim.keymap.set('n', '<leader>ds', start_debugging, { desc = ' Continue', noremap = true })
+vim.keymap.set('n', '<leader>ds', function() dap.continue() end, { desc = ' Continue', noremap = true })
 vim.keymap.set('n', '<leader>dt', function() dap.terminate() end, { desc = ' Terminate', noremap = true })
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)

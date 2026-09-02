@@ -1,0 +1,49 @@
+[bar.default]
+center = ["clock", "cat"]
+end = [
+  "media",
+  "tray",
+  "notifications",
+  "clipboard",
+  "network",
+  "bluetooth",
+  "volume",
+  "battery",
+]
+start = ["launcher", "wallpaper", "workspaces", "bar", "widget"]
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = ["lockscreen-login-box@DP-3", "lockscreen-login-box@eDP-1"]
+
+[lockscreen_widgets.grid]
+cell_size = 16
+major_interval = 4
+visible = true
+
+[plugins]
+enabled = [
+  "noctalia/bongocat",
+  "raycursive/niri-displays",
+  "alexander/screen-toolkit",
+]
+
+[theme.templates]
+builtin_ids = ["ghostty", "niri"]
+
+[wallpaper.default]
+path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
+
+[wallpaper.last]
+path = "/usr/share/noctalia/assets/noctalia-wallpaper.png"
+
+[widget.bar]
+type = "raycursive/niri-displays:bar"
+
+[widget.cat]
+type = "noctalia/bongocat:cat"
+input_devices = ["/dev/input/by-id/usb-Keychron_Keychron_K10-event-kbd"]
+
+[widget.widget]
+type = "alexander/screen-toolkit:widget"

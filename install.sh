@@ -15,7 +15,7 @@ sudo -s <<'END_OF_SUDO'
 	dnf --assumeyes install \
 		ghostty \
 		niri \
-		noctalia-shell \
+		noctalia \
 		nvim \
 		python \
 		stow \
@@ -30,6 +30,7 @@ sudo -s <<'END_OF_SUDO'
     sesh \
     tldr \
     ufw \
+    v4l2loopback \
     zoxide \
 
 

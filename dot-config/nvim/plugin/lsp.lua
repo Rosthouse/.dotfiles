@@ -34,7 +34,42 @@ vim.lsp.enable("pyright")
 vim.lsp.config('roslyn_ls', {
   filetypes = { 'cs', 'razor' },
   root_markers = { '.git', '.slnx' },
-  cmd = { 'roslyn-language-server', '--autoLoadProjects', '--sourceGeneratorExecutionPreference', 'Balanced', '--stdio' },
+  cmd = { 'roslyn-language-server', '--autoLoadProjects', '--daemon-mode', '--daemonKeepAlive', '300', '--sourceGeneratorExecutionPreference', 'Balanced', '--stdio' },
+  root_dir = function(_, cb)
+    cb(vim.fn.getcwd())
+  end,
+  on_init = {
+    function(client)
+      local root_dir = client.config.root_dir
+      local solutions = vim.fs.find(function(name)
+        return name:match('%.slnx?$') ~= nil
+      end, { limit = math.huge, type = 'file', path = root_dir })
+
+      local function open_sln(sln)
+        client:notify('solution/open', { solution = vim.uri_from_fname(sln) })
+        vim.cmd('compiler! dotnet')
+      end
+
+      if #solutions > 1 then
+        vim.ui.select(solutions, { prompt = 'Select solution' }, function(sln)
+          if sln then open_sln(sln) end
+        end)
+      elseif #solutions == 1 then
+        open_sln(solutions[1])
+      else
+        -- no solution found, open projects
+        local projects = {}
+        for entry, type in vim.fs.dir(root_dir) do
+          if type == 'file' and vim.endswith(entry, '.csproj') then
+            table.insert(projects, vim.uri_from_fname(vim.fs.joinpath(root_dir, entry)))
+          end
+        end
+        if #projects > 0 then
+          client:notify('project/open', { projects = projects })
+        end
+      end
+    end,
+  },
 })
 
 vim.lsp.enable('roslyn_ls')
@@ -85,3 +120,51 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
+
+local lsp_actions = {
+  {
+    name = "Restart LSP",
+    fn = function()
+      for _, client in vim.lsp.get_clients() do
+        client.stop()
+      end
+      vim.cmd.edit()
+    end,
+  },
+  {
+    name = "Toggle Codelens",
+    fn = function()
+      local buf = vim.api.nvim_get_current_buf()
+      local clients = vim.lsp.get_clients({ bufnr = buf })
+      for _, client in ipairs(clients) do
+        if client:supports_method('textDocument/codeLens') then
+          vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+        end
+      end
+    end,
+  },
+  {
+    name = "Toggle Inlay Hints",
+    fn = function()
+      local buf = vim.api.nvim_get_current_buf()
+      local clients = vim.lsp.get_clients({ bufnr = buf })
+      for _, client in ipairs(clients) do
+        if client:supports_method('textDocument/inlayHint') then
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end
+      end
+    end,
+  },
+  { name = "LSP checkhealth", fn = function() vim.cmd("checkhealth vim.lsp") end },
+}
+
+vim.keymap.set("n", "<leader>la", function()
+  vim.ui.select(lsp_actions, {
+    prompt = "Vim actions",
+    path_display = { "truncate" },
+    format_item = function(a) return a.name end,
+  }, function(a)
+    if a then a.fn() end
+  end)
+end, { desc = "LSP action menu" })

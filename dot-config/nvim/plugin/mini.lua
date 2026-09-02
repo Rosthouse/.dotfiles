@@ -4,8 +4,9 @@ vim.pack.add({
 
 require('mini.basics').setup()
 require('mini.icons').setup()
-require('mini.snippets').setup()
 require('mini.notify').setup()
+require('mini.pairs').setup()
+require('mini.snippets').setup()
 require('mini.surround').setup()
 
 require('mini.completion').setup({

@@ -3,6 +3,12 @@ sudo -s <<'END_OF_SUDO'
   # Installing runtimes
   dnf install --assumeyes \
     gh \
+    scons \
+    pkgconfig \
+    gcc-c++ \
+    libstdc++-static \
+    wayland-devel \
+    golang \
     lldb \
     nodejs \
     npm \
@@ -45,3 +51,12 @@ pip install pyright ruff
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -y
 
 cargo install taplo-cli --locked
+
+## XML
+if [ -d /opt/xml/lemminx ]; then 
+  git clone https://github.com/eclipse-lemminx/lemminx.git
+fi
+
+cd /opt/xml/lemminx/
+git pull
+./mvn clean verify

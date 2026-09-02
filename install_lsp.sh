@@ -2,9 +2,11 @@
 sudo -s <<'END_OF_SUDO'
   # Installing runtimes
   dnf install --assumeyes \
+    gh \
     lldb \
     nodejs \
     npm \
+
   
   # Installing dnf lsps
   dnf install --assumeyes \

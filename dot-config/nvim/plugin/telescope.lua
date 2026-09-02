@@ -43,7 +43,10 @@ vim.keymap.set("n", "<leader>fj", ts_builtin.jumplist, { desc = "jump list" })
 -- LSP
 vim.keymap.set("n", "<leader>fl", ts_builtin.lsp_references, { desc = "find LSP references" })
 vim.keymap.set("n", "<leader>fld", ts_builtin.lsp_document_symbols, { desc = "find LSP references in document" })
-vim.keymap.set("n", "<leader>flw", ts_builtin.lsp_workspace_symbols, { desc = "find LSP references in workspace" })
+vim.keymap.set("n", "<leader>fls", ts_builtin.lsp_document_symbols, { desc = "find LSP references in workspace" })
+vim.keymap.set("n", "<leader>flS", ts_builtin.lsp_workspace_symbols, { desc = "find LSP references in workspace" })
+vim.keymap.set("n", "<leader>flW", ts_builtin.lsp_dynamic_workspace_symbols,
+  { desc = "find LSP references in workspace" })
 
 
 -- Disable autocomplete in telescope buffers

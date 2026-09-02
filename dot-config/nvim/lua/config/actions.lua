@@ -25,16 +25,6 @@ local actions = {
       end)
     end,
   },
-  {
-    name = "Restart LSP",
-    fn = function()
-      for _, client in vim.lsp.get_clients() do
-        client.stop()
-      end
-      vim.cmd.edit()
-    end,
-  },
-  { name = "LSP checkhealth",    fn = function() vim.cmd("checkhealth vim.lsp") end },
   { name = "Toggle diagnostics", fn = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end },
 }
 

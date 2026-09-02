@@ -120,3 +120,51 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
+
+local lsp_actions = {
+  {
+    name = "Restart LSP",
+    fn = function()
+      for _, client in vim.lsp.get_clients() do
+        client.stop()
+      end
+      vim.cmd.edit()
+    end,
+  },
+  {
+    name = "Toggle Codelens",
+    fn = function()
+      local buf = vim.api.nvim_get_current_buf()
+      local clients = vim.lsp.get_clients({ bufnr = buf })
+      for _, client in ipairs(clients) do
+        if client:supports_method('textDocument/codeLens') then
+          vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+        end
+      end
+    end,
+  },
+  {
+    name = "Toggle Inlay Hints",
+    fn = function()
+      local buf = vim.api.nvim_get_current_buf()
+      local clients = vim.lsp.get_clients({ bufnr = buf })
+      for _, client in ipairs(clients) do
+        if client:supports_method('textDocument/inlayHint') then
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end
+      end
+    end,
+  },
+  { name = "LSP checkhealth", fn = function() vim.cmd("checkhealth vim.lsp") end },
+}
+
+vim.keymap.set("n", "<leader>la", function()
+  vim.ui.select(lsp_actions, {
+    prompt = "Vim actions",
+    path_display = { "truncate" },
+    format_item = function(a) return a.name end,
+  }, function(a)
+    if a then a.fn() end
+  end)
+end, { desc = "LSP action menu" })

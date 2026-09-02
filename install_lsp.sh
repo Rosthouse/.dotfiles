@@ -2,6 +2,11 @@
 sudo -s <<'END_OF_SUDO'
   # Installing runtimes
   dnf install --assumeyes \
+    scons \
+    pkgconfig \
+    gcc-c++ \
+    libstdc++-static \
+    wayland-devel \
     golang \
     lldb \
     nodejs \

@@ -16,23 +16,24 @@ binds {
   // Suggested binds for running programs: terminal, app launcher, screen locker.
   Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
 
-  Mod+Space { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-  Mod+S { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+  Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
+  Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
   // Mod+Comma { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
-  Mod+E hotkey-overlay-title="Run Emoji Picker: fuzzel-emoji" { spawn-sh "qs -c noctalia-shell ipc call launcher emoji"; }
-  Mod+A hotkey-overlay-title="Run Action Picker" {spawn-sh "qs -c noctalia-shell ipc call launcher command"; }
-  Super+Alt+L hotkey-overlay-title="Open Session Menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
-  Super+Alt+1 hotkey-overlay-title="Lock the Screen" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-  Super+Alt+2 hotkey-overlay-title="Lock and Suspend" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu lockAndSuspend"; }
+  Mod+E hotkey-overlay-title="Emojisdf" { spawn-sh "noctalia msg panel-toggle launcher /emo"; }
+  Super+Alt+L hotkey-overlay-title="Open Session Menu" { spawn-sh "noctalia msg panel-toggle launcher /session"; }
+  Super+Alt+1 hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
+  Super+Alt+2 hotkey-overlay-title="Log Out" { spawn-sh "noctalia msg session logout"; }
+  Super+Alt+3 hotkey-overlay-title="Reboot" { spawn-sh "noctalia msg session reboot"; }
+  Super+Alt+4 hotkey-overlay-title="Shut Down" { spawn-sh "noctalia msg session shutdown"; }
   Super+Shift+V hotkey-overlay-title="Clipboard manager: cliphist" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
   Super+Shift+W hotkey-overlay-title="Toggle Bar" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
 
   
-  XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
-  XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-  XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-  XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-  XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+  XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
+  XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
+  XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
+  XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
+  XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
   
   // Open/close the Overview: a zoomed-out view of workspaces and windows.
   // You can also move the mouse into the top-left hot corner,

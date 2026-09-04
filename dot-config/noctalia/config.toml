@@ -47,3 +47,8 @@ input_devices = ["/dev/input/by-id/usb-Keychron_Keychron_K10-event-kbd"]
 
 [widget.widget]
 type = "alexander/screen-toolkit:widget"
+
+[backdrop]
+enabled = true
+blur_intensity = 0.5
+tint_intensity = 0.3

@@ -26,7 +26,7 @@ binds {
   Super+Alt+3 hotkey-overlay-title="Reboot" { spawn-sh "noctalia msg session reboot"; }
   Super+Alt+4 hotkey-overlay-title="Shut Down" { spawn-sh "noctalia msg session shutdown"; }
   Super+Shift+V hotkey-overlay-title="Clipboard manager: cliphist" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
-  Super+Shift+W hotkey-overlay-title="Toggle Bar" { spawn-sh "qs -c noctalia-shell ipc call bar toggle"; }
+  Super+Shift+W hotkey-overlay-title="Toggle Bar" { spawn-sh "noctalia msg bar-toggle"; }
 
   
   XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }

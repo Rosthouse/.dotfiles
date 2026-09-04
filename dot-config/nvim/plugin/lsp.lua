@@ -99,7 +99,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     if client:supports_method('textDocument/inlayHint') then
-      vim.lsp.inlay_hint.enable(true)
+      vim.lsp.inlay_hint.enable(false)
     end
 
     -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
@@ -123,6 +123,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 
 local lsp_actions = {
+  {
+    name = "Format document",
+    fn = function()
+      local buf = vim.api.nvim_get_current_buf()
+      for _, client in ipairs(vim.lsp.get_clients({ bufnr = buf })) do
+        if client:supports_method('textDocument/formatting') then
+          vim.lsp.buf.format({ bufnr = buf, id = client.id, timeout_ms = 1000 })
+        end
+      end
+    end,
+  },
   {
     name = "Restart LSP",
     fn = function()

@@ -23,6 +23,7 @@ sudo -s <<'END_OF_SUDO'
     btop \
     code \
     evtest \
+    swappy \
     fd-find \
     fzf \
     lazygit \

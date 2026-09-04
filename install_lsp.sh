@@ -2,6 +2,7 @@
 sudo -s <<'END_OF_SUDO'
   # Installing runtimes
   dnf install --assumeyes \
+    gh \
     scons \
     pkgconfig \
     gcc-c++ \
@@ -11,6 +12,7 @@ sudo -s <<'END_OF_SUDO'
     lldb \
     nodejs \
     npm \
+
   
   # Installing dnf lsps
   dnf install --assumeyes \

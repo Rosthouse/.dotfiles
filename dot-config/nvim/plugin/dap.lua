@@ -35,7 +35,7 @@ dap.adapters.coreclr = {
 -- launch.json configs are matched by filetype, and nvim-dap assumes the
 -- config `type` is the filetype. Map `coreclr` configs to `cs` buffers,
 -- otherwise dap.continue() never offers them.
-require('dap.ext.vscode').type_to_filetypes.coreclr = { 'cs' }
+require('dap.ext.vscode').type_to_filetypes.coreclr = { 'cs', 'razor' }
 
 -- Fallback for projects without .vscode/launch.json: prompt for the dll.
 dap.configurations.cs = {
@@ -50,7 +50,6 @@ dap.configurations.cs = {
 }
 
 -- Open/close dap-view with the session, regardless of how it was started.
-dap.listeners.before.attach['dap-view'] = function() dap_view.open() end
 dap.listeners.before.launch['dap-view'] = function() dap_view.open() end
 dap.listeners.before.event_terminated['dap-view'] = function() dap_view.close() end
 dap.listeners.before.event_exited['dap-view'] = function() dap_view.close() end

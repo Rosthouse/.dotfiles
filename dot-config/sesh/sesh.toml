@@ -8,6 +8,12 @@ sort_order = [
   "👨‍💻 dotfiles",
 ]
 
+[tui]
+show_icons = true
+show_windows = true
+preview = true
+group_separator = true
+
 [[window]]
 name = " Editor"
 startup_script = "nvim"

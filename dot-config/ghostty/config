@@ -5,6 +5,10 @@ theme = noctalia
 window-decoration = false
 mouse-hide-while-typing = true
 
+
+cursor-opacity = 0.25
+custom-shader  = "~/.config/ghostty/shaders/cursor_glide.glsl"
+
 # font
 font-family         = "0xProto Nerd Font Mono"
 font-family-bold    = "0xProto Nerd Font Mono Bold"

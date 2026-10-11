@@ -136,12 +136,7 @@ local lsp_actions = {
   },
   {
     name = "Restart LSP",
-    fn = function()
-      for _, client in vim.lsp.get_clients() do
-        client.stop()
-      end
-      vim.cmd.edit()
-    end,
+    fn = function() vim.cmd("lsp restart") end,
   },
   {
     name = "Toggle Codelens",

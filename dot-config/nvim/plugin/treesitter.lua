@@ -11,4 +11,6 @@ vim.treesitter.language.add('json',
 )
 
 vim.treesitter.language.register('csharp', { 'cs', 'razor' })
+vim.treesitter.language.register('html', { 'html', 'razor' })
+vim.treesitter.language.register('javascript', { 'js', 'razor' })
 vim.treesitter.language.register('json', { 'avcl' })

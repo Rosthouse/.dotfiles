@@ -1,16 +1,35 @@
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'avsc', 'csharp', 'json', },
-  callback = function()
-    vim.treesitter.start()
-  end,
+vim.pack.add({
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
 })
 
+local treesitter = require("nvim-treesitter")
 
-vim.treesitter.language.add('json',
-  { path = '/opt/treesitter/tree-sitter-json.wasm' }
-)
+treesitter.setup({
+  -- Directory to install parsers and queries to (prepended to `runtimepath` to have priority)
+  install_dir = vim.fn.stdpath('data') .. '/site'
+})
 
-vim.treesitter.language.register('csharp', { 'cs', 'razor' })
-vim.treesitter.language.register('html', { 'html', 'razor' })
-vim.treesitter.language.register('javascript', { 'js', 'razor' })
-vim.treesitter.language.register('json', { 'avcl' })
+treesitter.install({
+  "bash",
+  "c_sharp",
+  "html",
+  "javascript",
+  "json",
+  "lua",
+  "nginx",
+  "powershell",
+  "sql",
+  "terraform",
+})
+
+vim.treesitter.language.register("bash", { "sh" })
+vim.treesitter.language.register("c_sharp", { "cs", "razor" })
+vim.treesitter.language.register("html", { "html", "razor" })
+vim.treesitter.language.register("javascript", { "js", "razor" })
+vim.treesitter.language.register("json", { "json", "jsonc", "avcl" })
+vim.treesitter.language.register("lua", { "lua" })
+vim.treesitter.language.register("nginx", { "conf" })
+vim.treesitter.language.register("powershell", { "ps1" })
+vim.treesitter.language.register("sql", { "sql" })
+vim.treesitter.language.register("terraform", { "tf" })

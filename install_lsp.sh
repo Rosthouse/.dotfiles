@@ -10,9 +10,7 @@ sudo -s <<'END_OF_SUDO'
     wayland-devel \
     golang \
     lldb \
-    nodejs \
-    npm \
-
+    nvm \
   
   # Installing dnf lsps
   dnf install --assumeyes \

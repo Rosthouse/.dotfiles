@@ -16,6 +16,7 @@ sudo -s <<'END_OF_SUDO'
 		ghostty \
 		niri \
 		noctalia \
+    noctalia-greeter \
 		nvim \
 		python \
 		stow \

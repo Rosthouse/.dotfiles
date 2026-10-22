@@ -35,6 +35,12 @@ vim.lsp.config('roslyn_ls', {
   filetypes = { 'cs', 'razor' },
   root_markers = { '.git', '.slnx' },
   cmd = { 'roslyn-language-server', '--autoLoadProjects', '--daemon-mode', '--daemonKeepAlive', '300', '--sourceGeneratorExecutionPreference', 'Balanced', '--stdio' },
+  settings = {
+    ['csharp|background_analysis'] = {
+      dotnet_analyzer_diagnostics_scope = 'openFiles',
+      dotnet_compiler_diagnostics_scope = 'openFiles',
+    }
+  },
   root_dir = function(_, cb)
     cb(vim.fn.getcwd())
   end,

@@ -1,11 +1,4 @@
 #!/usr/bin/bash
-
 # Install DotNetUp
-export PATH="/home/patrick/.dotnetup:$PATH"
-
-# Add dotnet 
-# export DOTNET_ROOT="$HOME/.dotnet"
-# export DOTNET_INSTALL_DIR="$DOTNET_ROOT"
-# export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools:$DOTNET_ROOT/vsdbg"
-# export DOTNET_USE_POLLING_FILE_WATCHER=1
-
+export PATH='/home/patrick/.dotnetup':'/home/patrick/.local/share/dotnetup/dotnet':'/home/patrick/.dotnet/tools/':$PATH
+export DOTNET_ROOT='/home/patrick/.local/share/dotnetup/dotnet'

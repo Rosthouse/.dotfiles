@@ -2,15 +2,16 @@
 sudo -s <<'END_OF_SUDO'
   # Installing runtimes
   dnf install --assumeyes \
-    gh \
-    scons \
-    pkgconfig \
     gcc-c++ \
-    libstdc++-static \
-    wayland-devel \
+    gh \
     golang \
+    libstdc++-static \
     lldb \
+    maven \
     nvm \
+    pkgconfig \
+    scons \
+    wayland-devel \
   
   # Installing dnf lsps
   dnf install --assumeyes \
@@ -27,14 +28,20 @@ sudo -s <<'END_OF_SUDO'
 END_OF_SUDO
 
 ## Install TMUX tpm
-if [ -d ~/.tmux/plugins/tpm ]; then
+if [ ! -d ~/.tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+else 
+  cd ~/.tmux/plugins/tpm
+  git pull
+  cd -
 fi
 
-curl -L https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh
-chmod +x /tmp/dotnet-install.sh
-. /tmp/dotnet-install.sh
-rm dotnet-install.sh
+if ! command -v dotnetup >/dev/null 2>&1; then
+  curl -fsSL https://aka.ms/dotnetup/get-dotnetup.sh | bash
+  dotnetup init
+else
+  dotnetup self update
+fi
 
 ## CSharp
 dotnet tool install --global csharpier
@@ -46,15 +53,21 @@ dotnet tool install --global roslyn-language-server --prerelease
 pip install pyright ruff
 
 ## Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -y
+
+if ! command -v rustup >/dev/null 2>&1; then
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -y
+else
+  rustup update
+fi
 
 cargo install taplo-cli --locked
 
 ## XML
-if [ -d /opt/xml/lemminx ]; then 
-  git clone https://github.com/eclipse-lemminx/lemminx.git
+if [ ! -d /opt/xml/lemminx ]; then 
+  git clone https://github.com/eclipse-lemminx/lemminx.git /opt/xml/lemminx/
 fi
 
 cd /opt/xml/lemminx/
 git pull
-./mvn clean verify
+mvn clean verify
+cd -

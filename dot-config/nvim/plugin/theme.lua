@@ -1,6 +1,20 @@
 vim.pack.add({
-  'https://github.com/catppuccin/nvim',
+  { src = 'https://github.com/catppuccin/nvim', name = "catppuccin" }
 })
 
-vim.cmd.colorscheme 'catppuccin-nvim'
+require("catppuccin").setup(
+  {
+    transparent_background = true,
+    dim_inactive = {
+      enabled = false,
+      shade = "dark",
+      percentage = 0.15,
+    },
+    integrations = {
+      mini = true,
+      indentscope_color = "",
+    },
+  }
+)
 
+vim.cmd.colorscheme 'catppuccin-nvim'

@@ -28,9 +28,14 @@ path = "~"
 preview_command = "ls ~"
 
 [[session]]
+name = " 📚 Projects"
+path = "~/Projects/devinite/master"
+preview_command = "ls --color=always ~/Projects"
+
+[[session]]
 name = "🌍 Devinite"
 path = "~/Projects/devinite/master"
-preview_command = "bat --color=always ~/c/Projects/devinite/master/README.md"
+preview_command = "bat --color=always ~/Projects/devinite/master/README.md"
 windows = [" Editor", "󰚩 OpenCode"]
 
 [[session]]

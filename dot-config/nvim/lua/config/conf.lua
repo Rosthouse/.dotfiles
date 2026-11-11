@@ -31,8 +31,9 @@ vim.opt.pummaxwidth = 40
 vim.opt.completeopt = { "menuone", "menu", "noselect", "fuzzy" }
 vim.o.autocomplete = true
 
+-- line numbers
+vim.wo.relativenumber = true
 
 -- Quickfix window
 vim.g.dotnet_errors_only = true
 vim.g.dotnet_show_project_file = false
-

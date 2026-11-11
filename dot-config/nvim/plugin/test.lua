@@ -13,6 +13,8 @@ neotest.setup({
 })
 
 vim.keymap.set('n', '<leader>tt', neotest.summary.toggle)
+vim.keymap.set('n', '<leader>td', function() neotest.run.run({ strategy = "dap" }) end)
+vim.keymap.set('n', '<leader>tD', function() neotest.run.run({ vim.fn.expand("%"), strategy = "dap" }) end)
 vim.keymap.set('n', '<leader>tr', neotest.run.run)
 vim.keymap.set('n', '<leader>tR', function() neotest.run.run(vim.fn.expand('%')) end)
 vim.keymap.set('n', '<leader>tx', neotest.run.stop)

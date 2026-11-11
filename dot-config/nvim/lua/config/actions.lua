@@ -25,7 +25,9 @@ local actions = {
       end)
     end,
   },
-  { name = "Toggle diagnostics", fn = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end },
+  { name = "Toggle diagnostics",      fn = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end },
+  { name = "Toggle Hardtime",         fn = function() require("hardtime").toggle() end },
+  { name = "Toggle Line Number Mode", fn = function() vim.wo.relativenumber = not vim.wo.relativenumber end },
 }
 
 vim.keymap.set("n", "<leader>va", function()

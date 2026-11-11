@@ -36,6 +36,8 @@ vim.keymap.set("n", "<leader>flS", ts_builtin.lsp_workspace_symbols, { desc = "f
 vim.keymap.set("n", "<leader>flW", ts_builtin.lsp_dynamic_workspace_symbols,
   { desc = "find LSP references in workspace" })
 
+-- GIT
+vim.keymap.set("n", "<leader>fgs", ts_builtin.git_status, { desc = "find LSP references in workspace" })
 
 -- Disable autocomplete in telescope buffers
 vim.api.nvim_create_autocmd("BufEnter", {

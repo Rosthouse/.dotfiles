@@ -6,17 +6,21 @@ sudo -s <<'END_OF_SUDO'
 	dnf --assumeyes copr enable scottames/ghostty
 
 	dnf install --assumeyes --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release ## For Noctalia Shell
+  dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tailscale.repo
 
   ## Add MS Repo for VS Code
   rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
   echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+
+  sudo dnf install tailscale
+  # Enable and start tailscaled
+  sudo systemctl enable --now tailscaled
 
 	echo "Installing dependencies"
 	dnf --assumeyes install \
 		ghostty \
 		niri \
 		noctalia \
-    noctalia-greeter \
 		nvim \
 		python \
 		stow \
@@ -24,30 +28,27 @@ sudo -s <<'END_OF_SUDO'
     btop \
     code \
     evtest \
-    swappy \
     fd-find \
     fzf \
     lazygit \
+    noctalia-greeter \
     rclone \
     sesh \
+    swappy \
+    tailscale \
     tldr \
     ufw \
     v4l2loopback \
     zoxide \
 
-
-  # Tmux package manager
-  curl --remote-name https://github.com/tmuxpack/tpack/releases/download/v1.0.0/tpack_1.0.0_linux_amd64.rpm
-  rpm -i tpack_*.rpm
-  rm tpack_*.rpm
-	
 	echo "Installing python libs"
 	dnf --assumeyes install \
 		pipx \
 		python-pip \
 		python3-virtualenv
 
-  sudo usermod -a -G input patrick
+  usermod -a -G input patrick
+  systemctl enable --now tailscaled
 
 END_OF_SUDO
 
@@ -55,14 +56,10 @@ END_OF_SUDO
 pipx ensurepath
 
 ## Make sure required scripts are executable
-chmod +x "$SCRIPT_DIR"/dot-config/userscripts/*
-
-## Setting up tools
-## Installing tailscale
-curl -fsSL https://tailscale.com/install.sh | sh
+chmod -R +x "$SCRIPT_DIR/dot-config/userscripts"
 
 ## Enabling niri
-systemctl --user add-wants niri.service
+## systemctl --user add-wants niri.service
 
 ## This links all files (not excluded by .stow-local-ignore) to your home directory
 ## Note that the directory 'dot-config' will map to $HOME/.config/

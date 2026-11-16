@@ -94,7 +94,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   ---@param ev {data: vim.event.lspattach.data}
   callback = function(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
-
     if client:supports_method('textDocument/codeLens') then
       vim.lsp.codelens.enable(true)
       vim.keymap.set("n", "grc", vim.lsp.codelens.run, { desc = "Run codelens" })
@@ -106,6 +105,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     if client:supports_method('textDocument/inlayHint') then
       vim.lsp.inlay_hint.enable(false)
+    end
+
+    if client:supports_method('textDocument/rename') then
+      vim.keymap.set("n", "grn", vim.lsp.buf.rename, { buffer = ev.buf, desc = "LSP: Rename Symbol" })
     end
 
     -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|

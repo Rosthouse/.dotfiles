@@ -19,6 +19,9 @@ treesitter.setup({
 treesitter.install({
   "bash",
   "c_sharp",
+  "gdscript",
+  "gdshader",
+  "godot_resource",
   "html",
   "javascript",
   "json",

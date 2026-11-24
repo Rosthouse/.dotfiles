@@ -5,7 +5,7 @@ local godot_project_path = ''
 local cwd = vim.fn.getcwd()
 
 -- iterate over paths and check
-for key, value in pairs(paths_to_check) do
+for _, value in pairs(paths_to_check) do
   if vim.uv.fs_stat(cwd .. value .. 'project.godot') then
     is_godot_project = true
     godot_project_path = cwd .. value

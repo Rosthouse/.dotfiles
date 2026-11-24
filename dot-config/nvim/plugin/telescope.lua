@@ -9,6 +9,16 @@ require("telescope").setup {
     ["ui-select"] = {
       require("telescope.themes").get_dropdown({}),
     }
+  },
+  defaults = {
+    dynamic_preview_title = true,
+    layout_strategy = "vertical",
+    layout_config = {
+      vertical = {
+        prompt_position = "bottom"
+      }
+    },
+    path_display = { "truncate" },
   }
 }
 
